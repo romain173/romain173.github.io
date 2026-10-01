@@ -874,7 +874,7 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .pj-q figcaption span { color: var(--muted); font-weight: 400; }
 .pj-left > :first-child { border-top: 0; padding-top: 0; }
 .pj-services { display: grid; gap: 18px; }   /* Services, Client, Agency: one under the other, the same size */
-.pj-svc-l { display: block; margin-bottom: 4px; font-size: var(--t1); line-height: 1.5; letter-spacing: 0; font-weight: 700; }   /* "SERVICE(S)" above the list, like the credit labels */
+.pj-svc-l { display: block; margin-bottom: 4px; font-size: var(--t1); line-height: 1.5; letter-spacing: 0; font-weight: 700; color: var(--muted); }   /* "SERVICE(S)" above the list, like the credit labels */
 @media (max-width: 899px) { .pj-row .pj-intro { order: -1; } }   /* phones: the project intro first, then the role, services and credits */
 /* project pages (test on Cinco): related projects, cards like the Work page, three per row */
 .pj-related { border-top: 1px solid var(--line); margin: clamp(56px, 7vw, 110px) var(--g) 0; padding-left: 0; padding-right: 0; padding-bottom: 0; }
