@@ -1,0 +1,63 @@
+page_title: Ranko — Montreal creative company
+description: Ranko is a creative company based in Montreal — video production, motion design and graphic design, produced end to end for brands worldwide.
+label: About
+heading: We are | *Ranko*
+portrait_alt: Romain Amphyon. A young man with short brown hair and blue eyes wearing a black shirt and a pink watch poses with arms crossed in front of a background of swirling blue lights and motion blur effects.
+
+== intro
+
+A creative company | based in Montreal, | led by creative director | Romain Amphyon.
+
+== statement
+
+We produce films, design and creative systems for brands worldwide, end to end, with AI fully integrated into how we work.
+
+== brands
+
+# a brand with a project page: "Name = project" (the logo then opens that page)
+Louis Vuitton = louis-vuitton
+Dior = dior
+McDonald's = mcdonalds
+Uniqlo = uniqlo
+Moncler = ssensexmoncler
+Nikon = nikon
+Jägermeister = jagermeister
+Japan Airlines = japan-airlines
+Ssense = ssensexmoncler
+Tintin = tintin
+Psycho Bunny = psycho-bunny
+Ubisoft = ubisoft
+Hydro-Québec = hydro-quebec
+Maxi
+Loto-Québec = lesfeuxlotoquebec
+Atypique = atypique
+La Ronde = la-ronde-2-0
+Alloprof
+Desjardins
+BMO
+BNC
+BDC
+iA
+TV5
+Cossette
+LG2
+Vibrant = la-ronde-2-0
+PoweredByTokyo = uniqlo
+Monopo Japan = uniqlo
+SOS IN Bel Air
+Alex+Jodi = ssensexmoncler
+UQAM = uqam
+UdeM
+Déferlantes
+
+== bio
+
+### Romain is a multidisciplinary creative director who spent a decade inside agencies and production companies before founding *Ranko* in 2020.
+### His work is driven by an endless curiosity for motion, design and aesthetics — and by the discipline of sports and music. Every project is a chance to push both craft and idea further.
+
+== visit
+
+RANKO
+1 Boul. De Maisonneuve Ouest
+Montreal, QC, H2X 0E3
+Canada

@@ -1,0 +1,31 @@
+page_title: Ranko — Afterhours — self-initiated work
+description: The Ranko playground — self-initiated experiments in motion, design and AI, made outside client briefs.
+
+label: Afterhours
+heading: After | hours
+
+== intro
+
+Here is our playground. | Where we test | what we're curious about, | without a client, without a brief.
+
+== media
+
+### The Vending Machine
+
+film 1026161301 half | image image-01 1080x1080 third alt="A digital rendering of a can of Pepsi Lime soda against a backdrop of ice, with a distorted, neon-like color effect."
+
+image image-02 1080x1080 third alt="Neon-style 3D text that reads 'FREE BEACH PACK EASY' with a colorful gradient effect, over a grid background." | video 1026161183 third
+
+image image-03 1080x1080 third alt="A vending machine stocked with Pepsi Blue soda cans, arranged in rows and columns." right
+
+### Halloween 2025
+
+film 1134037913 half
+
+### Dsqflo x Ranko
+
+image image-04 2160x2160 half alt="Close-up of a neon sign with cursive writing on a light blue wall." | image image-05 2160x2160 half alt="Close-up of a metallic sign with the word 'PAY' in purple letters, attached to a light blue background."
+
+### Rad level over 9000!
+
+video 1062184512 half | image image-06 1080x1350 quarter alt="Close-up of a white card with a red border inside a transparent plastic case, displaying the text '*Rad Level* Over #9000' and a number '13081985.'" | image image-07 1080x1350 quarter alt="A photo of a payphone or kiosk with a sign that reads 'BayWatch' in yellow stylized font, a QR code, and a picture of a blonde woman in a red top." | image image-08 1080x1350 quarter alt="A framed certificate received by Pamela Anderson, displayed in a plastic sleeve with a label above."

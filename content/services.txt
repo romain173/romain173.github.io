@@ -1,0 +1,56 @@
+page_title: Ranko — video production and motion design in Montreal
+description: Video production, motion design, graphic design and creative systems. Ranko produces end to end for brands, from first idea to final frame.
+label: Services
+heading: What | we do
+
+== intro
+
+End-to-end production for brands, | from first idea to final frame. | Films and design for every digital surface, | with the systems to scale them.
+
+== films
+
+## Brand Films
+*Ads, launch content and campaign films, delivered worldwide.*
+- Creative & Art Direction
+- Directing
+- Production
+- Motion & Mixed Media
+- Design & Illustration
+- Social Content
+
+== systems
+
+## Creative Systems
+*Motion toolkits and design systems built to scale across markets, formats and teams — and to stay usable long after delivery.*
+- Motion Toolkits
+- Brand Motion Language
+- Design Systems
+- Templates & Guidelines
+- Rollout & Adaptation
+- Production Workflows
+
+== media
+
+video 1221862529 half | video 1221905922 half
+
+== ai
+
+## AI, fully integrated
+AI runs through our pipeline, from concept development to finished content. It means the idea doesn't get scaled down to fit, and your brand lands somewhere no one else has been.
+
+== process
+
+Our process is built to move.
+Four steps, one team, | from first idea to final frame.
+
+1. Brief
+We start with the problem, not the deliverable. | What your brand needs to land, who it's landing on, and what success looks like.
+
+2. Direction
+The idea gets set before anything gets made. | Art direction, references, look and language, locked early so nothing drifts later.
+
+3. Production
+Design, film, motion, VFX. AI shows in the work and runs inside the pipeline, so we explore more options and get to the good one faster.
+
+4. Delivery
+Final frames, every format, every surface. | Plus the system to keep it running after we're gone.

@@ -1,0 +1,28 @@
+title: The Vending Machine
+related: psycho-bunny, dialogue, mcdonalds
+role: Creative direction & Y2K art direction
+page_title: Ranko — The Vending Machine — Y2K motion design experiment
+description: A self-initiated film celebrating the Y2K aesthetic — chrome, neon and retro-futurism through 3D motion design and VFX. By Ranko, Montreal.
+cover_alt: Y2K motion design experiment - chrome and neon retro-futurism
+
+== intro
+
+We simply made this project to celebrate the y2k aesthetic.
+
+A complex aesthetic from the late-90s/early-2000s blending retro-futurism and early internet optimism which features chrome, neon colors, water form, bold rounded fonts, and glossy tech-inspired graphics. Influenced by early consumer tech, pop culture and cyberculture, this aesthetic is playful, futuristic and nostalgic, all at once.
+
+== credits
+
+**SERVICES** — Creative Direction, Motion graphics, Motion graphics 3D, VFX, Editing
+
+== media
+
+film 1026161301 half wall | video 1125541538 quarter | video 1125541723 quarter | video 1125542004 quarter
+
+image image-01 1080x1080 half alt="Colorful neon-style text that repeats the words 'FREE BEER PLEASE' on a light blue grid background." | image image-02 1080x1080 half alt="A digitally stylized can of Pepsi Lyte soda with berry flavor, showcasing a purple and green color scheme and surrounded by ice cubes."
+
+### Here are some details about our precise work on the vending machine’s UI.
+
+image image-03 1080x1080 half alt="Close-up of a metallic blue automotive emblem with the numbers '996' and a small Chevrolet logo." | image image-04 1080x1080 half alt="Close-up of a washing machine's drum filled with ice cubes."
+
+image image-05 1080x1080 half alt="Close-up of a digital safe lock keypad with numbers 1 to 5 visible, and arrow buttons for navigation." | image image-06 1080x1080 half alt="Close-up of a mobile phone keypad and screen, with visible keys including the '*' and '#' signs, and a small speaker grill nearby."

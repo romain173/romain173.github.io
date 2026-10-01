@@ -1,0 +1,962 @@
+/* Ranko — site styles. Inlined in every page by build.py. */
+
+:root {
+  --bg: #ffffff;   /* Test-Ranko: white page (main: #fcfcf7 cream) */
+  --ink: #000;
+  --muted: rgba(0, 0, 0, .55);
+  --line: rgba(0, 0, 0, .14);
+  --tile: #e8e6dc;
+  --radius: 15px;
+  --g: 16px;              /* side gutter */
+  --gap: 12px;            /* gap between media */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* type scale: golden ratio (x 1.618 per step) from 16px, sizes given for a 1440px wide screen,
+     scaled with the screen width; each level keeps a minimum for phones and stops growing past ~1920px
+     (phone minimums raised on 29 Sept. 2026 so the titles stand out: 26 / 34 / 44 / 56) */
+  --t1: 16px;                                  /* menu, captions, footer, credits, small texts */
+  --t2: clamp(20px, 1.806vw, 30px);            /*  26 — reading text */
+  --t3: clamp(26px, 2.917vw, 56px);            /*  42 — sentence under titles, sub-headings, lists */
+  --t4: clamp(34px, 4.722vw, 91px);            /*  68 — section titles, mid statements */
+  --t5: clamp(44px, 7.639vw, 147px);           /* 110 — big statements, services, figures */
+  --t6: clamp(56px, 12.361vw, 237px);          /* 178 — page and project titles */
+}
+@media (min-width: 768px) { :root { --g: 24px; --gap: 20px; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font); font-weight: 700; font-size: var(--t1); line-height: 1.35;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+address { font-style: normal; }
+h1, h2, h3, .page-intro, .mid-t { text-wrap: balance; }   /* no lone word on the last line */
+p, li { text-wrap: pretty; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+img, svg, iframe { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+::selection { background: var(--ink); color: var(--bg); }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 4px; }
+
+.skip { position: absolute; left: var(--g); top: -80px; z-index: 100; background: var(--ink); color: var(--bg); padding: 10px 14px; border-radius: 999px; }
+.skip:focus { top: 12px; }
+
+.label { font-size: var(--t1); letter-spacing: .01em; }
+
+/* ------------------------------------------------ header */
+.hd {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px;
+  padding: 21px var(--g) 14px;   /* logo and clock on the same line as the centre of the menu pill */
+  color: var(--bg); mix-blend-mode: difference;
+  view-transition-name: header;
+  font-size: var(--t1);
+}
+.hd-logo svg { width: 92px; height: auto; }
+/* header logo: every 10s each letter lifts a little, slides down out of view and comes back in from the top.
+   CSS only (5 letters, transforms): no script, no cost. Letters are masked to the logo, a bit higher for the lift. */
+.hd-logo svg { overflow: visible; clip-path: inset(-12% -4% 0 -4%); }
+.hd-logo path { animation: logo-cycle 10s 3s infinite; }
+.hd-logo path:nth-child(2) { animation-delay: 3.06s; }
+.hd-logo path:nth-child(3) { animation-delay: 3.12s; }
+.hd-logo path:nth-child(4) { animation-delay: 3.18s; }
+.hd-logo path:nth-child(5) { animation-delay: 3.24s; }
+@keyframes logo-cycle {
+  0%    { transform: none; animation-timing-function: cubic-bezier(.3, 0, .2, 1); }
+  1.8%  { transform: translate(0, -34px); animation-timing-function: cubic-bezier(.6, 0, .9, .4); }
+  4.4%  { transform: translate(0, 420px); }
+  4.41% { transform: translate(0, -420px); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }   /* long, soft landing */
+  15%, 100% { transform: none; }
+}
+.hd-city { justify-self: center; white-space: nowrap; }
+.hd-clock { opacity: .6; margin-left: 6px; font-variant-numeric: tabular-nums; }
+.hd-menu { grid-column: 3; justify-self: end; position: relative; }
+@media (max-width: 519px) { .hd-city { display: none; } .hd { grid-template-columns: auto 1fr auto; } }
+@media (min-width: 900px) { .hd-menu { display: none; } }
+
+/* main menu (large screens): a floating pill, frosted dark glass; the current page sits in a white pill,
+   which glides to the link under the mouse (site.js). Outside the header so the header's colour inversion
+   does not touch it. */
+.pill {
+  position: fixed; top: 10px; right: var(--g); z-index: 51; display: none;
+  padding: 4px; border-radius: 999px; font-size: var(--t1); font-weight: 500;   /* lighter than the rest of the site, like the reference */
+  background: rgba(34, 34, 34, .56); -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);   /* thin outline only, no drop shadow */
+}
+@media (min-width: 900px) { .pill { display: block; } }
+.pill ul { position: relative; display: flex; }
+.pill a { position: relative; z-index: 1; display: block; padding: 8px 17px; border-radius: 999px; color: #fff; line-height: 1.2; transition: color .35s var(--ease); }
+.pill a.is-on { color: var(--ink); }
+.pill-ind {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 999px; background: #fff; opacity: 0;
+  transition: transform .5s var(--ease), width .5s var(--ease), opacity .3s var(--ease);
+}
+.pill:not(.is-ready) .pill-ind { transition: none; }
+/* without script: the current page is simply shown in white */
+.pill:not(.is-ready) a[aria-current] { background: #fff; color: var(--ink); }
+
+.menu {
+  position: fixed; inset: 0; z-index: 40; background: var(--ink); color: var(--bg);
+  padding: 96px var(--g) var(--g); display: flex; flex-direction: column; justify-content: space-between;
+}
+.menu[hidden] { display: none; }
+.menu ul { display: grid; gap: 4px; }
+.menu li a { font-size: var(--t5); line-height: 1; letter-spacing: -.04em; }
+.menu p { font-size: var(--t2); }
+body.menu-open { overflow: hidden; }
+
+/* ------------------------------------------------ reveal */
+.js [data-reveal] { opacity: 0; transform: translate3d(0, 32px, 0); transition: opacity .9s var(--ease), transform 1s var(--ease); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+/* each word rises from under its line. The mask is larger than the letters on every side (italics, g, p, y stay whole)
+   and the word starts just below the mask, so the text is never cut, during or after the animation */
+.js [data-split] .w { display: inline-block; vertical-align: top; clip-path: inset(-.4em -.4em -.3em -.4em); }
+.js [data-split] .w > span { display: inline-block; transform: translate3d(0, calc(100% + .35em), 0); transition: transform 1s var(--ease); transition-delay: calc(var(--i) * 28ms); }
+.js [data-split].is-in .w > span { transform: none; }
+.js [data-split="chars"] .w > span { transition-delay: calc(var(--i) * 45ms); }   /* letter by letter: a little more time between letters */
+
+/* ------------------------------------------------ sections */
+.sec { padding: clamp(48px, 6vw, 96px) var(--g); }
+.sec-hd { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: clamp(16px, 2vw, 28px); }
+.sec-t { font-size: var(--t4); letter-spacing: -.035em; line-height: 1; }
+/* big links: always underlined so they read as clickable (like the menu); on hover the line leaves to the right
+   and draws back in from the left */
+.link-big { font-size: var(--t3); letter-spacing: -.02em; }
+.link-big { display: inline-block; position: relative; padding-bottom: .12em; }
+.link-big::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: max(2px, .055em); background: currentColor;
+  transform-origin: right;
+}
+.link-big:hover::after { animation: line-redraw .8s var(--ease); }
+/* every other text link gets the same line (drawn as a background so it follows links that wrap onto two lines);
+   the header menu keeps its own: a line on hover and under the current page */
+:is(.fact-t, .pj-intro, .m-text, .credits, .page-intro, .bio-txt, .menu p) a:not(.link-big) {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% max(1.5px, .08em) no-repeat;
+  padding-bottom: .1em;
+}
+:is(.fact-t, .pj-intro, .m-text, .credits, .page-intro, .bio-txt, .menu p) a:not(.link-big):hover { animation: line-redraw-bg .8s var(--ease); }
+@keyframes line-redraw-bg {
+  0%   { background-size: 100% max(1.5px, .08em); background-position: 100% 100%; }
+  45%  { background-size: 0 max(1.5px, .08em); background-position: 100% 100%; }
+  46%  { background-size: 0 max(1.5px, .08em); background-position: 0 100%; }
+  100% { background-size: 100% max(1.5px, .08em); background-position: 0 100%; }
+}
+@keyframes line-redraw {
+  0%   { transform: scaleX(1); transform-origin: right; }
+  45%  { transform: scaleX(0); transform-origin: right; }
+  46%  { transform: scaleX(0); transform-origin: left; }
+  100% { transform: scaleX(1); transform-origin: left; }
+}
+
+
+/* reel */
+/* full width, as tall as the screen (like losyork.tv): the video is cropped to fill the frame */
+.reel { padding: 0 var(--g); }
+.reel-frame { border-radius: var(--radius); overflow: hidden; }   /* starts narrower (sides cut), full width after a short scroll (site.js) */
+.reel .vm { height: 100vh; height: min(100svh, 150vw); }
+.reel .vm .media { height: 100%; aspect-ratio: auto !important; border-radius: var(--radius); }
+.reel .vm iframe {
+  inset: auto; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1.02);   /* a little extra: no sub-pixel line at the edges */
+  height: auto; aspect-ratio: var(--ar); max-width: none;
+  width: max(100%, 100svh * var(--ar));   /* wide enough to cover the height too */
+  width: max(100%, min(100svh, 150vw) * var(--ar));
+}
+
+/* ------------------------------------------------ media & tiles */
+.media { position: relative; overflow: hidden; border-radius: var(--radius); background: var(--tile); isolation: isolate; }
+.media img { width: 100%; height: 100%; object-fit: cover; }
+.ph-label {
+  position: absolute; left: 10px; bottom: 10px; z-index: 2; max-width: calc(100% - 20px);
+  font-size: 11px; line-height: 1; padding: 6px 9px; border-radius: 999px;
+  background: rgba(252, 252, 247, .88); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+a .media::after, .vm-film .media::after, .ah-open .media::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; background: #000; opacity: 0; transition: opacity .45s var(--ease);
+}
+a:hover .media::after, .vm-film:hover .media::after { opacity: .5; }
+a .media img, .ah-open .media img { transition: transform 1.2s var(--ease); }
+a:hover .media img { transform: scale(1.03); }
+
+/* hosted clips (former GIFs) */
+.clip-v { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); }   /* a little extra: no sub-pixel line at the edges */
+
+/* vimeo */
+.vm { position: relative; border-radius: var(--radius); overflow: hidden; }
+.vm iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; opacity: 0; transition: opacity .8s var(--ease); z-index: 3; }
+.vm-loop iframe { transform: scale(1.02); }   /* muted loops only (films keep their controls whole): no sub-pixel line at the edges */
+.vm.is-ready iframe { opacity: 1; }
+.vm.is-ready .ph-label { display: none; }
+.play {
+  position: absolute; left: 50%; top: 50%; z-index: 4; transform: translate(-50%, -50%);
+  min-width: 92px; height: 92px; padding: 0 22px; border-radius: 999px;
+  background: var(--bg); color: var(--ink); font-size: var(--t1);
+  transition: transform .5s var(--ease);
+}
+.play:hover { transform: translate(-50%, -50%) scale(1.08); }
+.vm.is-playing .play { opacity: 0; pointer-events: none; }
+figcaption { margin-top: 10px; font-size: var(--t1); }
+
+.m-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); margin-top: var(--gap); }
+.cell { grid-column: span 12; }
+.c-quarter { grid-column: span 6; }
+@media (min-width: 768px) {
+  .c-half { grid-column: span 6; }
+  .c-third { grid-column: span 4; }
+  .c-quarter { grid-column: span 3; }
+  .c-right { grid-column-end: -1; }
+  .c-half.c-right { grid-column-start: 7; }
+  .c-third.c-right { grid-column-start: 9; }
+  .c-quarter.c-right { grid-column-start: 10; }
+}
+.m-row.masonry { display: block; columns: 2; column-gap: var(--gap); }
+.m-row.masonry .cell { break-inside: avoid; margin-bottom: var(--gap); }
+@media (min-width: 768px) { .m-row.masonry { columns: var(--cols); } }
+.m-text { max-width: 980px; margin: clamp(36px, 5vw, 72px) auto; padding: 0 0; }
+.m-text h2 { font-size: var(--t3); line-height: 1.04; letter-spacing: -.035em; }
+.m-text h3, .m-text h2.h3 { font-size: var(--t2); line-height: 1.08; letter-spacing: -.03em; }
+.m-text h4 { font-size: var(--t1); }
+.m-text p { font-weight: 500; font-size: var(--t2); line-height: 1.45; margin-top: 14px; max-width: 62ch; }
+.m-text > * + h2, .m-text > * + h3 { margin-top: 32px; }
+.m-text ul { display: grid; gap: 10px; margin-top: 14px; max-width: 62ch; font-weight: 500; font-size: var(--t2); line-height: 1.45; }
+.m-text li { position: relative; padding-left: 1.2em; }
+.m-text li::before { content: "—"; position: absolute; left: 0; }
+.m-text strong { font-weight: 700; }
+
+/* ------------------------------------------------ home: featured work, 4:5 tiles placed like the Squarespace home */
+/* phones: tiles stack, small ones alternate left and right, large ones take the full width */
+.feat-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 36px var(--gap); }
+.ft-tile { grid-column: 1 / span 9; }
+.ft-tile:nth-child(even) { grid-column: 4 / span 9; }
+.ft-tile.is-big { grid-column: 1 / -1; }
+.ft-tile a { display: block; }
+.feat-all { margin-top: clamp(24px, 3vw, 40px); text-align: right; }   /* bottom right, facing "Selected work" top left */
+/* tiles with a video: the loop covers the 4:5 frame (cropped), over the cover image */
+.tile-vm { position: absolute; inset: 0; z-index: 0; margin: 0; border-radius: 0; container-type: size; pointer-events: none; }   /* the video never catches the mouse: the tile stays one link (hand cursor, click opens the project) */
+.tile-vm iframe {
+  inset: auto; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1.02);   /* a little extra: no sub-pixel line at the edges */
+  width: max(100cqw, 100cqh * var(--ar)); height: auto; aspect-ratio: var(--ar); max-width: none;
+}
+
+/* every project tile (home + Work): name + role on a frosted bar over the picture, "View project" inside it;
+   the whole tile stays one link */
+.tcard {
+  position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 5; pointer-events: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 8px 8px 18px; border-radius: 12px;
+  color: #fff; font-size: var(--t1); line-height: 1.25;
+  background: rgba(34, 34, 34, .56); -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
+.tcard-txt { display: grid; gap: 1px; min-width: 0; }
+.tcard-name { }   /* project names as written (never forced to capitals) */
+.tcard-role { opacity: .7; }
+.tcard-btn {
+  flex: none; padding: 12px 20px; border-radius: 8px; background: #fff; color: var(--ink); line-height: 1.2;
+  transition: background-color .35s var(--ease), color .35s var(--ease);
+}
+a:hover .tcard-btn, a:focus-visible .tcard-btn { background: var(--ink); color: #fff; }
+.tcard-btn-i { display: none; }
+/* narrow tiles (small ones, phones): the button becomes a square arrow so the name and role keep their room */
+.ft-tile .media, .tile .media { container-type: inline-size; }
+@container (max-width: 360px) {
+  .tcard { padding-left: 14px; gap: 10px; }
+  .tcard-btn { padding: 10px 14px; }
+  .tcard-btn-l { display: none; }
+  .tcard-btn-i { display: block; font-size: 18px; line-height: 1; }
+}
+/* video tiles zoom like the picture tiles on hover (the dark veil already covers the video) */
+.tile-vm iframe { transition: transform 1.2s var(--ease), opacity .8s var(--ease); }
+a:hover .tile-vm iframe, .ah-open:hover .tile-vm iframe { transform: translate(-50%, -50%) scale(1.05); }
+a .clip-v { transition: transform 1.2s var(--ease); }
+a:hover .clip-v { transform: scale(1.05); }
+/* larger screens: each tile at its own place, sizes and places scale with the screen width */
+@media (min-width: 900px) {
+  .feat { padding-left: 0; padding-right: 0; }
+  .feat .sec-hd, .feat .feat-all { padding: 0 var(--g); }
+  .feat-grid { display: block; position: relative; aspect-ratio: var(--ratio); }
+  .ft-tile, .ft-tile:nth-child(even), .ft-tile.is-big { position: absolute; left: var(--x); top: var(--y); width: var(--w); }
+}
+
+/* statements */
+.statement { display: flex; flex-direction: column; gap: 20px; }
+.big-t { font-size: var(--t5); line-height: .94; letter-spacing: -.05em; max-width: 14ch; }
+.big-t em, .page-t em { font-style: italic; }
+.statement-2 { display: grid; gap: 20px; padding-top: 0; }
+.mid-t { font-size: var(--t4); line-height: 1; letter-spacing: -.04em; max-width: 20ch; }
+
+/* facts */
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px var(--gap); margin-top: 20px; border-top: 1px solid var(--line); padding-top: 24px; }
+@media (min-width: 900px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.fact { display: grid; gap: 10px; align-content: start; }
+.fact-n { font-size: var(--t5); line-height: .85; letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
+.fact-t { font-size: var(--t1); max-width: 22ch; }
+
+/* ------------------------------------------------ inner pages */
+/* page headers; the home hero uses the same sizes and spacing */
+.page-hd, .hero { padding: clamp(96px, 11vw, 150px) var(--g) clamp(24px, 3vw, 40px); display: grid; gap: 20px; }
+.page-t { font-size: var(--t6); line-height: .86; letter-spacing: -.045em; }
+.pj-t { font-size: var(--t6); line-height: .86; letter-spacing: -.045em; }
+.page-t, .pj-t { padding-bottom: .1em; }   /* tight line height: keep g, p, y clear of the text below */
+.page-intro { max-width: 36ch; font-size: var(--t3); line-height: 1.17; letter-spacing: -.01em; }   /* ~ the size on vucko.co (March 2026) */
+.page-intro h3, .page-intro p { font-size: inherit; line-height: inherit; }
+.hero .page-intro { max-width: none; }   /* home: the sentence on one line when there is room */
+.page-intro > :is(p, h2, h3) + :is(p, h2, h3) { margin-top: .6em; }
+.page-hd + .sec { padding-top: 0; }
+/* every page except the home: a thin grey line separates the header from the page, like the first row of Services */
+.hd-line { margin: clamp(40px, 5vw, 80px) var(--g) 0; border: 0; border-top: 1px solid var(--line); }
+
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }   /* Work: 2 per row on phones */
+@media (max-width: 639px) { .grid .k-card-meta { padding: 10px 12px 12px; } .grid .k-card-name { font-size: 17px; } .grid .k-card-role { font-size: 12px; } }
+@media (min-width: 640px) { .grid { gap: 28px var(--gap); } }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 20px; } }   /* Work: 4 projects per row */
+.tile a { display: block; }
+
+/* services */
+/* Services: one row per service in 3 columns: title · sentence · list (reference liked by Romain, in the Ranko style) */
+.svc3 { display: grid; gap: 20px; border-top: 1px solid var(--line); margin: 0 var(--g); padding-left: 0; padding-right: 0; }
+.svc3-t { font-size: var(--t4); line-height: 1; letter-spacing: -.035em; font-weight: 500; }
+.svc3-d { font-size: var(--t2); line-height: 1.3; letter-spacing: -.01em; font-weight: 400; color: var(--muted); max-width: 34ch; }
+.svc3-l { display: grid; gap: 6px; font-size: var(--t2); line-height: 1.3; letter-spacing: -.01em; font-weight: 400; }
+.svc3 + .sec:not(.svc3) { padding-top: 0; } .svc3 + .sec:not(.svc3) > :first-child { margin-top: 0; }   /* videos after the AI row: same space under the text as above it */
+.page-hd + .svc3 { margin-top: clamp(40px, 5vw, 80px); padding-top: clamp(48px, 6vw, 96px); }   /* first row: breathing room under the header */
+@media (min-width: 900px) {
+  .svc3 { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, .75fr); gap: var(--gap); align-items: start; }
+  .svc3-d { border-left: 1px solid var(--line); padding-left: 20px; }
+  .svc3-l { text-align: right; }
+}
+.svc { display: grid; gap: 20px; border-top: 1px solid var(--line); margin: 0 var(--g); padding-left: 0; padding-right: 0; }
+.svc-body h2 { font-size: var(--t5); line-height: .92; letter-spacing: -.05em; }
+.svc-body p { font-size: var(--t2); max-width: 34ch; margin-top: 18px; font-style: normal; }
+.svc-body p em { font-style: normal; color: var(--muted); }
+.svc-body ul { margin-top: 28px; display: grid; gap: 2px; }
+.svc-body li { font-size: var(--t3); letter-spacing: -.03em; }
+@media (min-width: 900px) { .svc { grid-template-columns: 1fr 3fr; } }
+
+/* about */
+/* About: logo wall, 6 per row (3 on phones), thin grey lines between the cells, the last row centred */
+.brand-grid { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 32px; padding: 1px 0 0 1px; }
+.brand { flex: 0 0 calc(100% / 3); display: grid; place-items: center; height: clamp(84px, 9vw, 120px); padding: 12px;
+  border: 1px solid var(--line); margin: -1px 0 0 -1px; }
+@media (min-width: 768px) { .brand { flex-basis: calc(100% / 6); } }
+.brand-logo { max-width: 78%; height: auto; object-fit: contain; }
+.brand-logo.is-k { filter: brightness(0); }
+.brand-logo.is-g { filter: grayscale(1); mix-blend-mode: multiply; }
+.brand-logo.is-c { filter: grayscale(1) contrast(4); mix-blend-mode: multiply; }
+.brand-txt { font-size: 17px; font-weight: 600; letter-spacing: -.01em; text-align: center; }
+.bio { display: grid; gap: 28px; padding-top: 0; }
+.bio-txt h3 { font-size: var(--t2); line-height: 1.15; letter-spacing: -.02em; }
+.bio-txt h3 + h3 { margin-top: .8em; }
+@media (min-width: 900px) { .bio { grid-template-columns: 1fr 1fr; align-items: end; } }
+
+/* about: address */
+.visit { display: grid; gap: 20px; }
+.visit-grid { display: grid; gap: var(--gap); margin-top: 12px; }
+.visit-addr, .visit-mail {
+  display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-height: 220px;
+  padding: 24px; border-radius: var(--radius); background: var(--tile);
+  font-size: var(--t3); line-height: 1.1; letter-spacing: -.03em; transition: background-color .45s var(--ease), color .45s var(--ease);
+}
+.visit-mail { background: var(--ink); color: var(--bg); justify-content: flex-end; }
+.visit-go { font-size: var(--t1); letter-spacing: 0; }
+.visit-addr:hover { background: #d9d6ca; }
+.visit-mail:hover { background: #333; }
+@media (min-width: 768px) { .visit-grid { grid-template-columns: 1fr 1fr; } }
+
+/* project */
+.pj-hd { padding: clamp(96px, 11vw, 150px) var(--g) clamp(24px, 3vw, 40px); display: grid; gap: 22px; }
+.pj-intro { max-width: 60ch; }
+.pj-intro p { font-weight: 500; font-size: var(--t2); line-height: 1.45; }
+.pj-intro p + p { margin-top: 12px; }
+.credits { max-width: 90ch; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.credits summary { list-style: none; cursor: pointer; padding: 14px 0; display: flex; justify-content: space-between; }
+.credits summary::-webkit-details-marker { display: none; }
+.credits summary::after { content: "+"; transition: transform .4s var(--ease); }
+.credits[open] summary::after { transform: rotate(45deg); }
+.credits ul { padding-bottom: 16px; display: grid; gap: 8px; font-size: var(--t1); font-weight: 500; line-height: 1.5; }
+.credits strong { font-weight: 700; }
+.pj-media { padding: 0 var(--g); }
+.pj-media > .m-row:first-child, .pj-media > .m-strips:first-child, .pj-media > .m-strips:first-child > .m-row:first-child { margin-top: 0; }
+
+.next { padding: clamp(48px, 6vw, 96px) var(--g) 0; }
+.next a { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 24px; }
+.next-t { font-size: var(--t5); line-height: .94; letter-spacing: -.05em; font-weight: 500; transition: transform .6s var(--ease); }   /* t5, like "Ranko makes work…" on the home */
+.next-r { color: var(--muted); font-size: var(--t1); }
+.next a:hover .next-t { transform: translateX(16px); }
+
+/* ------------------------------------------------ contact + footer */
+/* bottom of every page: one grey-blue panel (#F5F5F7, like the top bar) holding the two tiles and the footer.
+   Same side margins as the bar and rounded top corners: the bar hangs from the top, the panel rises from the bottom.
+   Tiles 12 px inside the panel: radius 16 - 12/2 = 10 (inner radius = outer radius - outer thickness / 2). */
+.bottom { margin: clamp(56px, 7vw, 110px) clamp(12px, 2.8vw, 40px) 0; padding: 12px; border-radius: 16px 16px 0 0; background: #f5f5f7; }
+.cta { display: grid; gap: 12px; }
+@media (min-width: 768px) { .cta { grid-template-columns: minmax(0, 5fr) minmax(0, 1fr); } }   /* "AI talent wanted" a third of its first size (1/6 of the width): the emphasis stays on "Work with us" */
+/* "Work with us": black tile, the whole tile is the link */
+.cta-tile, .cta-jobs { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 24px;
+  border-radius: 10px; font-size: var(--t3); font-weight: 700; line-height: 1.1; letter-spacing: -.03em;
+  transition: background-color .45s var(--ease), color .45s var(--ease); }
+.cta-tile { background: var(--ink); color: #fff; }
+.cta-tile:hover, .cta-tile:focus-visible { background: #fff; color: var(--ink); }   /* colours swap on hover: white tile, black text */
+/* "AI talent wanted": same tile in white on the grey panel */
+.cta-jobs { background: #fff; color: var(--ink); font-size: 18px; letter-spacing: -.01em; line-height: 1.2; }   /* smaller text to fit the narrow tile */
+.cta-jobs > span:last-child { align-self: flex-end; text-align: right; font-weight: 400; }   /* jobs@ranko.ca on the right, like hello@ranko.ca */
+.cta-jobs:hover, .cta-jobs:focus-visible { background: var(--ink); color: #fff; }
+.cta-t { font: inherit; }
+.cta-mail { font-weight: 400; letter-spacing: -.01em; text-align: right; }   /* like "not to cut corners, but to go further." on the home: regular weight, on the right */
+@media (min-width: 768px) {   /* the e-mail on the right, level with the last line of the sentence (like the page headers) */
+  .cta-tile { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: last baseline; align-content: start; column-gap: var(--gap); }
+}
+
+/* footer: three columns lined up with the text of the tiles, then a thin line and the copyright */
+.ft {
+  padding: clamp(40px, 5vw, 64px) 24px 12px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px var(--gap); font-size: var(--t1);
+}
+.ft h2 { font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 14px; }
+.ft ul { display: grid; gap: 6px; }
+.ft li a, .ft p a { font-weight: 500; }
+.ft p { font-weight: 500; line-height: 1.5; }
+.ft p + p { margin-top: 4px; }
+.ft-copy { grid-column: 1 / -1; margin-top: clamp(16px, 3vw, 40px); padding-top: 18px; border-top: 1px solid rgba(0, 0, 0, .08);
+  font-size: 14px; color: var(--muted); }
+@media (min-width: 768px) { .ft { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* back to top: black disc, bold arrow that lifts on hover */
+/* cookie banner (only when Google Analytics is set up): Accept and Decline weigh the same */
+.consent {
+  position: fixed; left: var(--g); bottom: var(--g); z-index: 60; max-width: 440px;
+  display: grid; gap: 14px; padding: 18px; border-radius: var(--radius);
+  background: var(--ink); color: var(--bg); font-size: var(--t1); line-height: 1.35;
+}
+.consent[hidden] { display: none; }
+.consent a { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1.5px no-repeat; padding-bottom: .1em; }
+.consent-btns { display: flex; gap: 8px; }
+.consent-btns button { flex: 1; padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--bg); transition: background-color .3s var(--ease), color .3s var(--ease); }
+.consent-btns button:hover, .consent-btns [data-consent="yes"] { background: var(--bg); color: var(--ink); }
+.consent-btns [data-consent="yes"]:hover { background: transparent; color: var(--bg); }
+@media (max-width: 519px) { .consent { right: var(--g); max-width: none; } }
+.ft-copy { display: flex; flex-wrap: wrap; gap: 6px 20px; padding-right: 64px; }   /* clear of the back-to-top button */
+.ft-copy span { margin-right: auto; }
+.ft-copy button { padding-bottom: .1em; }
+/* footer links: no line under them (Romain), they fade a little on hover */
+.ft a, .ft-copy button { transition: opacity .3s var(--ease); }
+.ft a:hover, .ft a:focus-visible, .ft-copy button:hover { opacity: .55; }
+
+.ft-top { display: inline-flex; align-items: center; gap: 4px; }   /* footer: "Back to top" with the same arrow */
+.ft-top svg { width: 14px; height: 14px; transition: transform .45s var(--ease); }
+.ft-top:hover svg { transform: translateY(-2px); }
+/* arrow like Romain's reference: a thin straight shaft and a sharp head with a hollowed base */
+.totop-s { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: butt; }
+.totop-h { fill: currentColor; }
+
+/* ------------------------------------------------ page transitions (supported browsers only) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out .35s var(--ease) both; }
+::view-transition-new(root) { animation: vt-in .6s var(--ease) both; }
+@keyframes vt-out { to { opacity: 0; transform: translate3d(0, -24px, 0); } }
+@keyframes vt-in { from { opacity: 0; transform: translate3d(0, 40px, 0); } }
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ------------------------------------------------ reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .js [data-reveal], .js [data-split] .w > span { opacity: 1; transform: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+
+/* ================================================ Kanso-style home (Test-Ranko branch) */
+.k { --soft: #efeee8; --grey: rgba(0, 0, 0, .38); font-weight: 500; }
+.k b { font-weight: 500; }
+/* hero: "Creative company" + the sentence (same sizes as the other page headers) */
+.k .big-t { font-weight: 500; }   /* statements back on the home: same weight as "Selected Work", not the heavy bold of main */
+.k :is(.big-t, .mid-t), .about-st .mid-t { max-width: none; }
+/* home rhythm: the same space between every block — showreel · first statement · Selected Work · second statement · bottom panel */
+:root { --sp: clamp(72px, 8vw, 128px); }
+.k .statement { padding-top: var(--sp); padding-bottom: 0; }
+.k .statement .big-t { font-size: var(--t5); line-height: .94; letter-spacing: -.05em; }   /* t5: between the page titles (t6) and the section titles (t4) */
+.k .k-shelf { margin-top: 0; padding-top: var(--sp); padding-bottom: 0; }
+main:has(.k) + .bottom { margin-top: var(--sp); }
+   /* home statements and About's sentence run across the full width */
+.statement-2.about-st { padding-top: clamp(48px, 6vw, 96px); }   /* About: under the header line, before the logo wall */
+.about-st .mid-t { font-weight: 500; }   /* same weight as the home statements */
+/* page headers, same on every page (home, Work, Services, About…): bold title, lighter sentence */
+.k-hero { font-weight: 700; }
+.k-hero .page-intro { max-width: none; font-weight: 400; }
+@media (min-width: 900px) {   /* big screens: the sentence on the right, its last line on the same line as the title's last line */
+  .k-hero { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: last baseline; column-gap: var(--gap); }
+  .k-hero .page-intro { flex: 0 1 26ch; max-width: 26ch; margin-left: auto; text-align: right; }
+  /* no room beside the title (long title or long sentence): the sentence goes under it, still on the right */
+  .k-hero.is-stacked .page-intro { flex-basis: 30ch; max-width: 30ch; }
+  .k-hero .page-intro:has(br) { flex: 0 1 auto; max-width: none; }   /* line breaks chosen by hand (| in the text file): keep them as they are */
+}
+@media (max-width: 899px) {   /* phones: too narrow for the hand-made lines, the sentence breaks evenly by itself */
+  .page-intro br, #st-t br { display: none; }
+}
+.k .reel { margin-top: clamp(8px, 1vw, 16px); }
+.k-sec { padding: clamp(56px, 7vw, 110px) var(--g) clamp(24px, 3vw, 40px); }
+/* like Apple: the section holding white cards sits on a light grey band, full width */
+.k-shelf { margin-top: clamp(40px, 5vw, 80px); padding-bottom: clamp(56px, 7vw, 110px); }
+/* heading row: big title left, short text + link right */
+.k-head { display: grid; gap: 20px; margin-bottom: clamp(24px, 3vw, 44px); }
+.k-title { font-size: var(--t3); line-height: 1; letter-spacing: -.03em; font-weight: 500; }   /* "Selected Work": t3 (42 px at 1440) */   /* same size and spacing as the section titles on main, lighter weight */
+.k-side { display: grid; gap: 14px; align-content: end; max-width: 36ch; }
+.k-side p { color: var(--muted); line-height: 1.4; }
+.k-pill {
+  justify-self: start; padding: 11px 20px; border-radius: 10px;   /* rounded rectangle (was a pill) */
+  font-size: 15px; line-height: 1.2;
+}
+@media (min-width: 900px) { .k-head { grid-template-columns: 1fr auto; align-items: end; } }
+@media (min-width: 900px) { .k-shelf .k-side { align-self: end; margin-bottom: calc(var(--t3) * .132); } }   /* big screens: "View all work" on the baseline of "Selected Work" */
+@media (max-width: 899px) {   /* phones: on the right, centred on the height of "Selected Work" */
+  .k-shelf .k-head { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+}   /* "View all work": bottom of the button on the baseline of "Selected Work" */
+/* project cards: picture in a soft grey card, name + role below, inside the card */
+/* phones: one column in the usual project order (the column wrappers step aside) */
+.k-cards { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }   /* phones: 2 projects per row, like Work */
+@media (max-width: 767px) { .k-cards .k-card-meta { padding: 10px 12px 12px; } .k-cards .k-card-name { font-size: 17px; } .k-cards .k-card-role { font-size: 12px; } }
+.k-col, .k-col ol { display: contents; }
+.k-card { order: var(--order); }   /* phones only: usual project order (columns on large screens keep their own order) */
+@media (min-width: 768px) {   /* 3 columns side by side, each a stack with the same gap everywhere */
+  .k-cards { display: flex; align-items: stretch; gap: var(--gap); }
+  .k-col { display: block; flex: var(--grow) 1 0; min-width: 0; }
+  .k-col ol { display: flex; flex-direction: column; gap: var(--gap); height: 100%; }
+  .k-col .k-card:last-child { margin-top: auto; }   /* the last project of every column ends on the same line */
+  .k-card { order: 0; }   /* every card fills its column */
+}
+.k-card a { display: block; border-radius: 14px; overflow: hidden; background: #f5f5f7; transition: background-color .4s var(--ease); }   /* picture to the edges, light grey strip below */
+.k-card a:hover { background: #f5f5f7; }   /* the strip keeps its grey on hover */
+.k-card .media { border-radius: 0; }
+/* project name first (larger), skills below (small, grey) */
+.k-card-meta { display: grid; gap: 4px; padding: 14px 16px 16px; font-weight: 500; }   /* same card on the home page and on Work */
+.k-card-role { font-size: 14px; color: var(--muted); line-height: 1.3; }
+.k-card-name { font-size: var(--t2); letter-spacing: -.02em; line-height: 1.1; }
+/* services: numbered rows with tags */
+.k-svcs { border-top: 1px solid var(--line); }
+.k-svc a { display: grid; gap: 10px 24px; padding: clamp(20px, 2.4vw, 32px) 0; border-bottom: 1px solid var(--line); }
+.k-svc-n { font-size: 14px; color: var(--muted); }
+.k-svc-t { font-size: var(--t3); line-height: 1.05; letter-spacing: -.03em; transition: transform .6s var(--ease); }
+.k-svc-d { color: var(--muted); max-width: 40ch; line-height: 1.4; }
+.k-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.k-tags span { padding: 6px 12px; border-radius: 999px; background: var(--soft); font-size: 14px; }
+.k-svc a:hover .k-svc-t { transform: translateX(10px); }
+@media (min-width: 900px) {
+  .k-svc a { grid-template-columns: 60px minmax(0, 1.2fr) minmax(0, 1fr); align-items: start; }
+  .k-tags { grid-column: 3; }
+  .k-svc-d { grid-column: 3; grid-row: 1; }
+}
+
+/* Kanso-style header (Test-Ranko): a light frosted bar hanging from the top, rounded at the bottom */
+.kn {
+  position: fixed; top: 0; left: clamp(12px, 2.8vw, 40px); right: clamp(12px, 2.8vw, 40px); z-index: 50;
+  display: flex; align-items: center; gap: 20px; height: 46px; padding: 0 6px 0 14px;
+  border-radius: 0 0 16px 16px; background: rgba(245, 245, 247, .9);   /* our #F5F5F7, see-through with a blur like kanso.framer.media */
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  font-size: 14px; font-weight: 500; view-transition-name: header;
+}
+.kn-l { display: flex; align-items: center; gap: 12px; margin-right: auto; min-width: 0; }
+.kn .hd-logo svg { width: 70px; }
+.kn-time { position: absolute; left: 50%; transform: translateX(-50%); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }   /* in the middle of the bar */
+.clock-sep { animation: clock-blink 1s steps(1, end) infinite; }   /* the colon blinks with the seconds */
+@keyframes clock-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .clock-sep { animation: none; } }
+.kn-nav ul { display: flex; gap: 18px; }
+.kn-nav a { position: relative; }
+.kn-nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px; background: currentColor;
+  transform: scaleX(0); transform-origin: right; transition: transform .4s var(--ease);
+}
+.kn-nav a[aria-current]::after { transform: scaleX(1); transform-origin: left; }   /* hover: the letters roll instead */
+.kn-cta { display: inline-flex; align-items: center; height: 34px; padding: 0 16px; white-space: nowrap;
+  border-radius: 13px; }   /* 6 px from the bar's edges all round; inner radius = outer radius − outer thickness / 2 = 16 − 6/2 = 13 */
+.kn-plus {
+  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 999px; background: #fff; color: var(--ink);
+  font-size: 22px; line-height: 1; font-weight: 400;
+}
+/* the "+" is drawn (two 2 px bars, whole pixels), so it sits exactly in the middle of the circle; it turns into a × when the menu is open */
+.kn-x { position: relative; width: 14px; height: 14px; transition: transform .4s var(--ease); }
+.kn-x::before, .kn-x::after { content: ""; position: absolute; background: currentColor; border-radius: 1px; }
+.kn-x::before { left: 0; top: 6px; width: 14px; height: 2px; }
+.kn-x::after { left: 6px; top: 0; width: 2px; height: 14px; }
+.kn-plus[aria-expanded="true"] .kn-x { transform: rotate(45deg); }
+.kn .kn-plus { display: grid; }
+@media (min-width: 900px) { .kn .kn-plus { display: none; } }   /* large screens: the links are in the bar, no "+" */
+@media (max-width: 899px) { .kn-nav { display: none; } }
+@media (max-width: 539px), (min-width: 900px) and (max-width: 999px) { .kn-time { display: none; } }   /* hidden where it would touch the links or the button */
+.menu { z-index: 49; }
+
+/* home intro (Test-Ranko), like salient.framer.website: dark screen, the logo's letters rise, then the screen lifts
+   like a curtain (~1.2 s). Once per visit (sessionStorage), never with reduced motion. */
+.intro { display: none; }
+.intro-on .intro {
+  display: flex; align-items: center; justify-content: center; position: fixed; inset: 0; z-index: 100;
+  background: #0b0b0b; color: var(--bg);
+  animation: intro-up .94s cubic-bezier(.76, 0, .24, 1) 1.06s forwards;   /* the whole intro lasts 2 s */
+}
+.intro-logo svg { width: clamp(90px, 9vw, 130px); height: auto; }
+.intro-logo path { transform: translate(0, 400px); animation: intro-letter .82s var(--ease) forwards; }
+.intro-logo path:nth-child(1) { animation-delay: .12s; }
+.intro-logo path:nth-child(2) { animation-delay: .19s; }
+.intro-logo path:nth-child(3) { animation-delay: .26s; }
+.intro-logo path:nth-child(4) { animation-delay: .33s; }
+.intro-logo path:nth-child(5) { animation-delay: .4s; }
+@keyframes intro-letter { to { transform: none; } }
+@keyframes intro-up { to { transform: translate3d(0, -100%, 0); } }
+/* the home title and sentence start rising as the curtain lifts */
+.intro-on .k-hero [data-split] .w > span { transition-delay: calc(1.3s + var(--i) * 28ms); }
+
+/* pill buttons ("Work with us", "View all work"): letters roll down on hover, in a cascade */
+.roll { display: inline-flex; }
+/* each letter has its copy stacked just above it: on hover both slide down, the letter leaves through the bottom
+   and the copy comes in from the top */
+.roll-l { display: inline-flex; flex-direction: column; height: 1.2em; line-height: 1.2; overflow: hidden; }
+.roll-l > span { display: block; transform: translate3d(0, -100%, 0); transition: transform .55s cubic-bezier(.65, 0, .25, 1); transition-delay: calc(var(--i) * 18ms); }
+.roll-l > span:last-child { order: -1; }
+.roll-l.is-em { font-style: italic; }   /* "Ranko" in italics inside a rolling button */
+a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
+
+/* pill buttons: light grey with black text, black with white text on hover (while the letters roll) */
+.k-pill { background-color: #ececec; color: var(--ink); transition: background-color .3s var(--ease), color .15s linear; }
+/* the text only turns white once the grey has gone dark (and back to black first on leave):
+   changing both at the same pace made the letters vanish into a mid grey, a white flash */
+.k-pill:hover, .k-pill:focus-visible { background-color: var(--ink); color: #fff; transition: background-color .25s var(--ease), color .15s linear .12s; }
+.k-pill { display: inline-flex; align-items: center; }
+.k-plus { position: relative; display: block; flex: none; width: 10px; height: 10px; margin-left: 10px; transition: transform .55s cubic-bezier(.65, 0, .25, 1); }   /* whole pixels: sharp lines */
+.k-pill:hover .k-plus, .k-pill:focus-visible .k-plus { transform: rotate(90deg); }   /* turns right; on leave the transition turns it back left */
+.k-plus::before, .k-plus::after { content: ""; position: absolute; background: currentColor; }
+.k-plus::before { left: 0; top: 4px; width: 10px; height: 2px; }
+.k-plus::after { left: 4px; top: 0; width: 2px; height: 10px; }
+/* "Work with us" in the bar stays black */
+.kn-cta { background: var(--ink); color: #fff; }   /* stays black at all times (only the letters roll on hover) */
+
+/* Afterhours: mosaic like the home wall, each piece in its own format; a click opens it full screen (site.js) */
+.ah-open { display: block; width: 100%; text-align: left; border-radius: 14px; overflow: hidden; background: #f5f5f7; cursor: zoom-in; }
+.ah-open .media { border-radius: 0; }
+.ah-open:hover .media img, .ah-open:focus-visible .media img { transform: scale(1.03); }
+.ah-open:hover .media::after, .ah-open:focus-visible .media::after { opacity: .5; }
+/* videos: a small play mark */
+.ah-play { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255, 255, 255, .92); }
+.ah-play::before { content: ""; position: absolute; left: 13px; top: 10px; border-left: 9px solid var(--ink);
+  border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+
+/* full-screen viewer */
+.lb { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+  background: rgba(11, 11, 11, .97); color: #fff; overflow: hidden; }
+.lb::backdrop { background: transparent; }
+.lb-stage { position: absolute; inset: 64px clamp(16px, 6vw, 88px) 72px; display: grid; place-items: center; }
+.lb-media { position: relative; border-radius: 10px; overflow: hidden; background: #1a1a1a; }
+.lb-media :is(img, iframe) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; max-width: none; }
+.lb-cap { position: absolute; left: var(--g); bottom: 22px; display: flex; gap: 14px; font-size: 14px; font-weight: 500; }
+.lb-count { color: rgba(255, 255, 255, .55); font-variant-numeric: tabular-nums; }
+.lb-btn { position: absolute; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255, 255, 255, .12); color: #fff; font-size: 20px; line-height: 1; transition: background-color .3s var(--ease); }
+.lb-btn:hover, .lb-btn:focus-visible { background: rgba(255, 255, 255, .26); }
+.lb-close { top: 12px; right: 12px; font-size: 26px; }
+.lb-prev { left: 12px; top: 50%; margin-top: -22px; }
+.lb-next { right: 12px; top: 50%; margin-top: -22px; }
+@media (max-width: 699px) { .lb-prev, .lb-next { top: auto; bottom: 12px; margin: 0; } .lb-prev { left: auto; right: 64px; } .lb-cap { bottom: 24px; } }
+
+/* home, after Selected Work: the AI part as a bento (like kanso.framer.media), in greys, only existing material.
+   Grey frames (#F5F5F7) hold white cards 6 px inside: card radius 16 - 6/2 = 13 (inner = outer - thickness / 2). */
+.k .ai { padding-top: var(--sp); padding-bottom: 0; }
+.ai-hd { display: grid; gap: 20px; margin-bottom: clamp(40px, 4.9vw, 80px); }   /* bigger title (t5) than "Selected Work": proportionally more room before the tiles (~70 px at 1440) */
+.ai-t { font-size: var(--t5); line-height: .94; letter-spacing: -.05em; font-weight: 500; }   /* t5, like "Ranko makes work…", full width */
+.ai-sub { font-weight: 400; max-width: 26ch; }   /* in small, like "Specialized in the fields of design, film and digital." */
+@media (min-width: 900px) {   /* like the page headers: title on the left, the small sentence on the right, last lines on the same line */
+  .ai-hd { grid-template-columns: auto minmax(0, 1fr); align-items: last baseline; column-gap: var(--gap); }
+  .ai-sub { justify-self: end; max-width: 21ch; text-align: right; }
+  .ai-sub:has(br) { max-width: none; }   /* lines chosen by hand */
+}   /* exactly like "Selected Work" and the Services titles: size, spacing, gap to what follows */
+.ai-bento { display: grid; gap: 8px; }
+@media (min-width: 700px) { .ai-bento { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .ai-bento { grid-template-columns: repeat(4, minmax(0, 1fr)); min-height: clamp(520px, 42vw, 640px); } }
+.ai-col { border-radius: 16px; min-width: 0; }
+.ai-frame { display: flex; flex-direction: column; gap: 6px; padding: 6px; background: #f5f5f7; }
+.ai-card { position: relative; border-radius: 13px; background: #fff; overflow: hidden; }
+/* 1: AI video with its title, the years and a button; the skills below */
+.ai-hero { flex: 1; min-height: 300px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; padding: 18px; }
+.ai-bg { position: absolute !important; inset: 0; z-index: 0; border-radius: 0 !important; height: 100%; aspect-ratio: auto !important; }
+.ai-hero > p, .ai-tall > p { position: relative; z-index: 2; }
+.ai-hero::after, .ai-tall::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(rgba(0, 0, 0, .45), rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, .55)); }   /* white text stays readable on the videos */
+.ai-hero-t { font-size: var(--t2); line-height: 1.1; letter-spacing: -.02em; max-width: 16ch; }
+.ai-list { display: grid; gap: 8px; padding: 18px; font-size: 15px; font-weight: 500; }
+.ai-list li { display: flex; align-items: center; gap: 10px; }
+.ai-list li::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+/* 2: client logos, how many brands, the AI sentence */
+.ai-quote { display: flex; flex-direction: column; gap: 14px; padding: 20px 20px 6px; background: linear-gradient(160deg, #f5f5f7, #e9e9ec); }
+.ai-avs { display: flex; }
+.ai-av { display: grid; place-items: center; width: 46px; height: 46px; margin-right: -6px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px #f5f5f7; overflow: hidden; }
+.ai-av img { width: 54%; height: 54%; object-fit: contain; }
+.ai-av img.is-k { filter: brightness(0); } .ai-av img.is-g { filter: grayscale(1); } .ai-av img.is-c { filter: grayscale(1) contrast(4); }
+.ai-top { display: grid; gap: 12px; }
+.ai-rating { display: flex; align-items: center; gap: 8px; justify-self: start; font-size: 13px; font-weight: 400; color: var(--muted); transition: opacity .3s var(--ease); }
+.ai-rating b { color: var(--ink); font-weight: 600; }
+.ai-rating:hover { opacity: .6; }
+.ai-stars { font-size: 15px; letter-spacing: 2px; color: var(--ink); line-height: 1; display: inline-flex; }
+/* stars: a grey star under a black one that pops in, one after the other, when the tile appears */
+.st { position: relative; display: inline-block; }
+.st > span:first-child { color: rgba(0, 0, 0, .14); }
+.st-on { position: absolute; left: 0; top: 0; transform-origin: 50% 55%;
+  transition: transform .55s cubic-bezier(.34, 1.56, .64, 1) calc(.15s + var(--i) * .09s), opacity .25s ease calc(.15s + var(--i) * .09s); }
+.js [data-reveal]:not(.is-in) .st-on { transform: scale(.2); opacity: 0; }
+/* numbers that roll up from 0 (Google rating); same idea as the process steps */
+.odo { display: inline-block; height: 1.2em; overflow: hidden; vertical-align: bottom; font-variant-numeric: tabular-nums; }
+.odo-r { display: block; transform: translate3d(0, calc(-100% * var(--n) / (var(--n) + 1)), 0);   /* exact: n of the n+1 digits of the column */
+ 
+  transition: transform calc(.6s + var(--n) * .12s) cubic-bezier(.3, .7, .15, 1) var(--d); }
+.odo-r > span { display: block; height: 1.2em; line-height: 1.2; }
+.js [data-reveal]:not(.is-in) .odo-r { transform: none; }
+.ai-quotes { margin-top: auto; display: grid; }
+.ai-q { grid-area: 1 / 1; display: grid; gap: 18px; align-content: end; }
+.ai-q[hidden] { display: grid; visibility: hidden; opacity: 0; }   /* all quotes share one spot: the card keeps the height of the longest */
+.ai-q.is-on { animation: ai-q-in .7s var(--ease); }
+@keyframes ai-q-in { from { opacity: 0; transform: translate3d(0, 10px, 0); } }
+.ai-q blockquote { margin: 0; font-size: clamp(20px, 1.6vw, 24px); line-height: 1.3; letter-spacing: -.015em; font-weight: 500; }   /* the testimonials fill more of the card */
+.ai-q figcaption { display: grid; gap: 2px; font-size: 14px; font-weight: 500; }
+.ai-q figcaption span { color: var(--muted); font-weight: 400; }
+.ai-dots { display: flex; gap: 6px; }
+.ai-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(0, 0, 0, .18); transition: background-color .3s var(--ease), width .3s var(--ease); }
+.ai-dot[aria-pressed="true"] { width: 18px; border-radius: 4px; background: var(--ink); }
+/* 3: three short cards (services) */
+.ai-feat { flex: 1; display: flex; flex-direction: column; gap: 6px; padding: 18px; }
+.ai-feat h3 { font-size: var(--t2); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 4px; }   /* same as the project names on the cards above */
+.ai-feat p { font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--muted); }   /* same as the skills under the project names */
+.ai-feat ul { display: flex; flex-wrap: wrap; gap: 2px 0; font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--muted); }
+.ai-feat li:not(:last-child)::after { content: "·"; margin: 0 7px; }   /* skills on a line, separated by a middle dot */
+.ai-more { align-self: stretch; justify-content: center; background-color: #fff; border-radius: 13px; padding: 14px 20px; }   /* tile 3: to the Services page, same button as "View all work", white like the cards */
+.ai-quote .ai-more { margin: 4px -14px 0; }
+.ai-tall .ai-more { position: relative; z-index: 2; align-self: stretch; margin: auto -18px -18px; }   /* tile 4: Work with us at the bottom, 6 px from the edges like the other buttons */   /* tile 2: the About button lines up with the one of tile 3 (6 px from the edges) */
+/* 4: tall AI video, Ranko on top, the sentence at the bottom */
+.ai-tall { position: relative; overflow: hidden; min-height: 420px; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; padding: 24px; color: #fff; text-align: left; }   /* the sentence top left, like the title of tile 1 */
+.ai-tall-b { font-size: var(--t2); line-height: 1.1; letter-spacing: -.02em; max-width: 20ch; }   /* same as the title of tile 1 */
+/* phones: smaller buttons so they stay secondary next to the titles (~34 px high instead of 40) */
+@media (max-width: 767px) {
+  .k-pill { padding: 8px 14px; font-size: 14px; }
+  .ai-more { padding: 10px 16px; }
+}
+
+/* Services: the process — first line like the service rows (title · sentence · button), then the 4 steps as tiles
+   like the AI block of the home (grey frame #F5F5F7, white cards 6 px inside, radius 13 = 16 - 6/2) */
+.pr { border-top: 1px solid var(--line); margin: 0 var(--g); padding-left: 0; padding-right: 0; }   /* a thin line above, like the service rows */
+.pr-t { font-size: var(--t4); line-height: 1; letter-spacing: -.035em; font-weight: 500; max-width: 14ch; }   /* t4, like Brand Films */
+.pr .ai-sub { font-size: var(--t2); line-height: 1.3; letter-spacing: -.01em; }   /* same size as the service sentences ("Motion toolkits and design systems…") */
+.pr-grid { display: grid; gap: 8px; border-radius: 16px; }
+/* test: grey tiles straight on the page (no grey frame around white cards) */
+.pr-grid.ai-frame { padding: 0; background: none; }
+.pr-grid .pr-card { background: #f5f5f7; border-radius: 16px; }
+@media (min-width: 700px) { .pr-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .pr-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); min-height: clamp(400px, 32vw, 500px); } }   /* lower than the AI block of the home (~460 px at 1440) */
+.pr-card { display: flex; flex-direction: column; gap: 6px; padding: 18px; }   /* same card as the services tile of the home AI block */
+.pr-card h3 { font-size: var(--t2); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 4px; }   /* like the project names */
+.pr-card p { font-size: var(--t2); font-weight: 400; line-height: 1.3; letter-spacing: -.01em; color: var(--muted); }   /* same size as the service sentences ("Motion toolkits and design systems…") */
+.pr-n { font-size: var(--t5); font-weight: 500; line-height: .8; letter-spacing: -.05em; color: var(--ink); }   /* step numbers in t5 (110 px at 1440), big on top of the tile */
+/* text for screen readers only (hidden on screen) */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+/* the number rolls from 0 to its value when the tile appears: a column of digits slides up inside a one-digit window */
+.pr-n { display: block; height: .9em; overflow: hidden; margin-bottom: -.1em; }
+.pr-roll { display: block; transform: translate3d(0, calc(-100% * var(--n) / (var(--n) + 1)), 0);
+ 
+  transition: transform calc(.7s + var(--n) * .2s) cubic-bezier(.3, .7, .15, 1) calc(.15s + var(--i) * .12s); }
+.pr-roll > span { display: block; height: .9em; line-height: .9; }
+.js .pr-card:not(.is-in) .pr-roll { transform: none; }   /* starts on 0 (without JavaScript: shows the final number) */
+@media (min-width: 1100px) { .pr-card h3 { margin-top: clamp(40px, 5vw, 80px); } }   /* the big number on top, then the name (level in every tile) and its text */
+
+/* Privacy: laid out like the Services rows — the section title on the left (t4, like "Brand Films"),
+   its text on the right (t2, like the service sentences), thin grey lines between the rows */
+.lg-date { margin: 0 var(--g); padding-top: clamp(32px, 4vw, 56px); font-size: var(--t1); font-weight: 500; color: var(--muted); }
+.lg-row { display: grid; gap: 20px; border-top: 1px solid var(--line); margin: clamp(24px, 3vw, 40px) var(--g) 0; padding-left: 0; padding-right: 0; }
+.lg-date + .lg-row { margin-top: 0; border-top: 0; padding-top: clamp(24px, 3vw, 40px); }   /* the header line is enough above the first section */
+.lg-t { font-size: var(--t4); line-height: 1; letter-spacing: -.035em; font-weight: 500; }
+.lg-body { display: grid; gap: .8em; font-size: var(--t2); line-height: 1.35; letter-spacing: -.01em; font-weight: 400; max-width: 40ch; }
+.lg-body ul { display: grid; gap: .6em; }
+.lg-body li { position: relative; padding-left: 1.1em; }
+.lg-body li::before { content: "—"; position: absolute; left: 0; }
+.lg-body strong { font-weight: 600; }
+.lg-body a { background: linear-gradient(currentColor, currentColor) 0 100% / 100% max(1.5px, .08em) no-repeat; padding-bottom: .1em; }
+@media (min-width: 900px) { .lg-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: var(--gap); } }
+
+/* project pages, harmonized with Services / Privacy: the name alone on top, a thin line, then rows —
+   the role on the left (t4), the intro and the credits on the right (t2); inside the page, each text:
+   its title on the left (t4), its text on the right (t2); a big sentence alone takes the full width */
+.pj-hd { padding: clamp(96px, 11vw, 150px) var(--g) clamp(24px, 3vw, 40px); }
+.pj-row { margin-top: 0; border-top: 0; padding-top: clamp(40px, 5vw, 72px); }
+.pj-intro p { font-weight: 400; font-size: inherit; line-height: inherit; }
+.pj-intro .credits { margin-top: 12px; max-width: none; font-size: var(--t1); }
+.pj-media .m-text { max-width: none; margin: clamp(56px, 7vw, 110px) 0; display: grid; gap: 20px var(--gap); }
+.pj-media .m-text :is(h2, h3) { font-size: var(--t4); line-height: 1; letter-spacing: -.035em; font-weight: 500; }
+.pj-media .m-text h3, .pj-media .m-text h2.h3 { font-size: var(--t3); letter-spacing: -.03em; }
+.pj-media .m-text strong { font-weight: inherit; }
+.pj-media .m-text :is(p, ul) { margin: 0; max-width: 40ch; font-size: var(--t2); line-height: 1.35; letter-spacing: -.01em; font-weight: 400; }
+.pj-media .m-text > * + :is(h2, h3) { margin-top: 0; }
+@media (min-width: 900px) {
+  .pj-media .m-text { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
+  .pj-media .m-text > :is(h2, h3) { grid-column: 1; }
+  .pj-media .m-text > :not(h2, h3) { grid-column: 2; }
+  .pj-media .m-text > :is(h2, h3):only-child { grid-column: 1 / -1; max-width: 28ch; }   /* a big sentence on its own */
+}
+
+/* About, harmonized with Services / Privacy / projects: section titles in weight 500, a thin grey line above each
+   section, the bio in a row (portrait left, text right at the size of the service sentences, regular weight) */
+.brands, .bio, .visit { border-top: 1px solid var(--line); margin: 0 var(--g); padding-left: 0; padding-right: 0; }
+.bio { padding-top: clamp(48px, 6vw, 96px); }
+.brands .sec-t, .visit .sec-t { font-weight: 500; }
+.bio-txt h3 { font-size: var(--t2); line-height: 1.35; letter-spacing: -.01em; font-weight: 400; max-width: 40ch; }
+@media (min-width: 900px) { .bio { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: var(--gap); align-items: start; } }
+/* About: a logo with a project page is a link: the whole cell, light grey and a slight zoom on hover */
+.brand { position: relative; }
+.brand-link { position: absolute; inset: 0; display: grid; place-items: center; padding: 12px; transition: background-color .35s var(--ease); }
+.brand-link .brand-logo, .brand-link .brand-txt { transition: transform .5s var(--ease); }
+.brand-link { transition: background-color .35s var(--ease), color .35s var(--ease); }
+.brand-link :is(.brand-logo) { transition: transform .5s var(--ease), filter .35s var(--ease); }
+/* hover: the cell turns black and the logo white (colours swapped) */
+.brand-link:hover, .brand-link:focus-visible { background: var(--ink); color: #fff; }
+.brand-link:is(:hover, :focus-visible) .brand-logo { filter: invert(1); mix-blend-mode: normal; }
+.brand-link:is(:hover, :focus-visible) .brand-logo.is-k { filter: brightness(0) invert(1); }
+.brand-link:is(:hover, :focus-visible) .brand-logo.is-g { filter: grayscale(1) invert(1); }
+.brand-link:is(:hover, :focus-visible) .brand-logo.is-c { filter: grayscale(1) contrast(4) invert(1); }
+.brand-link:hover :is(.brand-logo, .brand-txt), .brand-link:focus-visible :is(.brand-logo, .brand-txt) { transform: scale(1.06); }
+/* logos that look too small in their cell (file with a wide margin, thin wordmark): a bit bigger */
+.logo-udem { scale: 1.45; }
+.logo-jagermeister { scale: 1.35; }
+.logo-dior { scale: .82; }
+/* About: same spacing as the process of Services — the title, then ~70 px (at 1440) before the tiles / logos */
+.brands .brand-grid { margin-top: clamp(40px, 4.9vw, 80px); }
+
+/* About, contact: like the two tiles at the bottom of the page, mirrored — the address narrow on the left
+   (like "AI talent wanted": 18 px), the e-mail long and black on the right (like "Work with us": t3 bold);
+   same height, padding and text; colours swap on hover */
+.visit { padding-top: clamp(48px, 6vw, 96px); }
+.visit-grid { display: grid; gap: 12px; margin-top: 0; }
+@media (min-width: 768px) { .visit-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 5fr); } }
+.visit-addr, .visit-mail { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 24px;
+  border-radius: 16px; font-weight: 700; letter-spacing: -.03em; transition: background-color .45s var(--ease), color .45s var(--ease); }
+.visit-addr { background: #f5f5f7; color: var(--ink); font-size: 18px; line-height: 1.2; letter-spacing: -.01em; }
+.visit-addr address { font-style: normal; }
+.visit-addr .visit-go { font-size: 14px; font-weight: 500; letter-spacing: 0; }
+.visit-mail { background: var(--ink); color: #fff; font-size: var(--t3); line-height: 1.1; justify-content: space-between; }
+.visit-addr:hover, .visit-addr:focus-visible { background: var(--ink); color: #fff; }
+.visit-mail:hover, .visit-mail:focus-visible { background: #f5f5f7; color: var(--ink); }
+/* same as the bottom of the page: tiles only as tall as their text; the e-mail on the right, regular weight,
+   level with "Work with us"; "Open in Google Maps" on the right */
+.visit-mail > span:last-child { align-self: flex-end; text-align: right; font-weight: 400; letter-spacing: -.01em; }
+.visit-mail { gap: 12px; }
+.visit-addr { font-size: var(--t1); gap: 12px; }   /* like "AI talent wanted": the link on top, the address at the bottom right */
+.visit-addr .visit-go { align-self: flex-start; }
+.visit-addr address { align-self: flex-end; text-align: right; }
+/* the About contact tiles and the bottom-of-page tiles: exactly the same height */
+.visit-addr, .visit-mail, .cta-tile, .cta-jobs { min-height: 152px; }
+/* project credits: no dash before CLIENT / INDUSTRY / SERVICE / TEAM (the dashes of the text lists don't apply here) */
+.lg-body .credits li { padding-left: 0; }
+.lg-body .credits li::before { content: none; }
+/* project pages, first row, left: the role (grey) and the services under it (black) */
+.pj-left { display: grid; gap: 20px; align-content: start; max-width: 32rem; }   /* same width for the role, the services and the client lines (and their thin lines) */
+.pj-role { font-size: var(--t2); line-height: 1.35; letter-spacing: -.01em; font-weight: 500; color: var(--muted); }   /* the role, above the services, one weight above the intro */
+.pj-services { font-size: var(--t2); line-height: 1.35; letter-spacing: -.01em; font-weight: 500; border-top: 1px solid var(--line); padding-top: 20px; }   /* the services as big as the role above; a thin grey line between them */
+/* project credits: always shown (no drop-down), small, under a thin grey line */
+.pj-credits { display: grid; gap: 8px; margin-top: 12px; padding: 20px 0 0; border-top: 1px solid var(--line); border-bottom: 0;
+  font-size: var(--t1); font-weight: 500; line-height: 1.5; letter-spacing: 0; }
+/* project pages: client testimonials — grey cards (like the process tiles), the quote at the size of the home
+   testimonials, the name and role under it; two per row, after a thin grey line */
+.pj-quotes { border-top: 1px solid var(--line); margin: clamp(56px, 7vw, 110px) var(--g) 0; padding-left: 0; padding-right: 0; padding-bottom: 0; }   /* "Next project" brings its own space */
+.pj-q-grid { display: grid; gap: 8px; }
+@media (min-width: 900px) { .pj-q-grid { grid-template-columns: 1fr 1fr; } }
+.pj-q { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; padding: 24px; border-radius: 16px; background: #f5f5f7; }
+.pj-q blockquote { margin: 0; font-size: clamp(20px, 1.6vw, 24px); line-height: 1.3; letter-spacing: -.015em; font-weight: 500; }
+.pj-q figcaption { display: grid; gap: 2px; font-size: 14px; font-weight: 500; }
+.pj-q figcaption span { color: var(--muted); font-weight: 400; }
+.pj-facts { margin-top: 0; }   /* CLIENT / INDUSTRY under the services, on the left */
+.pj-left > :first-child { border-top: 0; padding-top: 0; }
+.pj-svc-l { display: block; margin-bottom: 4px; font-size: var(--t1); line-height: 1.5; letter-spacing: 0; font-weight: 700; }   /* "SERVICE(S)" above the list, like the credit labels */
+@media (max-width: 899px) { .pj-row .pj-intro { order: -1; } }   /* phones: the project intro first, then the role, services and credits */
+/* project pages (test on Cinco): related projects, cards like the Work page, three per row */
+.pj-related { border-top: 1px solid var(--line); margin: clamp(56px, 7vw, 110px) var(--g) 0; padding-left: 0; padding-right: 0; padding-bottom: 0; }
+.pj-quotes + .pj-related { margin-top: clamp(48px, 6vw, 96px); }
+.pj-rel-t { font-size: var(--t3); line-height: 1; letter-spacing: -.03em; font-weight: 500; margin-bottom: clamp(24px, 3vw, 44px); }   /* like "Selected Work" */
+.pj-rel-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 900px) { .pj-rel-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
+@media (min-width: 1100px) { .pj-rel-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }   /* the size of the Work page cards (4 per row); the 3 related cards sit on the left */
+@media (max-width: 639px) { .pj-rel-grid .k-card-meta { padding: 10px 12px 12px; } .pj-rel-grid .k-card-name { font-size: 17px; } .pj-rel-grid .k-card-role { font-size: 12px; } }
+/* a sentence on its own is always the size of the section titles (t4), whatever heading level the text file used (### on some pages) */
+.pj-media .m-text > :is(h2, h3):only-child { font-size: var(--t4); letter-spacing: -.035em; line-height: 1; }
+/* project pages: groups of pictures laid out as a wall like the home page (full width, columns ending on one line) */
+.m-wall { margin-top: var(--gap); }
+.m-wall .cell { grid-column: auto; }
+@media (min-width: 768px) { .m-wall .k-col { flex: 1 1 0; } }   /* equal start before site.js computes the widths */
+.m-wall .media, .m-wall .vm { border-radius: var(--radius); }
+@media (max-width: 767px) {   /* phones: two by two, same frame for every piece so the lines stay even */
+  .m-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .m-wall:not(.is-lead) .media { aspect-ratio: 4 / 5 !important; }
+  .m-wall.is-odd:not(.is-lead) .k-col:last-child .k-card:last-child:has(.vm) { grid-column: 1 / -1; }   /* odd count ending on a video: it takes the whole width, no empty half */
+  .m-wall.is-odd:not(.is-lead) .k-col:last-child .k-card:last-child .vm .media { aspect-ratio: var(--ar) !important; }   /* a video there keeps its own format */
+  .m-wall.is-stack { grid-template-columns: 1fr; }   /* flag "stack": one under the other, each in its own format */
+  .m-wall.is-stack .media { aspect-ratio: var(--ar, auto) !important; }
+  .m-wall .c-p1 { order: -2; } .m-wall .c-p2 { order: -1; } .m-wall .c-plast { order: 9; }   /* flags "phonefirst" / "phonesecond" / "phonelast" */
+  .m-wall:not(.is-lead) .media img, .m-wall:not(.is-lead) .media video { object-fit: cover; width: 100%; height: 100%; }
+  .m-wall:not(.is-lead) .vm { overflow: hidden; border-radius: var(--radius); }   /* Vimeo loops cover the 4:5 frame too (cropped): frame height = 125% of its width */
+  .m-wall:not(.is-lead) .vm iframe { inset: auto; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1.02); width: max(100%, calc(125% * var(--ar))); height: auto; aspect-ratio: var(--ar); max-width: none; }
+}
+/* logos / cut-outs on a transparent background (flag "plain" in the text file): no grey behind, never cropped */
+.media.is-plain { background: none; }
+.media.is-plain img { object-fit: contain; }
+.m-row.is-middle { align-items: center; }   /* a line whose pieces are centred on its height (flag "middle") */
+.m-row.is-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }   /* flag "strip": one line of equal pieces (phones: two by two) */
+.m-row.is-strip .cell { grid-column: auto; }
+@media (max-width: 767px) {   /* phones: following strips flow as one grid, two by two, no empty half */
+  .m-strips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); margin-top: var(--gap); }
+  .m-strips > .m-row { display: contents; }
+  .m-row:has(> .c-quarter) > .c-half { order: -1; }   /* a half between quarters comes first, the quarters side by side below */
+  .c-desk { display: none; }   /* flag "desktop": big screens only */
+  .m-strips.is-odd .c-fill { order: 99; grid-column: 1 / -1; }   /* odd count with a "fill" picture: it closes the series on the whole width */
+  .m-strips.is-odd .c-fill .media { aspect-ratio: 16 / 9 !important; }
+  .m-strips.is-odd > .is-wide-end:last-child > .cell:last-child { grid-column: 1 / -1; }
+  .m-strips.is-odd > .is-wide-end:last-child > .cell:last-child .is-plain { width: 50%; margin: 0 auto; }   /* a cut-out (can, logo): centred at half width */
+  .m-strips .cell:has(.is-plain) { align-self: center; }
+  .m-strips .cell:has(.is-plain) { order: 2; }   /* phones: cut-outs (cans) together after the videos, all on one line */
+  .m-strips:has(.is-plain) { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* 4 columns: videos take two, cans one */
+  .m-strips:has(.is-plain) .m-row .cell:not(:has(.is-plain)) { grid-column: span 2; }
+  .m-strips:has(.is-plain) .m-row .cell.c-pwide { grid-column: 1 / -1; }
+  .m-strips .m-row .cell.c-pwide { order: 1; grid-column: 1 / -1; }   /* flag "phonewide": the whole width, cropped 4:5 */
+  .c-pwide .media { aspect-ratio: 4 / 5 !important; }
+  .c-pwide .media img { width: 100%; height: 100%; object-fit: cover; }
+  .c-pwide .vm { overflow: hidden; border-radius: var(--radius); }
+  .c-pwide .vm iframe { inset: auto; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1.02); width: max(100%, calc(125% * var(--ar))); height: auto; aspect-ratio: var(--ar); max-width: none; }
+}
+/* flag "phone": the video inside a phone the size of a 9:16 tile (La Ronde: the iPad story, its white frame cropped off) */
+.cell.c-phone { position: relative; aspect-ratio: 240 / 406; }   /* same frame as the vertical videos next to it */
+.c-phone .vm { position: absolute; inset: 7px; margin: 0; border-radius: 18px; overflow: hidden; background: #000; box-shadow: 0 0 0 7px #111; }
+.c-phone .vm::after { content: ""; position: absolute; z-index: 4; top: 8px; left: 50%; width: 28%; height: 16px; border-radius: 99px; background: #111; transform: translateX(-50%); }   /* the island */
+.c-phone .vm .media { position: absolute; inset: 0; aspect-ratio: auto !important; border-radius: 0; }
+.c-phone .vm .media img, .c-phone .vm iframe { position: absolute; inset: auto; left: 50%; top: 50%; height: 115.5%; width: auto; aspect-ratio: 4 / 5; max-width: none; object-fit: cover; transform: translate(-50%, -47.3%); }
+.cell.c-fill { display: flex; }   /* flag "fill": the picture takes the whole height of its line, cropped */
+.c-fill > figure { flex: 1; display: flex; flex-direction: column; margin: 0; }
+.c-fill .media { flex: 1; aspect-ratio: auto !important; }
+.c-fill .media img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 768px) { .m-row.is-strip { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); } }
+/* phones: the big piece of a "wall" line on top, the others two by two under it;
+   a "middle" line: its widest piece first, the smaller ones two by two under it */
+@media (max-width: 767px) {
+  .m-wall.is-lead { grid-template-columns: 1fr 1fr; }
+  .m-wall.is-lead .k-col:first-child .k-card { grid-column: 1 / -1; }
+  .m-wall.is-lead .k-col:last-child .k-card:last-child:nth-child(odd) { grid-column: 1 / -1; }   /* odd count on the right: the last one takes the whole width, no empty half */
+  .m-row.is-middle:not(.is-strip) .c-half { order: -1; }
+  /* more air around the figurines and the two logos */
+  .m-row.is-middle:not(.is-strip) { margin-top: 48px; row-gap: 40px; column-gap: 24px; }
+  .m-row.is-middle:not(.is-strip) .c-half .media { width: 88%; margin: 0 auto; }
+  .m-row.is-middle:not(.is-strip) .c-quarter .media { width: 72%; margin: 0 auto; }
+}
+
+/* tag="…" on a media line (e.g. Before / After): white word, top left, over a light shading that keeps it readable */
+.has-tag { position: relative; }
+.has-tag::after { content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(rgba(0, 0, 0, .42), rgba(0, 0, 0, 0) 38%); }
+.m-tag { position: absolute; left: 18px; top: 16px; z-index: 5; pointer-events: none;   /* same type as the project names on the Work tiles */
+  color: #fff; font-size: var(--t2); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; }
+@media (max-width: 639px) { .m-tag { font-size: 17px; left: 12px; top: 10px; } }

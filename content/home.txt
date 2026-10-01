@@ -1,0 +1,44 @@
+page_title: Ranko | Creative Company
+description: Ranko is a creative company specialized in design, film and digital. End-to-end production for brands leading the way. From Montreal to global.
+# AI bento, tile 1 (AI video): the title top left
+ai_tile1: AI pipeline, human direction
+# AI bento, tile 4 (tall video): the sentence at the bottom
+ai_tile: Your idea stays full size. Your brand goes further.
+hero_sub: Specialized in the fields of design, film and digital.
+reel: 1221254113
+featured: cinco, uniqlo, jagermeister, mcdonalds, dior, ssensexmoncler, nikon, nba-beat, louis-vuitton, la-ronde-2-0
+# Kanso-style home (Test-Ranko): which column each featured project sits in (left | middle | right)
+columns: cinco, mcdonalds, nikon | uniqlo, dior, louis-vuitton, nba-beat | jagermeister, ssensexmoncler, la-ronde-2-0
+# featured tiles that play a muted video loop over their cover image
+# (project = vimeo id, or a video file placed in images/<project>/, e.g. vignette.webm)
+tile_videos: cinco = 1209587063/e507ba7b2d
+
+== statement
+
+*Ranko* makes work | that lands for brands | leading the way.
+
+== statement2
+
+End-to-end | production with AI | fully integrated — not to cut corners, but to go further.
+
+== facts
+
+# number | suffix | text   ({projects} and {brands} are counted automatically; = before a number: no count-up)
+
+=2020 | | Founded in Montreal by Romain Amphyon
+2 | M+ | Views in 2 days for [NBA Beat](/nba-beat)
+{projects} | | Selected projects — [see the work](/work)
+{brands} | | [Brands we've worked for](/about)
+
+== testimonials
+
+# Google rating shown above the quotes (update by hand: Google Business, 29 Sept. 2026)
+google: 5.0 | 38
+
+# quote | name | role | project   (taken as-is from ranko.ca, Cinco and La Ronde 2.0 pages)
+Ranko worked in true synergy with our team to deliver a high-quality product. Easy to collaborate with, forward-thinking, and innovative, they brought both strong ideas and a solutions-oriented approach throughout the process. | Nicolas Marullo | President & CEO | Cinco
+Ranko translated our vision into images with remarkable quality and attention to detail. A trusted partner I recommend without hesitation. | Carlos Ponce | Creative & Strategic Marketing Leader | Cinco
+J'aime beaucoup. Merci énormément gang, je sais que ce n'est pas évident! | Carole Bricault | Directrice Marketing-Communication et Ventes groupes | La Ronde
+Vous êtes vraiment en mode solution. | Carole Bricault | Directrice Marketing-Communication et Ventes groupes | La Ronde
+Merci énormément pour les vidéos, j'ai tellement hâte de les utiliser sur les réseaux sociaux. | Josiane Cormier | Coordinatrice marketing | La Ronde
+On adore le beat de la version rétro […] C'est très bien 😊 | Bryan Briceno | Chef Marketing | La Ronde

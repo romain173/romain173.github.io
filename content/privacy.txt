@@ -1,0 +1,43 @@
+page_title: Ranko — Privacy & cookies
+description: How Ranko handles personal information and cookies on ranko.ca: what is collected, why, Google Analytics with your consent, and your rights.
+
+label: Privacy
+heading: Privacy | & cookies
+
+== intro
+
+What we collect | on this website, why, | and how you stay in control.
+
+== body
+
+Last updated: September 28, 2026
+
+## Who we are
+This website is run by Ranko, a creative company based at 1 Boul. De Maisonneuve Ouest, Montreal, QC, H2X 0E3, Canada.
+The person in charge of the protection of personal information is Romain Amphyon, founder and creative director. You can reach him at [romain@ranko.ca](mailto:romain@ranko.ca) for any question or request about your personal information.
+
+## What we collect and why
+- **When you write to us.** If you email us, we receive your name, your email address and what you choose to tell us. We use it only to answer you and, if we work together, to run the project. We keep it as long as the business relationship requires.
+- **Visit statistics, only if you agree.** With your consent, we use Google Analytics to count visits and see which pages are viewed, so we can improve the website. We never use it to identify you, and we do not sell or share this information for advertising.
+- **Nothing else.** There is no account, no form and no newsletter on this website.
+
+## Cookies
+Cookies are small files a website saves in your browser. This website sets no cookie of its own.
+Google Analytics cookies are **off by default**. They are only set if you click "Accept" in the cookie banner:
+- **_ga** — tells visits apart, without identifying you. Kept up to 2 years.
+- **_ga_<id>** — keeps the state of your visit for Google Analytics. Kept up to 2 years.
+Your choice (accept or decline) is saved in your browser's local storage so we don't ask again. You can change it at any time with the "Cookie settings" link at the bottom of every page. If you decline after accepting, the Google Analytics cookies are deleted.
+
+## Videos
+Videos are played with the Vimeo player in "Do Not Track" mode: Vimeo does not use cookies to follow your visit.
+Links to Instagram, LinkedIn, Vimeo and Google Maps are plain links. Those services only apply their own rules if you click them.
+
+## Where your information goes
+Google Analytics data is processed by Google, including on servers outside Quebec and Canada. Google acts on our behalf and is bound by its own data protection commitments.
+
+## Your rights
+You can ask to see the personal information we hold about you, to correct it, or to have it deleted. You can withdraw your consent to visit statistics at any time. Write to [romain@ranko.ca](mailto:romain@ranko.ca): we answer within 30 days.
+If you are not satisfied with our answer, you can contact the Commission d'accès à l'information du Québec.
+
+## Changes
+We may update this page. The date at the top shows the latest version.
