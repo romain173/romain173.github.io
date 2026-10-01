@@ -841,15 +841,14 @@ def page_project(slug, order, P):
     # the SERVICE(S) line of the credits goes to the left, under the role (both matter most); the rest stays in Credits
     clines = [l.strip() for l in s.get('credits', '').splitlines() if l.strip()]
     svc_line = next((l for l in clines if re.match(r'^\*\*SERVICES?\*\*', l)), '')
-    svc_label = 'Services'   # the same label on every project page
     services = re.sub(r'^\*\*SERVICES?\*\*\s*[—-]\s*', '', svc_line)
     services = re.sub(r'(?<=\w)-(?=\w)', '\u2011', services)   # "Full-Service" never breaks at its hyphen
-    # all the other credits (client, industry, team…) go to the left too, under the services
-    is_left = lambda l: l != svc_line
-    # labels written in capitals in the files (**CLIENT**, **PARIS TEAM**…) are shown in lower case: Client, Paris team
-    low = lambda l: re.sub(r'^\*\*([^*a-z]+)\*\*', lambda x: '**' + x.group(1).capitalize() + '**', l)
-    facts = ''.join(f'<li>{inline(low(l))}</li>' for l in clines if is_left(l))
-    credits = ''.join(f'<li>{inline(l)}</li>' for l in clines if l != svc_line and not is_left(l))
+    # under the services: only the client and the agency (when there is one), shown the same way — the team is not shown
+    def fact(key):
+        l = next((l for l in clines if re.match(rf'^\*\*{key}\*\*', l)), '')
+        return re.sub(rf'^\*\*{key}\*\*\s*[—-]\s*', '', l)
+    facts = [(lab, v) for lab, v in (('Services', services), ('Client', fact('CLIENT')), ('Agency', fact('AGENCY'))) if v]
+    facts_html = ''.join(f'<p class="pj-fact"><strong class="pj-svc-l">{lab}</strong>{inline(v)}</p>' for lab, v in facts)
     lst = [x for x in order]
     nxt = P[lst[(lst.index(slug) + 1) % len(lst)]] if slug in lst else P[lst[0]]
     body = f'''
@@ -861,11 +860,9 @@ def page_project(slug, order, P):
   <section class="sec lg-row pj-row">
     <div class="pj-left">
       <p class="pj-role" data-reveal>{esc(m["role"])}</p>
-      {f'<p class="pj-services" data-reveal><strong class="pj-svc-l">{svc_label}</strong>{inline(services)}</p>' if services else ''}
-      {f'<ul class="credits pj-credits pj-facts" data-reveal>{facts}</ul>' if facts else ''}
+      {f'<div class="pj-services" data-reveal>{facts_html}</div>' if facts else ''}
     </div>
     <div class="lg-body pj-intro">{md(s.get("intro", ""), reveal=False)}
-      {f'<ul class="credits pj-credits" data-reveal>{credits}</ul>' if credits else ''}
     </div>
   </section>
   <div class="pj-media">
