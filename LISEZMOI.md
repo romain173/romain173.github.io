@@ -175,7 +175,7 @@ de publier et la version déjà en ligne reste en place.** Vos visiteurs ne voie
 
 ## 8. Mettre le site en ligne
 
-Le site est hébergé gratuitement sur **GitHub Pages**. Le domaine ranko.ca et les courriels Google Workspace
+Le site est en ligne sur **https://www.ranko.ca** (depuis le 1er octobre 2026), hébergé gratuitement sur **GitHub Pages**. Le domaine ranko.ca et les courriels Google Workspace
 restent chez Squarespace : on ne change que les lignes du *site* dans l'annuaire (DNS), jamais celles des courriels.
 
 ### Comment ça marche une fois en ligne
