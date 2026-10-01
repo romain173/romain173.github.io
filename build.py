@@ -488,7 +488,9 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
 <meta property="og:image" content="{SITE_URL}{og_image}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 {pre}
 <style>{CSS}</style>
 <script>document.documentElement.classList.add('js')</script>
