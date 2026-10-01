@@ -726,11 +726,11 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .ai-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(0, 0, 0, .18); transition: background-color .3s var(--ease), width .3s var(--ease); }
 .ai-dot[aria-pressed="true"] { width: 18px; border-radius: 4px; background: var(--ink); }
 /* 3: three short cards (services) */
-.ai-feat { flex: 1; display: flex; flex-direction: column; gap: 6px; padding: 18px; }
+.ai-feat { flex: 1 1 auto; display: flex; flex-direction: column; gap: 6px; padding: 18px; }   /* each card at least as tall as its text, the space left shared out */
 .ai-feat h3 { font-size: var(--t2); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 4px; }   /* same as the project names on the cards above */
 .ai-feat p { font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--muted); }   /* same as the skills under the project names */
-.ai-feat ul { display: flex; flex-wrap: wrap; gap: 2px 0; font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--muted); }
-.ai-feat li:not(:last-child)::after { content: "·"; margin: 0 7px; }   /* skills on a line, separated by a middle dot */
+.ai-feat ul { display: flex; flex-wrap: wrap; gap: 0; font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--muted); }
+.ai-feat li:not(:last-child)::after { content: "\2014"; margin: 0 5px; }   /* skills on a line, separated by an em dash */
 .ai-more { align-self: stretch; justify-content: center; background-color: #fff; border-radius: 13px; padding: 14px 20px; }   /* tile 3: to the Services page, same button as "View all work", white like the cards */
 .ai-quote .ai-more { margin: 4px -14px 0; }
 .ai-tall .ai-more { position: relative; z-index: 2; align-self: stretch; margin: auto -18px -18px; }   /* tile 4: Work with us at the bottom, 6 px from the edges like the other buttons */   /* tile 2: the About button lines up with the one of tile 3 (6 px from the edges) */
