@@ -251,8 +251,20 @@
       if (!film && fig.dataset.seen !== '1') setTimeout(() => cmd(fig, 'pause'), 300);   // loaded ahead while off screen: wait
     }, { once: true });
     fig.iframe = f; fig.append(f);
+    cover(fig);
     if (film) fig.classList.add('is-playing');
   };
+  // Safari before 16 (old iPhones) doesn't know the container units the tile videos use to cover their tile:
+  // there the video is sized here instead, so it fills the tile like everywhere else
+  const oldSafari = !(window.CSS && CSS.supports('width', '1cqw'));
+  const cover = (fig) => {
+    if (!oldSafari || !fig.iframe || !fig.classList.contains('tile-vm')) return;
+    const [a, b] = getComputedStyle(fig).getPropertyValue('--ar').split('/').map(Number);
+    const r = fig.getBoundingClientRect(), ar = a / b || 16 / 9;
+    const w = Math.max(r.width, r.height * ar);
+    fig.iframe.style.width = `${w}px`; fig.iframe.style.height = `${w / ar}px`;
+  };
+  if (oldSafari) addEventListener('resize', () => $$('.tile-vm').forEach(cover), { passive: true });
   const cmd = (fig, method) => fig.iframe?.contentWindow?.postMessage(JSON.stringify({ method }), 'https://player.vimeo.com');
 
   const loops = $$('.vm-loop');

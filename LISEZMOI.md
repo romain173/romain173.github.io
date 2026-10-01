@@ -180,6 +180,10 @@ restent chez Squarespace : on ne change que les lignes du *site* dans l'annuaire
 
 ### Comment ça marche une fois en ligne
 
+Pour envoyer une nouvelle version : enregistrer les changements (`git commit`), puis lancer `./publish.sh`.
+Le script vérifie le site et envoie une copie sans les notes de travail (`SUIVI.md`) ni l'historique.
+Dépôt : https://github.com/romain173/romain173.github.io — adresse provisoire : https://romain173.github.io
+
 Chaque fois que la branche `main` est envoyée sur GitHub, GitHub fabrique le site et lance la vérification
 (`python3 build.py check`). S'il manque quoi que ce soit, rien n'est publié et la version en ligne reste en place.
 Sinon, le site est à jour en une à deux minutes. Réglage : `.github/workflows/deploy.yml`.
