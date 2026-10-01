@@ -434,7 +434,7 @@ a:hover .clip-v { transform: scale(1.05); }
 .consent[hidden] { display: none; }
 .consent a { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1.5px no-repeat; padding-bottom: .1em; }
 .consent-btns { display: flex; gap: 8px; }
-.consent-btns button { flex: 1; padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--bg); transition: background-color .3s var(--ease), color .3s var(--ease); }
+.consent-btns button { flex: 1; padding: 10px 16px; border-radius: 6px; border: 1.5px solid var(--bg); transition: background-color .3s var(--ease), color .3s var(--ease); }   /* rounded rectangles like the rest of the site; inner radius = outer radius − outer thickness / 2 = 15 − 18/2 = 6 */
 .consent-btns button:hover, .consent-btns [data-consent="yes"] { background: var(--bg); color: var(--ink); }
 .consent-btns [data-consent="yes"]:hover { background: transparent; color: var(--bg); }
 @media (max-width: 519px) { .consent { right: var(--g); max-width: none; } }
