@@ -666,7 +666,7 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 /* home, after Selected Work: the AI part as a bento (like kanso.framer.media), in greys, only existing material.
    Grey frames (#F5F5F7) hold white cards 6 px inside: card radius 16 - 6/2 = 13 (inner = outer - thickness / 2). */
 .k .ai { padding-top: var(--sp); padding-bottom: 0; }
-.ai-hd { display: grid; gap: 20px; margin-bottom: clamp(40px, 4.9vw, 80px); }   /* bigger title (t5) than "Selected Work": proportionally more room before the tiles (~70 px at 1440) */
+.ai-hd { display: grid; gap: 20px; margin-bottom: calc(var(--sp) + .045 * var(--t5)); }   /* as much air under the title (baseline → tiles) as above it (projects → top of the capitals) */
 .ai-t { font-size: var(--t5); line-height: .94; letter-spacing: -.05em; font-weight: 500; }   /* t5, like "Ranko makes work…", full width */
 .ai-sub { font-weight: 400; max-width: 26ch; }   /* in small, like "Specialized in the fields of design, film and digital." */
 @media (min-width: 900px) {   /* like the page headers: title on the left, the small sentence on the right, last lines on the same line */
