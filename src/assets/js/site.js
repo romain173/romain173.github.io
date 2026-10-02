@@ -84,7 +84,7 @@
   /* ---------- Montreal clock */
   const clock = $('[data-clock]');
   if (clock) {
-    // English: 12-hour clock with AM / PM (3:42 PM); French: 24-hour clock (15:42)
+    // English: 12-hour clock with am / pm (3:42 pm); French: 24-hour clock (15:42)
     const fr = document.documentElement.lang.startsWith('fr');
     const f = new Intl.DateTimeFormat('en-US', fr
       ? { timeZone: 'America/Toronto', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }
@@ -92,7 +92,7 @@
     // hours and minutes, the colon blinks with the seconds (CSS), started on the second
     const tick = () => {
       const p = Object.fromEntries(f.formatToParts(new Date()).map((x) => [x.type, x.value]));
-      clock.innerHTML = `${p.hour}<span class="clock-sep">:</span>${p.minute}${p.dayPeriod ? ' ' + p.dayPeriod.toUpperCase() : ''}`;
+      clock.innerHTML = `${p.hour}<span class="clock-sep">:</span>${p.minute}${p.dayPeriod ? ' ' + p.dayPeriod.toLowerCase() : ''}`;
       clock.firstElementChild.style.animationDelay = `-${Date.now() % 1000}ms`;
     };
     tick(); setInterval(tick, 20000);
