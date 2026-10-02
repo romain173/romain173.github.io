@@ -560,9 +560,9 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   font-size: 14px; font-weight: 500; view-transition-name: header;
 }
-.kn-l { display: flex; align-items: center; gap: 12px; margin-right: auto; min-width: 0; }
+.kn-l { display: flex; flex: 1 1 auto; align-items: center; gap: 20px; min-width: 0; }   /* takes the room between the logo and the links */
 .kn .hd-logo svg { width: 70px; }
-.kn-time { position: absolute; left: 50%; transform: translateX(-50%); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }   /* in the middle of the bar */
+.kn-time { margin-inline: auto; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }   /* in the middle between the logo and the first link (or the button on phones) */
 .clock-sep { animation: clock-blink 1s steps(1, end) infinite; }   /* the colon blinks with the seconds */
 @keyframes clock-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .clock-sep { animation: none; } }
@@ -588,7 +588,7 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
 .kn .kn-plus { display: grid; }
 @media (min-width: 900px) { .kn .kn-plus { display: none; } }   /* large screens: the links are in the bar, no "+" */
 @media (max-width: 899px) { .kn-nav { display: none; } }
-@media (max-width: 539px), (min-width: 900px) and (max-width: 999px) { .kn-time { display: none; } }   /* hidden where it would touch the links or the button */
+@media (max-width: 479px) { .kn-time { display: none; } }   /* small phones: no room beside the button */
 .menu { z-index: 49; }
 
 /* home intro (Test-Ranko), like salient.framer.website: dark screen, the logo's letters rise, then the screen lifts
