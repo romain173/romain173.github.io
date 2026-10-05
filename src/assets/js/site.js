@@ -81,6 +81,23 @@
     if (b.classList.contains('k-pill')) b.append(Object.assign(document.createElement('i'), { className: 'k-plus' }));
   });
 
+  /* ---------- Services: the skill lists start as far from the grey sentences as the "Creative Systems" title is from
+     its thin grey line — one same left edge for every row (the row whose sentence reaches furthest sets it) */
+  const svcRows = $$('.svc3');
+  const svcAir = () => {
+    svcRows.forEach((r) => { const l = $('.svc3-l', r); if (l) l.style.marginLeft = ''; });
+    if (innerWidth < 1100 || svcRows.length < 2) return;   // smaller screens: the lists keep their column
+    const right = (el) => { const g = document.createRange(); g.selectNodeContents(el); return Math.max(...[...g.getClientRects()].map((x) => x.right)); };
+    const ref = svcRows[1];   // Creative Systems
+    const air = $('.svc3-d', ref).getBoundingClientRect().left - right($('.svc3-t', ref));
+    const withList = svcRows.filter((r) => $('.svc3-l', r)?.children.length);   // the AI row has no list
+    const x = Math.max(...withList.map((r) => right($('.svc3-d', r)))) + air;
+    // never past the right margin (the widest list keeps the page margin on its right)
+    const room = Math.min(...svcRows.map((r) => { const l = $('.svc3-l', r); return l && l.children.length ? r.getBoundingClientRect().right - Math.max(...[...l.children].map(right)) : Infinity; }));
+    svcRows.forEach((r) => { const l = $('.svc3-l', r); if (l && l.children.length) l.style.marginLeft = `${Math.min(room, x - l.getBoundingClientRect().left)}px`; });
+  };
+  if (svcRows.length) { svcAir(); addEventListener('resize', svcAir, { passive: true }); document.fonts?.ready.then(svcAir); }
+
   /* ---------- Montreal clock */
   const clock = $('[data-clock]');
   if (clock) {
