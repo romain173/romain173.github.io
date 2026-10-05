@@ -36,7 +36,7 @@ video 1221862529 half | video 1221905922 half
 == ai
 
 ## AI, fully integrated
-AI runs through our pipeline, from concept development to finished content. It means the idea doesn't get scaled down to fit, and your brand lands somewhere no one else has been.
+AI runs through our production pipeline. It means the idea doesn't get scaled down to fit, and your brand lands somewhere it's never been.
 
 == process
 
