@@ -36,6 +36,7 @@ L’IA est pleinement intégrée à notre pipeline de production. Ainsi, tout de
 - Génération Images et vidéos IA
 - Génération Motion IA
 - VFX assistés par IA
+- Ingénierie de prompt
 - Développement visuel et prévis
 
 == process
