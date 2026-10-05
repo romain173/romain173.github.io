@@ -326,7 +326,6 @@ a:hover .clip-v { transform: scale(1.05); }
 @media (min-width: 900px) {
   .svc3 { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, .75fr); gap: var(--gap); align-items: start; }
   .svc3-d { border-left: 1px solid var(--line); padding-left: 20px; }
-  .svc3-l { justify-self: end; }   /* the list block ends on the right margin (as the title starts on the left one), its lines aligned left */
 }
 .svc { display: grid; gap: 20px; border-top: 1px solid var(--line); margin: 0 var(--g); padding-left: 0; padding-right: 0; }
 .svc-body h2 { font-size: var(--t5); line-height: .92; letter-spacing: -.05em; }
