@@ -40,8 +40,8 @@ AI runs through our production pipeline. It means the idea doesn't get scaled do
 - AI-Generated Images & Video
 - AI-Generated Motion
 - AI-Assisted VFX
-- AI Prompt Engineering
 - Visual Development & Previs
+- AI Prompt Engineering
 
 == process
 
