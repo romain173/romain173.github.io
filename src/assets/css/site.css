@@ -827,6 +827,7 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .logo-jagermeister { scale: 1.35; }
 .logo-dior { scale: .82; }
 .logo-la-ronde { scale: 1.2; }   /* 20 % bigger (Romain) */
+.logo-moncler, .logo-loto-quebec { scale: 1.1; }   /* 10 % bigger (Romain) */
 /* About: same spacing as the process of Services — the title, then ~70 px (at 1440) before the tiles / logos */
 .brands .brand-grid { margin-top: clamp(40px, 4.9vw, 80px); }
 
