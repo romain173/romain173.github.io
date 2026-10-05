@@ -53,6 +53,34 @@ Astuce : le site gratuit https://squoosh.app convertit une image en WebP (régla
 
 </details>
 
+## la-ronde-2-0
+
+| | Fichier | Dimensions | Format | Dossier |
+|---|---|---|---|---|
+| ✅ | `cover.webp` | 1200 × 1500 | WebP | `images/la-ronde-2-0/` |
+
+<details><summary>Images d’attente des vidéos (15, facultatif)</summary>
+
+| | Fichier | Dimensions | Dossier |
+|---|---|---|---|
+| ✅ | `video-1209658978.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209672801.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209669829.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209664774.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209672802.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1213338865.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209682226.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209682150.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209682294.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209682151.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209669107.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209584852.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209584856.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209649598.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+| ✅ | `video-1209649599.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
+
+</details>
+
 ## uniqlo
 
 | | Fichier | Dimensions | Format | Dossier |
@@ -81,28 +109,6 @@ Astuce : le site gratuit https://squoosh.app convertit une image en WebP (régla
 | ✅ | `video-943253572.webp` | 1440 × 1920 | `images/uniqlo/` |
 | ✅ | `video-943253683.webp` | 1440 × 1920 | `images/uniqlo/` |
 | ✅ | `video-943258948.webp` | 1440 × 1920 | `images/uniqlo/` |
-
-</details>
-
-## mcdonalds
-
-| | Fichier | Dimensions | Format | Dossier |
-|---|---|---|---|---|
-| ✅ | `cover.webp` | 1200 × 1500 | WebP | `images/mcdonalds/` |
-| ✅ | `image-01.webp` | 1080 × 1351 | WebP | `images/mcdonalds/` |
-| ✅ | `image-02.webp` | 1024 × 538 | WebP | `images/mcdonalds/` |
-| ✅ | `image-03.webp` | 1024 × 640 | WebP | `images/mcdonalds/` |
-| ✅ | `image-04.webp` | 900 × 900 | WebP | `images/mcdonalds/` |
-| ✅ | `image-05.webp` | 1600 × 380 | WebP | `images/mcdonalds/` |
-| ✅ | `image-06.webp` | 900 × 900 | WebP | `images/mcdonalds/` |
-
-<details><summary>Images d’attente des vidéos (3, facultatif)</summary>
-
-| | Fichier | Dimensions | Dossier |
-|---|---|---|---|
-| ✅ | `video-894922858.webp` | 1920 × 1082 | `images/mcdonalds/` |
-| ✅ | `video-894598146.webp` | 1920 × 1920 | `images/mcdonalds/` |
-| ✅ | `video-894520279.webp` | 1536 × 1920 | `images/mcdonalds/` |
 
 </details>
 
@@ -142,6 +148,28 @@ Astuce : le site gratuit https://squoosh.app convertit une image en WebP (régla
 
 </details>
 
+## mcdonalds
+
+| | Fichier | Dimensions | Format | Dossier |
+|---|---|---|---|---|
+| ✅ | `cover.webp` | 1200 × 1500 | WebP | `images/mcdonalds/` |
+| ✅ | `image-01.webp` | 1080 × 1351 | WebP | `images/mcdonalds/` |
+| ✅ | `image-02.webp` | 1024 × 538 | WebP | `images/mcdonalds/` |
+| ✅ | `image-03.webp` | 1024 × 640 | WebP | `images/mcdonalds/` |
+| ✅ | `image-04.webp` | 900 × 900 | WebP | `images/mcdonalds/` |
+| ✅ | `image-05.webp` | 1600 × 380 | WebP | `images/mcdonalds/` |
+| ✅ | `image-06.webp` | 900 × 900 | WebP | `images/mcdonalds/` |
+
+<details><summary>Images d’attente des vidéos (3, facultatif)</summary>
+
+| | Fichier | Dimensions | Dossier |
+|---|---|---|---|
+| ✅ | `video-894922858.webp` | 1920 × 1082 | `images/mcdonalds/` |
+| ✅ | `video-894598146.webp` | 1920 × 1920 | `images/mcdonalds/` |
+| ✅ | `video-894520279.webp` | 1536 × 1920 | `images/mcdonalds/` |
+
+</details>
+
 ## dior
 
 | | Fichier | Dimensions | Format | Dossier |
@@ -157,34 +185,6 @@ Astuce : le site gratuit https://squoosh.app convertit une image en WebP (régla
 | ✅ | `video-1127965717.webp` | 1920 × 1082 | `images/dior/` |
 | ✅ | `video-1127965748.webp` | 1920 × 1082 | `images/dior/` |
 | ✅ | `video-1127965613.webp` | 1920 × 1082 | `images/dior/` |
-
-</details>
-
-## la-ronde-2-0
-
-| | Fichier | Dimensions | Format | Dossier |
-|---|---|---|---|---|
-| ✅ | `cover.webp` | 1200 × 1500 | WebP | `images/la-ronde-2-0/` |
-
-<details><summary>Images d’attente des vidéos (15, facultatif)</summary>
-
-| | Fichier | Dimensions | Dossier |
-|---|---|---|---|
-| ✅ | `video-1209658978.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209672801.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209669829.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209664774.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209672802.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1213338865.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209682226.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209682150.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209682294.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209682151.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209669107.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209584852.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209584856.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209649598.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
-| ✅ | `video-1209649599.webp` | 1920 × 1082 | `images/la-ronde-2-0/` |
 
 </details>
 
