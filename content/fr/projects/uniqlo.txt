@@ -1,0 +1,35 @@
+role: Direction motion pour une campagne mondiale
+page_title: Ranko — Uniqlo UT — motion design pour une campagne mondiale
+description: Motion design et typographie cinétique pour la campagne mondiale UT d’Uniqlo — 16 t-shirts graphiques animés pour des boutiques du monde entier. Par Ranko, Montréal.
+cover_alt: Campagne mondiale UT d’Uniqlo - danseuse entourée de grandes lettres UT
+
+== intro
+
+Notre mandat : donner vie à 16 t-shirts graphiques pour la campagne mondiale « UT » d’Uniqlo. En étroite collaboration avec le réalisateur, nous avons utilisé diverses formes de motion design dynamique et de typographie cinétique pour donner à cette vidéo un style accrocheur, qui capte l’attention des clients dans les boutiques du monde entier.
+
+== credits
+
+**CLIENT** — Uniqlo Global
+**AGENCY** — Monopo Tokyo
+**SERVICES** — Traitement créatif, Motion design, Typographie cinétique
+
+== media
+
+## Street Fighter, Star Wars, BTS, Hello Kitty, Mickey Mouse — que des grands noms!
+
+## La vidéo a été présentée dans les boutiques Uniqlo du monde entier pour promouvoir la collection UT.
+
+== alt
+
+image-01 = Campagne Uniqlo UT - femme qui chante sur scène, en t-shirt à visage illustré
+image-02 = Campagne Uniqlo UT - homme qui fait tourner un ballon de basketball, en t-shirt graphique
+image-03 = Campagne Uniqlo UT, collection Nintendo Street Fighter - jeune homme qui s’entraîne sur un sac de frappe
+image-04 = Campagne Uniqlo UT - femme qui chante dans un studio d’enregistrement
+image-05 = Campagne Uniqlo UT - homme qui lit des bandes dessinées à côté d’une lettre L géante
+image-06 = Campagne Uniqlo UT - femme au dos imprimé illustré qui se regarde dans un miroir
+image-07 = Campagne Uniqlo UT - femme qui tient une lettre U rouge géante
+image-08 = Campagne Uniqlo UT - homme sur une plage avec une planche de surf
+image-09 = Collection Uniqlo UT Star Wars - homme qui lit, en t-shirt L’Empire contre-attaque
+image-10 = Campagne Uniqlo UT - femme qui dessine sur une grande toile
+image-11 = Collection Uniqlo UT Peanuts - homme avec un appareil photo vintage
+image-12 = Collection Uniqlo UT Hello Kitty - femme qui tient une pince à documents

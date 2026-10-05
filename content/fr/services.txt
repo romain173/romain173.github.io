@@ -1,0 +1,56 @@
+page_title: Ranko — production vidéo et motion design à Montréal
+description: Production vidéo, motion design, design graphique et systèmes créatifs. Ranko assure une production complète pour les marques, de la première idée à l’image finale.
+label: Services
+heading: Ce que | nous | faisons
+
+== intro
+
+Une production complète, | de la première idée à l’image finale. | Vidéos et design pour tous les écrans, | avec les systèmes pour les déployer.
+
+== films
+
+## Films de marque
+*Publicités, contenus de lancement et films de campagne, livrés partout dans le monde.*
+- Direction créative | et artistique
+- Réalisation
+- Production
+- Motion et mix-média
+- Design et illustration
+- Contenu pour les | réseaux sociaux
+
+== systems
+
+## Systèmes créatifs
+*Des boîtes à outils d’animation et des systèmes de design conçus pour se déployer à travers les marchés, les formats et les équipes — et rester utiles longtemps après la livraison.*
+- Boîte à outils d’animation
+- Identité cinétique
+- Systèmes de design
+- Gabarits et lignes directrices
+- Déploiement et adaptation
+- Flux de production
+
+== ai
+
+## L’IA, pleinement intégrée
+L’IA est pleinement intégrée à notre pipeline de production. Ainsi, tout devient possible et votre marque est propulsée là où elle n’est encore jamais allée.
+- Génération Images et vidéos IA
+- Génération Motion IA
+- VFX assistés par IA
+- Développement visuel et prévis
+
+== process
+
+Un processus fait pour avancer.
+Quatre étapes, une équipe, | de la première idée à l’image finale.
+
+1. Brief
+On part du problème, pas du livrable. | Ce dont votre marque a besoin ? À qui elle s’adresse ? À quoi ressemblerait son succès ?
+
+2. Direction
+L’idée est définie avant de commencer quoi que ce soit. | Direction artistique, références, look et langage, tout est décidé tôt pour que rien ne dérive ensuite.
+
+3. Production
+Design, film, motion, VFX. L’IA se voit dans le travail et tourne au cœur du pipeline : on explore plus de pistes et on arrive plus vite à la bonne.
+
+4. Livraison
+Produit final, dans tous les formats, sur toutes les surfaces. | Et le système pour que tout continue de rouler, bien après la livraison.

@@ -1,0 +1,43 @@
+page_title: Ranko — Confidentialité et témoins
+description: Comment Ranko traite les renseignements personnels et les témoins sur ranko.ca : ce qui est recueilli, pourquoi, Google Analytics avec votre consentement, et vos droits.
+
+label: Confidentialité
+heading: Confidentialité | et témoins
+
+== intro
+
+Ce que nous recueillons | sur ce site, pourquoi, | et comment vous gardez le contrôle.
+
+== body
+
+Dernière mise à jour : 28 septembre 2026
+
+## Qui nous sommes
+Ce site est exploité par Ranko, un studio créatif situé au 1, boul. De Maisonneuve Ouest, Montréal (Québec) H2X 0E3, Canada.
+La personne responsable de la protection des renseignements personnels est Romain Amphyon, fondateur et directeur de création. Vous pouvez le joindre à [romain@ranko.ca](mailto:romain@ranko.ca) pour toute question ou demande concernant vos renseignements personnels.
+
+## Ce que nous recueillons et pourquoi
+- **Quand vous nous écrivez.** Si vous nous envoyez un courriel, nous recevons votre nom, votre adresse courriel et ce que vous choisissez de nous dire. Nous l’utilisons uniquement pour vous répondre et, si nous travaillons ensemble, pour mener le projet. Nous le conservons aussi longtemps que la relation d’affaires l’exige.
+- **Statistiques de visite, seulement avec votre accord.** Avec votre consentement, nous utilisons Google Analytics pour compter les visites et voir quelles pages sont consultées, afin d’améliorer le site. Nous ne l’utilisons jamais pour vous identifier, et nous ne vendons ni ne partageons ces renseignements à des fins publicitaires.
+- **Rien d’autre.** Ce site n’a ni compte, ni formulaire, ni infolettre.
+
+## Témoins (cookies)
+Les témoins sont de petits fichiers qu’un site enregistre dans votre navigateur. Ce site ne dépose aucun témoin qui lui soit propre.
+Les témoins de Google Analytics sont **désactivés par défaut**. Ils ne sont déposés que si vous cliquez sur « Accepter » dans le bandeau des témoins :
+- **_ga** — distingue les visites, sans vous identifier. Conservé jusqu’à 2 ans.
+- **_ga_<id>** — conserve l’état de votre visite pour Google Analytics. Conservé jusqu’à 2 ans.
+Votre choix (accepter ou refuser) est enregistré dans le stockage local de votre navigateur pour ne pas vous le redemander. Vous pouvez le modifier en tout temps avec le lien « Réglages des témoins » au bas de chaque page. Si vous refusez après avoir accepté, les témoins de Google Analytics sont supprimés.
+
+## Vidéos
+Les vidéos sont lues avec le lecteur Vimeo en mode « Do Not Track » : Vimeo n’utilise pas de témoins pour suivre votre visite.
+Les liens vers Instagram, LinkedIn, Vimeo et Google Maps sont de simples liens. Ces services n’appliquent leurs propres règles que si vous cliquez dessus.
+
+## Où vont vos renseignements
+Les données de Google Analytics sont traitées par Google, y compris sur des serveurs situés à l’extérieur du Québec et du Canada. Google agit en notre nom et est tenu par ses propres engagements en matière de protection des données.
+
+## Vos droits
+Vous pouvez demander à consulter les renseignements personnels que nous détenons à votre sujet, à les faire corriger ou à les faire supprimer. Vous pouvez retirer en tout temps votre consentement aux statistiques de visite. Écrivez à [romain@ranko.ca](mailto:romain@ranko.ca) : nous répondons dans un délai de 30 jours.
+Si notre réponse ne vous satisfait pas, vous pouvez vous adresser à la Commission d’accès à l’information du Québec.
+
+## Modifications
+Nous pouvons mettre cette page à jour. La date en haut indique la version la plus récente.

@@ -1,0 +1,20 @@
+page_title: Ranko — Afterhours — projets personnels
+description: Le terrain de jeu de Ranko — des expérimentations personnelles en motion, en design et en IA, réalisées hors des mandats clients.
+
+label: Afterhours
+heading: After | hours
+
+== intro
+
+Voici notre terrain de jeu. | Là où on teste ce qui | nous rend curieux, | sans client, sans brief.
+
+== alt
+
+image-01 = Rendu numérique d’une canette de soda Pepsi Lime sur fond de glace, avec un effet de couleurs déformées façon néon.
+image-02 = Texte 3D style néon « FREE BEACH PACK EASY » en dégradé coloré, sur fond quadrillé.
+image-03 = Une distributrice remplie de canettes de Pepsi Blue, alignées en rangées et en colonnes.
+image-04 = Gros plan d’une enseigne néon en lettres cursives sur un mur bleu clair.
+image-05 = Gros plan d’une plaque métallique portant le mot « PAY » en lettres violettes, sur fond bleu clair.
+image-06 = Gros plan d’une carte blanche bordée de rouge dans un étui en plastique transparent, avec le texte « *Rad Level* Over #9000 » et le numéro « 13081985 ».
+image-07 = Photo d’une cabine téléphonique ou d’un kiosque avec une enseigne « BayWatch » en lettres jaunes stylisées, un code QR et la photo d’une femme blonde en haut rouge.
+image-08 = Un certificat encadré reçu par Pamela Anderson, présenté dans une pochette en plastique sous une étiquette.

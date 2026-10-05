@@ -1,0 +1,28 @@
+role: Design typographique et motion
+page_title: Ranko — Louis Vuitton x J-Hope — design typographique
+description: Design typographique pour la campagne Visionary Journeys de Louis Vuitton x J-Hope. Par Ranko, studio créatif montréalais.
+cover_alt: Campagne Visionary Journeys de Louis Vuitton x J-Hope
+
+== intro
+
+Notre mandat : créer la typographie et l’animation du logo pour la campagne Visionary Journeys de Louis Vuitton x J-Hope.
+
+On nous demandait du texte statique et, même si nous avons proposé des concepts plus expérimentaux, Louis Vuitton, fidèle à son style classique, a choisi la typographie la plus simple possible. Peu importe pour nous : travailler sur un projet Louis Vuitton avec J-Hope était déjà une grande fierté!
+
+== credits
+
+**CLIENT** — Louis Vuitton
+**AGENCY** — EUROS
+**SERVICES** — Design typographique
+
+== media
+
+### Voici quelques-unes des propositions que nous avons faites et que le client n’a finalement pas retenues.
+
+== alt
+
+image-01 = Campagne Louis Vuitton - intérieur de galerie avec la typographie du logo
+image-02 = Louis Vuitton x J-Hope - portrait avec la typographie « With J-Hope »
+image-03 = Campagne Louis Vuitton - lampes illuminées avec le logo en surimpression
+image-04 = Louis Vuitton Visionary Journeys - boîtes orange au motif monogramme
+image-05 = Louis Vuitton x J-Hope - portrait en gros plan avec typographie en surimpression

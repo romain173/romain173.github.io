@@ -1,0 +1,27 @@
+role: Direction créative et direction artistique Y2K
+page_title: Ranko — The Vending Machine — expérimentation en motion design Y2K
+description: Un film personnel qui célèbre l’esthétique Y2K — chrome, néons et rétrofuturisme en motion design 3D et VFX. Par Ranko, Montréal.
+cover_alt: Expérimentation en motion design Y2K - rétrofuturisme en chrome et néons
+
+== intro
+
+Nous avons fait ce projet simplement pour célébrer l’esthétique Y2K.
+
+Une esthétique riche de la fin des années 90 et du début des années 2000, qui mêle rétrofuturisme et optimisme des débuts d’Internet : chrome, couleurs néon, formes liquides, typographies rondes et grasses, et graphismes brillants inspirés de la technologie. Influencée par les premiers appareils grand public, la culture populaire et la cyberculture, elle est à la fois ludique, futuriste et nostalgique.
+
+== credits
+
+**SERVICES** — Direction créative, Motion design, Motion design 3D, VFX, Montage
+
+== media
+
+### Voici quelques détails de notre travail minutieux sur l’interface de la distributrice.
+
+== alt
+
+image-01 = Texte coloré style néon qui répète les mots « FREE BEER PLEASE » sur un fond quadrillé bleu clair.
+image-02 = Canette stylisée numériquement de soda Pepsi Lyte saveur de baies, aux couleurs violet et vert, entourée de glaçons.
+image-03 = Gros plan d’un emblème automobile bleu métallique avec les chiffres « 996 » et un petit logo Chevrolet.
+image-04 = Gros plan du tambour d’une laveuse rempli de glaçons.
+image-05 = Gros plan du clavier numérique d’un coffre-fort avec les chiffres 1 à 5 et des flèches de navigation.
+image-06 = Gros plan du clavier et de l’écran d’un téléphone mobile, avec les touches « * » et « # » et un petit haut-parleur.

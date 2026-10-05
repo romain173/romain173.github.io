@@ -1,0 +1,26 @@
+page_title: Ranko — studio créatif montréalais
+description: Ranko est un studio créatif basé à Montréal : une production complète en vidéo, motion design et design graphique pour les marques du monde entier.
+label: À propos
+heading: Nous | sommes | *Ranko*
+portrait_alt: Romain Amphyon. Un jeune homme aux cheveux bruns courts et aux yeux bleus, en chemise noire et montre rose, pose les bras croisés devant un fond de lumières bleues tourbillonnantes et d’effets de flou de mouvement.
+
+== intro
+
+Un studio créatif basé à Montréal, | dirigé par le directeur de création | Romain Amphyon.
+
+== statement
+
+Nous produisons des vidéos, du design et des systèmes créatifs pour les marques du monde entier, de A à Z, avec l’IA pleinement intégrée à notre façon de travailler.
+
+== bio
+
+### Romain est un directeur de création multidisciplinaire qui a passé une décennie en agences et en maisons de production avant de fonder *Ranko* en 2020.
+### Son travail est porté par une curiosité sans fin pour les nouvelles technologies, le design et l’esthétique, mais aussi par la discipline du sport et de la musique.
+### Chaque projet est, pour lui, l’occasion de repousser les limites du métier comme de l’idée.
+
+== visit
+
+RANKO
+1, boul. De Maisonneuve Ouest
+Montréal, QC, H2X 0E3
+Canada

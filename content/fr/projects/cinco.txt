@@ -1,0 +1,47 @@
+role: Production complète, propulsée par l’IA
+page_title: Ranko — Cinco — étude de cas de production vidéo propulsée par l’IA
+description: Production vidéo complète pour l’AI Experience Room de Cinco — stratégie créative, direction artistique, motion design et 70 contenus générés par IA, par Ranko Montréal.
+cover_alt: AI Experience Room de Cinco - visuels de produits, un aspirateur et un maillot, sur des écrans de téléphone
+
+== intro
+
+Cinco est une agence marketing qui crée depuis 20 ans des campagnes mesurables pour de grandes marques internationales, par des activations physiques et numériques.
+
+Aujourd’hui, l’entreprise repousse les limites de l’industrie en intégrant l’IA conversationnelle et des environnements immersifs grâce à sa plateforme innovante *AI Experience Room*.
+
+== credits
+
+**CLIENT** — Cinco
+**SERVICE** — Stratégie créative, Direction artistique, Design graphique, Ingénierie de requêtes IA, Motion design, Production vidéo complète
+
+== media
+
+## Le défi
+Il fallait traduire les besoins de Cinco en une vidéo de lancement percutante et en un ensemble de contenus intégrés, conçus pour augmenter ses ventes et lui permettre d’attirer de nouveaux clients.
+
+## Malgré un échéancier serré, le projet exigeait une exécution sans faille, capable de transformer un concept abstrait en un outil marketing haut de gamme.
+
+## Notre approche stratégique et créative
+
+### 01 — **Une stratégie en mix-média**
+Pour saisir pleinement le caractère innovant de la plateforme *AI Experience Room*, le mix-média était le véhicule créatif idéal : il rend des concepts technologiques abstraits par des visuels haut de gamme.
+
+### 02 — Une direction artistique sur mesure
+Pour mettre en valeur le produit phare de Cinco, toute la production repose sur une vision artistique claire et cohérente. L’esthétique originale et l’univers visuel conçus spécialement pour le produit ont donné une vidéo de lancement haut de gamme et un ensemble de contenus dérivés.
+
+### 03 — Les contenus générés par IA
+Représenter fidèlement l'*AI Experience Room* demandait des techniques de pointe. La génération et l’intégration de près de 70 photos et vidéos IA soignées, de qualité cinéma — alliant requêtes conçues sur mesure et mouvement génératif fluide — étaient essentielles pour donner vie à la *Room*.
+
+## Une esthétique sans faille, un flux de travail avancé : la génération IA était pleinement intégrée à la **stratégie de production**.
+
+### 04 — **Une production optimisée**
+En raison du délai serré, le projet a combiné deux lignes de production en parallèle : l’une consacrée au design et au motion, l’autre à la génération des contenus IA, fusionnées en postproduction.
+Ce double flux de travail a maximisé l’efficacité et permis de livrer à temps des contenus impeccables.
+
+## Le livrable final
+La vidéo de lancement finale a été conçue pour appuyer les présentations de Cinco à ses clients et capter instantanément l’attention du marché.
+
+== alt
+
+image-01 = Un ensemble de pages imprimées avec divers visuels et textes — interfaces web, image de voiture, globe avec un profil humain, graphiques et statistiques marketing — disposées sur un fond violet pastel.
+image-02 = Photo studio détaillée d’un VUS électrique blanc vu sous plusieurs angles — avant, côté et arrière — sur fond de ville, et scène de nuit à l’intérieur avec les phares allumés.

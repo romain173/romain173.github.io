@@ -1,0 +1,31 @@
+role: Concept créatif et direction du montage
+page_title: Ranko — McDonald’s McNugget Buddies — concept et montage
+description: Concept, traitement du réalisateur et montage de la publicité McNugget Buddies de Kerwin Frost pour McDonald’s — un traitement audacieux inspiré des années 90. Par Ranko, Montréal.
+cover_alt: Publicité McNugget Buddies de McDonald’s - croquettes de poulet empilées
+
+== intro
+
+Notre mandat : développer le concept, rédiger le traitement du réalisateur et monter la publicité des McNugget Buddies de Kerwin Frost.
+
+En étroite collaboration avec le réalisateur, nous avons bâti un concept qui nous permettait de dévoiler quelque chose que nous ne pouvions pas encore montrer… les McNugget Buddies de Kerwin Frost. Pour aller plus loin, nous avons donné à toute la pièce un traitement esthétique audacieux, inspiré des années 90, et livré un montage dynamique conçu pour capter l’attention.
+
+== credits
+
+**CLIENT** — McDonald’s
+**AGENCY** — Cossette
+**SERVICES** — Traitement créatif, Montage
+
+== media
+
+### Kerwin Frost et ses McNugget Buddies.
+
+### Voici la publicité exactement comme elle aurait été dans les années 90!
+
+== alt
+
+image-01 = McNugget Buddies de McDonald’s - Kerwin Frost en veste de mascotte violette
+image-02 = Boîte Joyeux Festin McDonald’s avec des figurines de Sesame Street
+image-03 = Boîte Joyeux Festin McDonald’s avec des personnages des Muppet Babies
+image-04 = Illustration de la mascotte du Joyeux Festin McDonald’s
+image-05 = Figurines à collectionner McDonald’s de la série McNugget Buddies
+image-06 = Logo McDonald’s avec un visage souriant stylisé et un lettrage de bande dessinée

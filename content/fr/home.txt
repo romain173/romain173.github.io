@@ -1,0 +1,20 @@
+page_title: Ranko | Studio créatif
+description: Ranko est un studio créatif spécialisé en design, en film et en numérique. Une production complète pour les marques qui ouvrent la voie. De Montréal à l’international.
+ai_tile1: Nous décidons, | l’IA exécute.
+ai_tile: Tout est possible. | Votre marque va plus loin.
+hero_sub: Spécialisé en design, vidéo et numérique.
+
+== statement
+
+*Ranko* signe des projets | qui font mouche | pour les marques | qui ouvrent la voie.
+
+== statement2
+
+Une production | complète avec l’IA | pleinement intégrée — pas pour en faire moins, | mais pour aller plus loin.
+
+== facts
+
+=2020 | | Fondée à Montréal par Romain Amphyon
+2 | M+ | vues en 2 jours pour [NBA Beat](/nba-beat)
+{projects} | | projets choisis — [voir les projets](/work)
+{brands} | | [Marques pour lesquelles nous avons travaillé](/about)

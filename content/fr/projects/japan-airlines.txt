@@ -1,0 +1,29 @@
+role: Direction motion et design typographique
+page_title: Ranko — Japan Airlines Fly to Hokkaido — motion design
+description: Direction créative et motion design pour la campagne Fly to Hokkaido de Japan Airlines — une approche claire et sobre pour une communication corporative. Ranko, Montréal.
+cover_alt: Campagne Fly to Hokkaido de Japan Airlines - motion design
+
+== intro
+
+Notre mandat : donner vie au design graphique de la campagne « Fly to Hokkaido » de Japan Airlines.
+
+Le brief appelait à la retenue : nous avons donc construit le motion autour de la clarté. Des transitions épurées, une typographie lisible et un rythme qui laisse la destination parler d’elle-même — tout est pensé pour guider le spectateur plutôt que rivaliser avec l’image.
+
+== credits
+
+**CLIENT** — Japan Airlines
+**AGENCY** — Dmbz
+**SERVICES** — Direction créative, Motion design
+
+== media
+
+### Naturellement, les macaques japonais sont les vedettes de cette campagne!
+
+### Voici quelques-unes des propositions que nous avons faites et que le client n’a finalement pas retenues.
+
+== alt
+
+image-01 = Japan Airlines Fly to Hokkaido - carte illustrée avec la route du vol
+image-02 = Japan Airlines Fly to Hokkaido - carte avec les repères des destinations
+image-03 = Aquarelle d’une silhouette de chauve-souris sur un fond de neige ou de nuages.
+image-04 = Une carte du Japon sur un fond enneigé et hivernal

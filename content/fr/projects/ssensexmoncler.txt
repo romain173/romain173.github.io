@@ -1,0 +1,23 @@
+role: Postproduction et mix-média
+page_title: Ranko — Ssense x Moncler — postproduction et mix-média
+description: Postproduction, montage en mix-média, détourage et compositing pour trois messages de la campagne Ssense x Moncler, diffusés en boutique et sur les réseaux sociaux. Ranko, Montréal.
+cover_alt: Campagne Ssense x Moncler - mannequin en manteau Moncler blanc
+
+== intro
+
+Notre mandat : prendre en charge la postproduction de la campagne de la collaboration Ssense x Moncler.
+
+En étroite collaboration avec les réalisateurs, nous avons signé un montage audacieux en mix-média et pris en charge tout le détourage et le compositing, pour créer trois messages éclatants diffusés dans les boutiques Ssense et sur les réseaux sociaux.
+
+== credits
+
+**CLIENT** — SSENSE x MONCLER
+**AGENCY** — Madame Brown
+**SERVICES** — Postproduction, Détourage, Compositing, VFX, Montage
+
+== alt
+
+image-01 = Chaussure de randonnée Moncler à semelle texturée sur des rochers sombres
+image-02 = Campagne Moncler - randonneur en tenue de plein air dans un paysage de montagne
+image-03 = Sneaker Moncler sur des rochers enneigés, montagnes en arrière-plan
+image-04 = Campagne Moncler - grimpeur en chaussures de randonnée rouges sur un terrain rocheux

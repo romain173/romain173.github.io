@@ -3,6 +3,7 @@
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const FRENCH = document.documentElement.lang.startsWith('fr');   // the /fr version of the site
 
   /* ---------- smooth scroll (Lenis, optional) */
   let lenis = null;
@@ -168,7 +169,7 @@
   if (btn && menu) {
     const set = (open) => {
       menu.hidden = !open; btn.setAttribute('aria-expanded', open);
-      if (!btn.classList.contains('kn-plus')) btn.textContent = open ? 'Close' : 'Menu';   // the '+' button turns into an × in CSS
+      if (!btn.classList.contains('kn-plus')) btn.textContent = open ? (FRENCH ? 'Fermer' : 'Close') : 'Menu';   // the '+' button turns into an × in CSS
       document.body.classList.toggle('menu-open', open);
       open ? lenis?.stop() : lenis?.start();
     };
@@ -295,7 +296,7 @@
     loops.forEach((fig) => {
       if (fig.classList.contains('tile-vm')) return;   // tiles keep their still image
       const b = document.createElement('button');
-      b.className = 'play'; b.type = 'button'; b.innerHTML = '<span>Play</span>';
+      b.className = 'play'; b.type = 'button'; b.innerHTML = `<span>${FRENCH ? 'Lire' : 'Play'}</span>`;
       b.addEventListener('click', () => { mount(fig, false); b.remove(); });
       fig.append(b);
     });

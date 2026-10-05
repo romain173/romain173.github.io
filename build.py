@@ -42,6 +42,80 @@ def paragraphs(text):
     return [p.strip() for p in re.split(r'\n\s*\n', text or '') if p.strip()]
 
 
+# ---------------------------------------------------------------- languages
+# The site is built twice: in English (/) and in French (/fr). A French file in content/fr/ (same name and place as
+# the English one) holds only the texts: any key, section or text paragraph missing from it is taken from the English
+# file, and in the "media" sections the pictures and their layout always come from the English file — the French
+# text paragraphs simply replace the English ones, in the same order.
+LANG = 'en'
+FR_MISSING = []
+
+def read_content_l(*rel):
+    meta, sec = read_content(os.path.join(CONTENT, *rel))
+    if LANG != 'fr':
+        return meta, sec
+    fr = os.path.join(CONTENT, 'fr', *rel)
+    if not os.path.exists(fr):
+        FR_MISSING.append('/'.join(rel)); return meta, sec
+    fm, fs = read_content(fr)
+    meta = {**meta, **fm}
+    alts = dict((x.strip(), y.strip()) for x, _, y in (l.partition(' = ') for l in fs.pop('alt', '').splitlines()) if y.strip())
+    for k, v in fs.items():
+        sec[k] = merge_text(sec.get(k, ''), v, '/'.join(rel)) if k == 'media' else v
+    # "== alt" in the French file: the description of each picture ("image-01 = …"), for screen readers and search engines
+    if alts and sec.get('media'):
+        sec['media'] = re.sub(r'\b(image|clip) ([\w-]+)([^|\n]*?)alt="[^"]*"',
+                              lambda m: f'{m.group(1)} {m.group(2)}{m.group(3)}alt="{alts[m.group(2)]}"' if m.group(2) in alts else m.group(0),
+                              sec['media'])
+    return meta, sec
+
+def is_media(para):
+    return para.split(None, 1)[0] in ('video', 'film', 'image', 'clip')
+
+def merge_text(en, fr, name):
+    """The English media section with its text paragraphs replaced, in order, by the French ones."""
+    fr_txt = [p for p in paragraphs(fr) if not is_media(p)]
+    out, i = [], 0
+    for p in paragraphs(en):
+        if is_media(p):
+            out.append(p)
+        else:
+            out.append(fr_txt[i] if i < len(fr_txt) else p); i += 1
+    if i != len(fr_txt):
+        print(f'  ! content/fr/{name}: {len(fr_txt)} French text block(s) in "media" for {i} in English')
+    return '\n\n'.join(out)
+
+# words of the interface (buttons, menus, footer…) in French
+FR = {
+    'Work': 'Projets', 'About': 'À propos', 'Contact': 'Contact', 'Work with us': 'Travaillons ensemble',
+    'Skip to content': 'Aller au contenu', 'Ranko — home': 'Ranko — accueil', 'Main': 'Principal', 'Menu': 'Menu',
+    'Montreal, QC': 'Montréal, QC',
+    'Cookies': 'Témoins',
+    "We'd like to measure visits with Google Analytics. Cookies are only used if you agree.":
+        "Nous aimerions mesurer les visites avec Google Analytics. Les témoins ne sont utilisés qu’avec votre accord.",
+    'Privacy & cookies': 'Confidentialité et témoins', 'Decline': 'Refuser', 'Accept': 'Accepter',
+    "Let's take your brand<br>somewhere it's never been.": "Emmenons votre marque<br>là où elle n’est jamais allée.",
+    'AI talent wanted': 'Talents IA recherchés',
+    'Hours': 'Heures', 'Monday – Friday<br>9am – 6pm': 'Du lundi au vendredi<br>9 h – 18 h', 'Socials': 'Réseaux',
+    '© All rights reserved — Ranko 2020 - ': '© Tous droits réservés — Ranko 2020 - ',
+    'Cookie settings': 'Réglages des témoins', 'Back to top': 'Haut de page',
+    'View project': 'Voir le projet', 'Selected Work': 'Projets choisis', 'View all work': 'Voir tous les projets',
+    'Creative<br>Company': 'Studio<br>créatif', 'Creative Company': 'Studio créatif', 'Showreel': 'Bande démo',
+    'About <em>Ranko</em>': 'À propos de <em>Ranko</em>', 'View all services': 'Voir tous les services',
+    'Google reviews': 'avis Google', 'What clients say': 'Ce que disent nos clients', 'Choose a testimonial': 'Choisir un témoignage',
+    'Related projects': 'Projets similaires', 'Next project': 'Projet suivant', 'What the client says': 'Ce que dit le client',
+    'Services': 'Services', 'Client': 'Client', 'Agency': 'Agence',
+    "Brands we've worked for": 'Marques pour lesquelles nous avons travaillé', 'Open in Google Maps ↗': 'Ouvrir la carte ↗',
+    'see the project': 'voir le projet', 'Our Work': 'Nos projets', 'Play': 'Lire',
+    'Afterhours pieces': 'Œuvres Afterhours', 'Afterhours piece': 'Œuvre Afterhours', 'Open': 'Ouvrir',
+    'Previous piece': 'Œuvre précédente', 'Next piece': 'Œuvre suivante', 'Close': 'Fermer',
+}
+
+def t(s):
+    """An interface word in the language being built."""
+    return FR.get(s, s) if LANG == 'fr' else s
+
+
 def inline(s):
     s = esc(s)
     s = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', lambda m: f'<a href="{m.group(2)}"'
@@ -188,7 +262,7 @@ def vimeo(ref, mode, owner, label, size='full', caption='', eager=False, slot=No
     poster = re.sub(r'width="\d+" height="\d+"', f'width="{pw}" height="{ph}"', poster)
     poster = re.sub(r'aspect-ratio:[\d/]+', f'aspect-ratio:{w}/{hh}', poster)
     SLOTS.append((owner, slot, pw, ph, os.path.exists(os.path.join(IMAGES, owner, f'{slot}.webp'))))
-    btn = '' if mode == 'loop' else '<button class="play" type="button"><span>Play</span></button>'
+    btn = '' if mode == 'loop' else f'<button class="play" type="button"><span>{t("Play")}</span></button>'
     cap = f'<figcaption>{inline(caption)}</figcaption>' if caption else ''
     return (f'<figure class="vm vm-{mode}" data-vimeo="{vid}" data-h="{h}" data-mode="{mode}" style="--ar:{w}/{hh}">'
             f'{poster}{btn}</figure>{cap}')
@@ -267,7 +341,8 @@ def svc_row(txt):
     items = re.findall(r'^- (.+)$', txt, re.M)
     rest = [l.strip() for l in txt.splitlines() if l.strip() and not l.lstrip().startswith(('##', '- '))]
     desc = ' '.join(re.sub(r'^\*(.+)\*$', r'\1', l) for l in rest)
-    lst = f'<ul class="svc3-l">{"".join(f"<li data-reveal>{inline(i)}</li>" for i in items)}</ul>' if items else '<div class="svc3-l"></div>'
+    lis = ''.join(f'<li data-reveal>{inline(i).replace(" | ", "<br>")}</li>' for i in items)   # " | " in a skill: line break chosen by hand
+    lst = f'<ul class="svc3-l">{lis}</ul>' if items else '<div class="svc3-l"></div>'
     return f'''<section class="sec svc3">
   <h2 class="svc3-t" data-split>{inline(title.group(1)) if title else ""}</h2>
   <p class="svc3-d" data-reveal>{inline(desc)}</p>
@@ -289,8 +364,8 @@ def mosaic(text, owner):
             group = m.group(1).strip() if m else group
             continue
         for item in para.split(' | '):
-            t = shlex.split(item.replace('’', "'"), posix=True)
-            kind, ref, rest = t[0], t[1], t[2:]
+            tok = shlex.split(item.replace('’', "'"), posix=True)
+            kind, ref, rest = tok[0], tok[1], tok[2:]
             opts = dict(x.split('=', 1) for x in rest if '=' in x)
             flags = [x for x in rest if '=' not in x]
             alt = opts.get('alt', '')
@@ -308,8 +383,8 @@ def mosaic(text, owner):
                 if items:   # every video plays in its tile, muted, in a loop — except the very first piece (the vending machine film)
                     media = tile_video(media, ref, owner)
                 else:
-                    media = media.replace('</div>', '<span class="play ah-play" aria-hidden="true"><span>Play</span></span></div>', 1)
-            items.append((h / w, f'''<li class="k-card" style="--order:{len(items)}"><button type="button" class="ah-open" {data} data-title="{esc(group)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="Open {esc(group)} — {esc(what)}">
+                    media = media.replace('</div>', f'<span class="play ah-play" aria-hidden="true"><span>{t("Play")}</span></span></div>', 1)
+            items.append((h / w, f'''<li class="k-card" style="--order:{len(items)}"><button type="button" class="ah-open" {data} data-title="{esc(group)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="{t('Open')} {esc(group)} — {esc(what)}">
   {media}
 </button></li>'''))
     # 3 columns, in the page order, each piece going to the column that is the shortest so far
@@ -317,13 +392,13 @@ def mosaic(text, owner):
     for r, html_ in items:
         c = tall.index(min(tall)); cols[c].append(html_); tall[c] += r
     wall = ''.join(f'<li class="k-col"><ol>{"".join(c)}</ol></li>' for c in cols)
-    return f'''<section class="sec ah-sec" aria-label="Afterhours pieces"><ol class="k-cards">{wall}</ol></section>
-<dialog class="lb" aria-label="Afterhours piece">
+    return f'''<section class="sec ah-sec" aria-label="{t('Afterhours pieces')}"><ol class="k-cards">{wall}</ol></section>
+<dialog class="lb" aria-label="{t('Afterhours piece')}">
   <div class="lb-stage"><div class="lb-media"></div></div>
   <p class="lb-cap"><span class="lb-title"></span><span class="lb-count"></span></p>
-  <button type="button" class="lb-btn lb-prev" aria-label="Previous piece">←</button>
-  <button type="button" class="lb-btn lb-next" aria-label="Next piece">→</button>
-  <button type="button" class="lb-btn lb-close" aria-label="Close" autofocus>×</button>
+  <button type="button" class="lb-btn lb-prev" aria-label="{t('Previous piece')}">←</button>
+  <button type="button" class="lb-btn lb-next" aria-label="{t('Next piece')}">→</button>
+  <button type="button" class="lb-btn lb-close" aria-label="{t('Close')}" autofocus>×</button>
 </dialog>'''
 
 
@@ -345,8 +420,8 @@ def media_rows(text, owner, label, first_eager=False):
             continue
         cells, sizes, ratios = [], [], []
         for item in para.split(' | '):
-            t = shlex.split(item.replace('’', "'"), posix=True)
-            kind, ref, rest = t[0], t[1], t[2:]
+            tok = shlex.split(item.replace('’', "'"), posix=True)
+            kind, ref, rest = tok[0], tok[1], tok[2:]
             opts = dict(x.split('=', 1) for x in rest if '=' in x)
             flags = [x for x in rest if '=' not in x]
             size = next((f for f in flags if f in ('full', 'half', 'third', 'quarter')), 'full')
@@ -464,8 +539,14 @@ INTRO_JS = ("<script>try{if(!sessionStorage.getItem('ranko-intro')&&!matchMedia(
 
 def layout(path, title, description, body, current='', video=False, og_image='/assets/img/og-ranko.png'):
     here = ' aria-current="page"'
-    nav = ''.join(f'<li><a href="{h}"{here if current == h else ""}>{t}</a></li>' for h, t in NAV)
-    canonical = SITE_URL + (path if path != '/' else '/')
+    nav = ''.join(f'<li><a href="{h}"{here if current == h else ""}>{t(x)}</a></li>' for h, x in NAV)
+    canonical = SITE_URL + ('/fr' if LANG == 'fr' else '') + path
+    # the same page in the other language; written with a mark (\x00) so the /fr link rewriting leaves it alone
+    other = ('\x00' + path) if LANG == 'fr' else ('/fr' + path)
+    alt = ''.join(f'<link rel="alternate" hreflang="{h}" href="{SITE_URL}{u}">'
+                  for h, u in (('en-CA', path), ('fr-CA', '/fr' + path), ('x-default', path))) if path != '/404' else ''
+    switch = (f'<a class="kn-lang" href="{other}" hreflang="{"en" if LANG == "fr" else "fr"}" lang="{"en" if LANG == "fr" else "fr"}" '
+              f'aria-label="{"English version" if LANG == "fr" else "Version française"}">{"EN" if LANG == "fr" else "FR"}</a>') if path != '/404' else ''
     ld = json.dumps({'@context': 'https://schema.org', '@type': 'Organization', 'name': 'Ranko', 'url': SITE_URL,
                      'email': 'hello@ranko.ca', 'foundingDate': '2020',
                      'address': {'@type': 'PostalAddress', 'addressLocality': 'Montreal', 'addressRegion': 'QC', 'addressCountry': 'CA'},
@@ -473,14 +554,16 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
     lenis = f'<script src="/assets/js/lenis.min.js?v={ver("assets/js/lenis.min.js")}" defer></script>' if HAS_LENIS else ''
     pre = '<link rel="preconnect" href="https://player.vimeo.com">' if video else ''
     return f'''<!doctype html>
-<html lang="en-CA">
+<html lang="{"fr-CA" if LANG == "fr" else "en-CA"}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{canonical}">
+{alt}
 <meta property="og:type" content="website">
+<meta property="og:locale" content="{"fr_CA" if LANG == "fr" else "en_CA"}">
 <meta property="og:site_name" content="Ranko">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}">
@@ -501,19 +584,21 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
 </head>
 <body>
 {f'<div class="intro" aria-hidden="true"><span class="intro-logo">{LOGO}</span></div>' if path == '/' else ''}
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">{t("Skip to content")}</a>
 <header class="kn">
   <div class="kn-l">
-    <a class="hd-logo" href="/" aria-label="Ranko — home">{LOGO}</a>
-    <p class="kn-time">Montreal, QC <span data-clock></span></p>
+    <a class="hd-logo" href="/" aria-label="{t("Ranko — home")}">{LOGO}</a>
+    <p class="kn-time">{t("Montreal, QC")} <span data-clock></span></p>
   </div>
-  <nav class="kn-nav" aria-label="Main"><ul>{nav}</ul></nav>
-  <a class="kn-cta" href="{MAIL}">Work with us</a>
+  <nav class="kn-nav" aria-label="{t("Main")}"><ul>{nav}</ul></nav>
+  {switch}
+  <a class="kn-cta" href="{MAIL}">{t("Work with us")}</a>
   <button class="hd-menu kn-plus" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span class="kn-x" aria-hidden="true"></span></button>
 </header>
 <div class="menu" id="menu" hidden>
-  <ul>{nav}<li><a href="{MAIL}">Contact</a></li></ul>
+  <ul>{nav}<li><a href="{MAIL}">{t("Contact")}</a></li></ul>
   <p><a href="{MAIL}">hello@ranko.ca</a></p>
+  <p>{switch}</p>
 </div>
 <main id="main">
 {body}
@@ -532,9 +617,9 @@ def consent():
     """Cookie banner: only when Google Analytics is set up. Analytics loads after "Accept" only (site.js)."""
     if not GA_ID:
         return ''
-    return f'''<div class="consent" role="dialog" aria-label="Cookies" data-ga="{esc(GA_ID)}" hidden>
-  <p>We'd like to measure visits with Google Analytics. Cookies are only used if you agree. <a href="/privacy">Privacy & cookies</a></p>
-  <div class="consent-btns"><button type="button" data-consent="no">Decline</button><button type="button" data-consent="yes">Accept</button></div>
+    return f'''<div class="consent" role="dialog" aria-label="{t('Cookies')}" data-ga="{esc(GA_ID)}" hidden>
+  <p>{t("We'd like to measure visits with Google Analytics. Cookies are only used if you agree.")} <a href="/privacy">{t('Privacy & cookies')}</a></p>
+  <div class="consent-btns"><button type="button" data-consent="no">{t('Decline')}</button><button type="button" data-consent="yes">{t('Accept')}</button></div>
 </div>'''
 
 
@@ -542,23 +627,23 @@ def cta():
     # a black tile (same as the e-mail tile of the About page): "Work with us" on top, the address at the bottom; one link.
     # Beside it, a light grey tile calling for AI talent (like the "Talent wanted" tile of losyork.tv)
     return f'''<section class="cta" aria-labelledby="cta-t">
-  <a class="cta-tile" href="{MAIL}" data-reveal><h2 id="cta-t" class="cta-t">Let's take your brand<br>somewhere it's never been.</h2><span class="cta-mail">hello@ranko.ca</span></a>
-  <a class="cta-jobs" href="mailto:jobs@ranko.ca?subject=AI%20talent" data-reveal><span class="cta-jobs-t">AI talent wanted</span><span>jobs@ranko.ca</span></a>
+  <a class="cta-tile" href="{MAIL}" data-reveal><h2 id="cta-t" class="cta-t">{t("Let's take your brand<br>somewhere it's never been.")}</h2><span class="cta-mail">hello@ranko.ca</span></a>
+  <a class="cta-jobs" href="mailto:jobs@ranko.ca?subject=AI%20talent" data-reveal><span class="cta-jobs-t">{t("AI talent wanted")}</span><span>jobs@ranko.ca</span></a>
 </section>'''
 
 
 def footer():
-    nav = ''.join(f'<li><a href="{h}">{t}</a></li>' for h, t in NAV)
+    nav = ''.join(f'<li><a href="{h}">{t(x)}</a></li>' for h, x in NAV)
     return f'''<footer class="ft">
-  <div class="ft-col"><h2>Ranko</h2><ul>{nav}<li><a href="mailto:romain@ranko.ca?subject=Hello%20Ranko!">Contact</a></li></ul></div>
-  <div class="ft-col"><h2>Hours</h2><p>Monday – Friday<br>9am – 6pm</p><p>—</p><p><a href="mailto:hello@ranko.ca?subject=Hello%20RANKO%20!">hello@ranko.ca</a></p></div>
-  <div class="ft-col"><h2>Socials</h2><ul>
+  <div class="ft-col"><h2>Ranko</h2><ul>{nav}<li><a href="mailto:romain@ranko.ca?subject=Hello%20Ranko!">{t("Contact")}</a></li></ul></div>
+  <div class="ft-col"><h2>{t("Hours")}</h2><p>{t("Monday – Friday<br>9am – 6pm")}</p><p>—</p><p><a href="mailto:hello@ranko.ca?subject=Hello%20RANKO%20!">hello@ranko.ca</a></p></div>
+  <div class="ft-col"><h2>{t("Socials")}</h2><ul>
     <li><a href="https://www.instagram.com/ranko.ca/" target="_blank" rel="noopener">Instagram</a></li>
     <li><a href="https://www.linkedin.com/company/rankoca" target="_blank" rel="noopener">LinkedIn</a></li>
     <li><a href="https://vimeo.com/rankoca" target="_blank" rel="noopener">Vimeo</a></li></ul></div>
-  <p class="ft-copy"><span>© All rights reserved — Ranko 2020 - {YEAR}</span>
-    <a href="/privacy">Privacy & cookies</a>{' <button type="button" data-consent-open>Cookie settings</button>' if GA_ID else ''}
-    <a class="ft-top" href="#main">Back to top <svg viewBox="0 0 24 24" aria-hidden="true"><path class="totop-s" d="M12 21V8.5"/><path class="totop-h" d="M12 2.5 17.6 10.6Q12 7.4 6.4 10.6Z"/></svg></a></p>
+  <p class="ft-copy"><span>{t("© All rights reserved — Ranko 2020 - ")}{YEAR}</span>
+    <a href="/privacy">{t("Privacy & cookies")}</a>{f' <button type="button" data-consent-open>{t("Cookie settings")}</button>' if GA_ID else ''}
+    <a class="ft-top" href="#main">{t("Back to top")} <svg viewBox="0 0 24 24" aria-hidden="true"><path class="totop-s" d="M12 21V8.5"/><path class="totop-h" d="M12 2.5 17.6 10.6Q12 7.4 6.4 10.6Z"/></svg></a></p>
 </footer>'''
 
 
@@ -568,12 +653,12 @@ def load_projects():
     order = [l.strip() for l in open(os.path.join(CONTENT, 'work-order.txt')).read().splitlines() if l.strip()]
     projects = {}
     for slug in order:
-        meta, sec = read_content(os.path.join(CONTENT, 'projects', slug + '.txt'))
+        meta, sec = read_content_l('projects', slug + '.txt')
         projects[slug] = dict(meta=meta, sec=sec, slug=slug)
     extra = sorted(f[:-4] for f in os.listdir(os.path.join(CONTENT, 'projects')) if f.endswith('.txt') and f[:-4] not in projects)
     for slug in extra:
         print(f'  ! content/projects/{slug}.txt is not listed in content/work-order.txt (page built, not listed)')
-        meta, sec = read_content(os.path.join(CONTENT, 'projects', slug + '.txt'))
+        meta, sec = read_content_l('projects', slug + '.txt')
         projects[slug] = dict(meta=meta, sec=sec, slug=slug, hidden=True)
     return order, projects
 
@@ -589,7 +674,7 @@ def tile_card(media, p):
     m = p['meta']
     card = (f'<span class="tcard" aria-hidden="true"><span class="tcard-txt"><span class="tcard-name">{esc(m["title"])}</span>'
             f'<span class="tcard-role">{esc(m["role"])}</span></span>'
-            '<span class="tcard-btn"><span class="tcard-btn-l">View project</span><span class="tcard-btn-i">→</span></span></span>')
+            f'<span class="tcard-btn"><span class="tcard-btn-l">{t("View project")}</span><span class="tcard-btn-i">→</span></span></span>')
     return media[:media.rindex('</div>')] + card + '</div>'
 
 
@@ -616,13 +701,14 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1=''):
     head, _, tail = statement.partition(' — ')
     # like a page header: the first part as the title (black), the rest in small on the right, like "Specialized in…"
     title, sub = (inline(head), inline(tail)) if tail else (inline(statement), '')
+    sub = sub.replace(' | ', ' <br>')   # line breaks chosen by hand in the small text too
     title = title.replace(' | ', '<br>')   # line breaks chosen by hand (| in content/home.txt)
-    _, svc = read_content(os.path.join(CONTENT, 'services.txt'))
+    _, svc = read_content_l('services.txt')
     def part(key):
         txt = svc.get(key, '')
-        t = re.search(r'^##\s+(.+)$', txt, re.M); tag = re.search(r'^\*(.+)\*\s*$', txt, re.M)
+        tt = re.search(r'^##\s+(.+)$', txt, re.M); tag = re.search(r'^\*(.+)\*\s*$', txt, re.M)
         body = ' '.join(l.strip() for l in txt.splitlines() if l.strip() and not l.lstrip().startswith(('#', '-', '*')))
-        return (t.group(1) if t else ''), (tag.group(1) if tag else body), re.findall(r'^- (.+)$', txt, re.M)
+        return (tt.group(1) if tt else ''), (tag.group(1) if tag else body), [x.replace(' | ', ' ') for x in re.findall(r'^- (.+)$', txt, re.M)]   # no hand line break in the tiles
     films_t, films_d, films_l = part('films')
     sys_t, sys_d, sys_l = part('systems')
     ai_t, ai_d, _ = part('ai')
@@ -651,11 +737,12 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1=''):
     # animated when the tile appears: the stars light up one after the other, the numbers roll up from 0 (like the process)
     stars = ''.join(f'<span class="st" style="--i:{i}"><span>★</span><span class="st-on">★</span></span>' for i in range(5))
     rating = (f'<a class="ai-rating" href="https://www.google.com/maps/search/?api=1&amp;query=Ranko+Montreal" target="_blank" rel="noopener" '
-              f'aria-label="Rated {g.group(1)} out of 5 on Google, {g.group(2)} reviews"><span class="ai-stars" aria-hidden="true">{stars}</span>'
-              f'<span aria-hidden="true"><b>{odometer(g.group(1), .35)}</b> · {odometer(g.group(2), odo_end(g.group(1), .35) - .2)} Google reviews</span></a>') if g else ''
+              + (f'aria-label="Note de {g.group(1)} sur 5 sur Google, {g.group(2)} avis">' if LANG == 'fr' else f'aria-label="Rated {g.group(1)} out of 5 on Google, {g.group(2)} reviews">')
+              + f'<span class="ai-stars" aria-hidden="true">{stars}</span>'
+              + f'<span aria-hidden="true"><b>{odometer(g.group(1), .35)}</b> · {odometer(g.group(2), odo_end(g.group(1), .35) - .2)} {t("Google reviews")}</span></a>') if g else ''
     qs = ''.join(f'''<figure class="ai-q{" is-on" if i == 0 else ""}"{" hidden" if i else ""}><blockquote>“{inline(q)}”</blockquote>
         <figcaption><b>{esc(n)}</b><span>{esc(r)} — {esc(pj)}</span></figcaption></figure>''' for i, (q, n, r, pj) in enumerate(qrows))
-    dots = ''.join(f'<button type="button" class="ai-dot" aria-label="Testimonial {i + 1} of {len(qrows)}" aria-pressed="{"true" if i == 0 else "false"}"></button>' for i in range(len(qrows)))
+    dots = ''.join(f'<button type="button" class="ai-dot" aria-label="{"Témoignage" if LANG == "fr" else "Testimonial"} {i + 1} {"sur" if LANG == "fr" else "of"} {len(qrows)}" aria-pressed="{"true" if i == 0 else "false"}"></button>' for i in range(len(qrows)))
     # tile 4: the Bronco intro (WebM hosted with the site, images/home/ai-intro.webm + its still ai-intro.webp)
     tall_media = tile_video(picture('home', 'ai-intro', 1510, 2160, '', 'third', label='AI', register=False), 'ai-intro.webm', 'home') \
         .replace('class="media ', 'class="media ai-bg ', 1)
@@ -667,34 +754,34 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1=''):
   <div class="ai-bento">
     <div class="ai-col ai-frame">
       <div class="ai-card ai-hero" data-reveal>{vid_card(vids[0], "ai-bg") if vids else ""}
-        <p class="ai-hero-t">{inline(tile1 or ai_t)}</p>
+        <p class="ai-hero-t">{inline(tile1 or ai_t).replace(" | ", "<br>")}</p>
       </div>
-      <a class="k-pill ai-more" href="/work">View all work</a>
+      <a class="k-pill ai-more" href="/work">{t("View all work")}</a>
     </div>
     <div class="ai-col ai-quote" data-reveal>
       <div class="ai-top"><div class="ai-avs">{avatars}</div>{rating}</div>
-      <div class="ai-quotes" aria-label="What clients say">{qs}</div>
-      <div class="ai-dots" role="group" aria-label="Choose a testimonial">{dots}</div>
-      <a class="k-pill ai-more" href="/about">About <em>Ranko</em></a>
+      <div class="ai-quotes" aria-label="{t("What clients say")}">{qs}</div>
+      <div class="ai-dots" role="group" aria-label="{t("Choose a testimonial")}">{dots}</div>
+      <a class="k-pill ai-more" href="/about">{t("About <em>Ranko</em>")}</a>
     </div>
     <div class="ai-col ai-frame ai-feats">
       {feat(films_t, films_l)}
       {feat(sys_t, sys_l)}
       {feat(ai_t, ai_d.split(". ")[0].rstrip(".") + ".")}
-      <a class="k-pill ai-more" href="/services">View all services</a>
+      <a class="k-pill ai-more" href="/services">{t("View all services")}</a>
     </div>
     <div class="ai-col ai-tall" data-reveal>{tall_media}
-      <p class="ai-tall-b">{inline(tall_txt)}</p>
-      <a class="k-pill ai-more" href="{MAIL}">Work with us</a>
+      <p class="ai-tall-b">{inline(tall_txt).replace(" | ", "<br>")}</p>
+      <a class="k-pill ai-more" href="{MAIL}">{t("Work with us")}</a>
     </div>
   </div>
 </section>'''
 
 
 def page_home(order, P):
-    meta, sec = read_content(os.path.join(CONTENT, 'home.txt'))
+    meta, sec = read_content_l('home.txt')
     featured = [s.strip() for s in meta.get('featured', '').split(',') if s.strip()]
-    n_brands = len([b for b in read_content(os.path.join(CONTENT, 'about.txt'))[1].get('brands', '').splitlines() if b.strip() and not b.lstrip().startswith('#')])
+    n_brands = len([b for b in read_content_l('about.txt')[1].get('brands', '').splitlines() if b.strip() and not b.lstrip().startswith('#')])
     # featured work: 4:5 tiles placed freely, same sizes and places as the Squarespace home page.
     # each tile: (left, top, width) in pixels measured on a 1440 px wide screen; scaled to the screen width.
     # on phones the tiles simply stack, small ones alternating left and right.
@@ -754,16 +841,16 @@ def page_home(order, P):
   <span class="k-card-meta"><span class="k-card-name">{esc(m_["title"])}</span><span class="k-card-role">{esc(m_["role"])}</span></span>
 </a></li>''')
         cards.append(f'<li class="k-col" style="--grow:{cw:.1f}"><ol>{"".join(items)}</ol></li>')
-    work_meta, _ = read_content(os.path.join(CONTENT, 'work.txt'))
+    work_meta, _ = read_content_l('work.txt')
     reel = meta.get('reel', '')
     body = f'''
 <div class="k">
 <section class="page-hd k-hero" aria-labelledby="hero-t">
-  <h1 id="hero-t" class="page-t hero-t" data-split aria-label="Creative Company"><span aria-hidden="true">Creative<br>Company</span></h1>
+  <h1 id="hero-t" class="page-t hero-t" data-split aria-label="{t("Creative Company")}"><span aria-hidden="true">{t("Creative<br>Company")}</span></h1>
   <p class="page-intro" data-split>{inline(meta.get("hero_sub", ""))}</p>
 </section>
 
-<section class="reel" aria-label="Showreel">
+<section class="reel" aria-label="{t("Showreel")}">
   <div class="reel-frame">
     {vimeo(reel, "loop", "home", "Showreel", "full", eager=True)}
   </div>
@@ -775,8 +862,8 @@ def page_home(order, P):
 
 <section class="k-sec k-shelf" aria-labelledby="k-work">
   <div class="k-head">
-    <h2 id="k-work" class="k-title" data-split>Selected Work</h2>
-    <div class="k-side" data-reveal><a class="k-pill" href="/work">View all work</a></div>
+    <h2 id="k-work" class="k-title" data-split>{t("Selected Work")}</h2>
+    <div class="k-side" data-reveal><a class="k-pill" href="/work">{t("View all work")}</a></div>
   </div>
   <ol class="k-cards">{"".join(cards)}</ol>
 </section>
@@ -789,7 +876,7 @@ def page_home(order, P):
 
 
 def page_work(order, P):
-    meta, sec = read_content(os.path.join(CONTENT, 'work.txt'))
+    meta, sec = read_content_l('work.txt')
     tiles = []
     for i, slug in enumerate(order):
         p = P[slug]; m = p['meta']
@@ -799,8 +886,8 @@ def page_work(order, P):
 </a></li>''')
     body = f'''
 <section class="page-hd k-hero">
-  <h1 class="page-t" data-split>{esc(meta.get("heading", "Our Work"))}</h1>
-  <p class="page-intro" data-split>{inline(meta.get("intro", ""))}</p>
+  <h1 class="page-t" data-split>{"<br>".join(esc(x.strip()) for x in meta.get("heading", t("Our Work")).split("|"))}</h1>
+  <p class="page-intro" data-split>{inline(meta.get("intro", "")).replace(" | ", " <br>")}</p>
 </section>
 <hr class="hd-line">
 <section class="sec"><ul class="grid">{"".join(tiles)}</ul></section>'''
@@ -817,7 +904,7 @@ def pj_related(slugs, P):
   <span class="k-card-meta"><span class="k-card-name">{esc(P[x]["meta"]["title"])}</span><span class="k-card-role">{esc(P[x]["meta"]["role"])}</span></span>
 </a></li>''' for x in picks)
     return f'''<section class="sec pj-related" aria-labelledby="rel-t">
-  <h2 id="rel-t" class="pj-rel-t" data-split>Related projects</h2>
+  <h2 id="rel-t" class="pj-rel-t" data-split>{t("Related projects")}</h2>
   <ul class="pj-rel-grid">{cards}</ul>
 </section>'''
 
@@ -825,7 +912,7 @@ def pj_related(slugs, P):
 def pj_quotes(title):
     """Project pages: the client testimonials of this project (content/home.txt, section "testimonials",
     last column = project), in grey cards, two per row, after a thin line."""
-    _, hs = read_content(os.path.join(CONTENT, 'home.txt'))
+    _, hs = read_content_l('home.txt')
     rows = [[x.strip() for x in l.split('|')] for l in hs.get('testimonials', '').splitlines()
             if l.strip() and not l.lstrip().startswith('#') and l.count('|') >= 3]
     mine = [r for r in rows if title.lower().startswith(r[3].lower())]
@@ -833,7 +920,7 @@ def pj_quotes(title):
         return ''
     cards = ''.join(f'''<figure class="pj-q" data-reveal><blockquote>“{inline(q)}”</blockquote>
   <figcaption><b>{esc(n)}</b><span>{esc(r)}</span></figcaption></figure>''' for q, n, r, _ in mine)
-    return f'<section class="sec pj-quotes" aria-label="What the client says"><div class="pj-q-grid">{cards}</div></section>'
+    return f'<section class="sec pj-quotes" aria-label="{t("What the client says")}"><div class="pj-q-grid">{cards}</div></section>'
 
 
 def page_project(slug, order, P):
@@ -849,7 +936,7 @@ def page_project(slug, order, P):
     def fact(key):
         l = next((l for l in clines if re.match(rf'^\*\*{key}\*\*', l)), '')
         return re.sub(rf'^\*\*{key}\*\*\s*[—-]\s*', '', l)
-    facts = [(lab, v) for lab, v in (('Services', services), ('Client', fact('CLIENT')), ('Agency', fact('AGENCY'))) if v]
+    facts = [(lab, v) for lab, v in ((t('Services'), services), (t('Client'), fact('CLIENT')), (t('Agency'), fact('AGENCY'))) if v]
     facts_html = ''.join(f'<p class="pj-fact"><strong class="pj-svc-l">{lab}</strong>{inline(v)}</p>' for lab, v in facts)
     lst = [x for x in order]
     nxt = P[lst[(lst.index(slug) + 1) % len(lst)]] if slug in lst else P[lst[0]]
@@ -873,9 +960,9 @@ def page_project(slug, order, P):
 {pj_quotes(m["title"])}
 {pj_related(m.get("related", ""), P)}
 </article>
-<nav class="next" aria-label="Next project">
+<nav class="next" aria-label="{t("Next project")}">
   <a href="/{nxt["slug"]}">
-    <span class="label">Next project</span>
+    <span class="label">{t("Next project")}</span>
     <span class="next-t">{esc(nxt["meta"]["title"])}</span>
     <span class="next-r">{esc(nxt["meta"]["role"])}</span>
   </a>
@@ -885,7 +972,7 @@ def page_project(slug, order, P):
 
 def page_simple(name, path):
     """services / about / afterhours: content/<name>.txt"""
-    meta, sec = read_content(os.path.join(CONTENT, name + '.txt'))
+    meta, sec = read_content_l(name + '.txt')
     parts = [f'''<section class="page-hd k-hero">
   <h1 class="page-t" data-split>{"<br>".join(inline(x.strip()) for x in meta.get("heading", "").split("|"))}</h1>
   <div class="page-intro" data-split>{md(sec.get("intro", ""), reveal=False).replace(" | ", " <br>")}</div>
@@ -906,7 +993,7 @@ def page_simple(name, path):
         brands = [b.strip() for b in sec.get('brands', '').splitlines() if b.strip() and not b.lstrip().startswith('#')]
         parts.append(f'''{f'<section class="sec statement-2 about-st"><p class="mid-t" data-split>{inline(sec["statement"])}</p></section>' if sec.get("statement") else ""}
 <section class="sec brands" aria-labelledby="br-t">
-  <h2 id="br-t" class="sec-t" data-reveal>Brands we've worked for</h2>
+  <h2 id="br-t" class="sec-t" data-reveal>{t("Brands we've worked for")}</h2>
   <ul class="brand-grid">{"".join(brand_cell(b) for b in brands)}</ul>
 </section>
 <section class="sec bio">
@@ -948,7 +1035,7 @@ def brand_cell(line):
     name, _, link = (x.strip() for x in line.partition(' = '))   # "Dior = dior": the logo opens the project page
     slug = re.sub(r'[^a-z0-9]+', '-', unicodedata.normalize('NFKD', name).encode('ascii', 'ignore').decode().lower()).strip('-')
     files = [f for f in os.listdir(LOGOS) if f.split('.')[0] == slug] if os.path.isdir(LOGOS) else []
-    wrap = (lambda x: f'<a class="brand-link" href="/{link}" aria-label="{esc(name)}: see the project">{x}</a>') if link else (lambda x: x)
+    wrap = (lambda x: f'<a class="brand-link" href="/{link}" aria-label="{esc(name)}: {t("see the project")}">{x}</a>') if link else (lambda x: x)
     if not files:
         txt = '<span class="brand-txt">' + esc(name) + '</span>'
         return f'<li class="brand" data-reveal>{wrap(txt)}</li>'
@@ -971,8 +1058,8 @@ def visit(text):
     # the e-mail in the long black tile on the right (like "Work with us"); colours swap on hover
     return f'''<section class="sec visit" aria-label="Contact">
   <div class="visit-grid">
-    <a class="visit-addr" href="{maps}" target="_blank" rel="noopener" data-reveal><span class="visit-go">Open in Google Maps ↗</span><address>{addr}</address></a>
-    <a class="visit-mail" href="{MAIL}" data-reveal><span>Work with us</span><span>hello@ranko.ca</span></a>
+    <a class="visit-addr" href="{maps}" target="_blank" rel="noopener" data-reveal><span class="visit-go">{t("Open in Google Maps ↗")}</span><address>{addr}</address></a>
+    <a class="visit-mail" href="{MAIL}" data-reveal><span>{t("Work with us")}</span><span>hello@ranko.ca</span></a>
   </div>
 </section>'''
 
@@ -1046,9 +1133,20 @@ def italic_ranko(page):
     return head + sep + ''.join(out)
 
 
+def fr_links(page):
+    """French pages: links to the site's pages point to their French version (/work -> /fr/work);
+    files (pictures, videos, scripts), outside links and the language switch stay as they are."""
+    page = re.sub(r'href="/(?!/|assets/|images/|fr/|favicon|apple-touch)([^"]*)"', r'href="/fr/\1"', page)
+    page = page.replace('subject=Hello%20Ranko!', 'subject=Bonjour%20Ranko!').replace('subject=Hello%20RANKO%20!', 'subject=Bonjour%20Ranko!')
+    page = page.replace('subject=AI%20talent', 'subject=Talents%20IA')   # e-mail subjects in French too
+    return page.replace('href="\x00', 'href="')
+
+
 def write(path, content):
     if path.endswith('.html'):
         content = italic_ranko(content)
+        if path.startswith('/fr/'):
+            content = fr_links(content)
     full = os.path.join(DIST, path.lstrip('/'))
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, 'w', encoding='utf-8').write(content)
@@ -1072,8 +1170,21 @@ def build():
     for slug in P:
         pages[f'/{slug}.html'] = page_project(slug, order, P)
     pages['/404.html'] = page_404()
+    # the French version, under /fr (texts from content/fr/, everything else shared)
+    global LANG
+    LANG = 'fr'
+    order_fr, P_fr = load_projects()
+    pages['/fr/index.html'] = page_home(order_fr, P_fr)
+    pages['/fr/work.html'] = page_work(order_fr, P_fr)
+    for name in ('services', 'about', 'afterhours', 'privacy'):
+        pages[f'/fr/{name}.html'] = page_simple(name, '/' + name)
+    for slug in P_fr:
+        pages[f'/fr/{slug}.html'] = page_project(slug, order_fr, P_fr)
+    LANG = 'en'
+    if FR_MISSING:
+        print(f'  ! French text not written yet for {len(FR_MISSING)} file(s) (English shown): ' + ', '.join(sorted(set(FR_MISSING))))
     for path, content in pages.items(): write(path, content)
-    urls = ['/'] + [p[:-5] for p in pages if p not in ('/index.html', '/404.html')]
+    urls = ['/'] + [p[:-5] for p in pages if p not in ('/index.html', '/404.html', '/fr/index.html')] + ['/fr/']
     write('/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + ''.join(f'  <url><loc>{SITE_URL}{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     write_images_md()
@@ -1115,7 +1226,10 @@ def check_site():
             problems.append(f'Image manquante : images/{owner}/{slot}' + ('' if slot.endswith('.mp4') else '.webp'))
     # 2. every local file or page referenced by the built pages
     refs = re.compile(r'(?:src|href|poster|data-src)="(/[^"#?]*)|srcset="([^"]+)"')
-    for page in sorted(f for f in os.listdir(DIST) if f.endswith('.html')):
+    pages = [f for f in os.listdir(DIST) if f.endswith('.html')]
+    if os.path.isdir(os.path.join(DIST, 'fr')):
+        pages += ['fr/' + f for f in os.listdir(os.path.join(DIST, 'fr')) if f.endswith('.html')]
+    for page in sorted(pages):
         html_ = open(os.path.join(DIST, page), encoding='utf-8').read()
         for m in refs.finditer(html_):
             paths = [m.group(1)] if m.group(1) else [p.split()[0] for p in m.group(2).split(',') if p.strip().startswith('/')]

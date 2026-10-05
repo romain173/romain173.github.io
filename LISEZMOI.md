@@ -162,6 +162,19 @@ git commit -m "Ce que j'ai changé"
 ---
 
 
+## Version française (/fr)
+
+Le site existe en anglais (adresse normale, langue d'arrivée) et en français (**/fr** : /fr/work, /fr/dior…).
+Le sélecteur **FR / EN** est dans la barre du haut (sur téléphone : dans le menu « + »).
+
+- Les textes français sont dans **`content/fr/`**, même nom et même place que les fichiers anglais. Ils ne contiennent
+  **que les textes** : tout ce qui n'y est pas est repris de l'anglais (images, vidéos, mise en page, ordre des projets).
+- Dans une section `== media`, n'écrivez que les paragraphes de texte (titres `##`, `###`, phrases), dans le même ordre
+  que dans le fichier anglais : ils remplacent les textes anglais un par un. Les lignes `video …`, `image …` restent
+  dans le fichier anglais seulement. Si le nombre de textes ne correspond pas, la fabrication du site vous le signale.
+- Section `== alt` : la description de chaque image en français (`image-01 = …`).
+- Les mots de l'interface (menu, boutons, pied de page, bandeau des témoins) sont dans `build.py`, dictionnaire `FR`.
+
 ## Vérification automatique avant publication
 
 À chaque fabrication du site, une vérification s'affiche à la fin :

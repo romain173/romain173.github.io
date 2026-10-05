@@ -1,0 +1,19 @@
+role: Direction créative et design 3D
+page_title: Ranko — Psycho Bunny Bunnyverse — design de NFT en 3D
+description: Direction créative et motion design 3D pour la collection de NFT Bunnyverse de Psycho Bunny. Par Ranko, studio créatif montréalais.
+cover_alt: Psycho Bunny Bunnyverse - design de personnages 3D à collectionner
+
+== intro
+
+Notre mandat : concevoir des NFT pour le Bunnyverse de Psycho Bunny.
+
+Nous nous sommes plongés dans la culture de la marque Psycho Bunny pour concevoir et réaliser ces NFT 3D audacieux et colorés.
+
+== credits
+
+**CLIENT** — Psycho Bunny
+**SERVICES** — Direction créative, Motion design, Motion design 3D
+
+== alt
+
+image-01 = Psycho Bunny Bunnyverse - fond psychédélique avec le logo du lapin à tête de mort

@@ -587,7 +587,13 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
 .kn .kn-plus { display: grid; }
 @media (min-width: 900px) { .kn .kn-plus { display: none; } }   /* large screens: the links are in the bar, no "+" */
 @media (max-width: 899px) { .kn-nav { display: none; } }
+/* language switch (FR / EN): after the links on big screens, in the full-screen menu on phones */
+.kn-lang { color: var(--muted); letter-spacing: .02em; transition: color .3s var(--ease); }
+.kn-lang:hover { color: var(--ink); }
+@media (max-width: 899px) { .kn > .kn-lang { display: none; } }
+.menu .kn-lang { font-size: inherit; }
 @media (max-width: 479px) { .kn-time { display: none; } }   /* small phones: no room beside the button */
+@media (max-width: 539px) { [lang^=fr] .kn-time { display: none; } }   /* French: longer button */
 .menu { z-index: 49; }
 
 /* home intro (Test-Ranko), like salient.framer.website: dark screen, the logo's letters rise, then the screen lifts

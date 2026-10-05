@@ -1,0 +1,23 @@
+role: Direction de campagne et mix-média
+page_title: Ranko — Mocktails Atypique — campagne publicitaire complète
+description: Direction créative, mix-média et motion 3D pour une campagne publicitaire complète des mocktails Atypique, créée de A à Z. Par Ranko, Montréal.
+cover_alt: Campagne des mocktails Atypique - visuels colorés des saveurs en mix-média
+
+== intro
+
+Notre mandat : créer de A à Z une campagne publicitaire complète pour les mocktails Atypique.
+
+Portés par le mix-média, nous avons travaillé de près avec le réalisateur pour bâtir un univers lumineux et coloré pour Atypique — le plus cocktail des mocktails. Chaque publicité de saveur suit la même approche créative : des images en prises de vue réelles et un montage plein d’énergie.
+
+== credits
+
+**CLIENT** — Atypique
+**AGENCY** — Vibrant
+**SERVICES** — Direction créative, Motion design, Motion design 3D, VFX, Montage
+
+== alt
+
+image-01 = Canette Atypique rhum épicé 355 ml
+image-02 = Canette Atypique mojito 355 ml
+image-03 = Canette Atypique gin tonic 355 ml
+image-04 = Canette Atypique spritz 355 ml
