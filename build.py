@@ -140,7 +140,7 @@ def md(text, reveal=True):
         flush()
         if m:
             n = max(2, len(m.group(1)))  # h1 is kept for the page title
-            out.append(f'<h{n}{r}>{inline(m.group(2))}</h{n}>')
+            out.append(f'<h{n}{r}>{inline(m.group(2)).replace(" | ", "<br>")}</h{n}>')   # " | ": line break chosen by hand
         else:
             out.append(f'<p{r}>{inline(line)}</p>')
     flush()
