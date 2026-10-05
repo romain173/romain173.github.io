@@ -308,7 +308,7 @@ def mosaic(text, owner):
                 if items:   # every video plays in its tile, muted, in a loop — except the very first piece (the vending machine film)
                     media = tile_video(media, ref, owner)
                 else:
-                    media = media.replace('</div>', '<span class="ah-play" aria-hidden="true"></span></div>', 1)
+                    media = media.replace('</div>', '<span class="play ah-play" aria-hidden="true"><span>Play</span></span></div>', 1)
             items.append((h / w, f'''<li class="k-card" style="--order:{len(items)}"><button type="button" class="ah-open" {data} data-title="{esc(group)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="Open {esc(group)} — {esc(what)}">
   {media}
 </button></li>'''))
