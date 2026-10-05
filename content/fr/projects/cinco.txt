@@ -12,7 +12,7 @@ Aujourd’hui, l’entreprise repousse les limites de l’industrie en intégran
 == credits
 
 **CLIENT** — Cinco
-**SERVICE** — Stratégie créative, Direction artistique, Design graphique, Ingénierie de requêtes IA, Motion design, Production vidéo complète
+**SERVICE** — Stratégie créative, Direction artistique, Design graphique, Ingénierie de prompt, Motion design, Production vidéo complète
 
 == media
 

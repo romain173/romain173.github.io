@@ -108,7 +108,7 @@ FR = {
     "Brands we've worked for": 'Marques pour lesquelles nous avons travaillé', 'Open in Google Maps ↗': 'Ouvrir la carte ↗',
     'see the project': 'voir le projet', 'Our Work': 'Nos projets', 'Play': 'Lire',
     'Afterhours pieces': 'Œuvres Afterhours', 'Afterhours piece': 'Œuvre Afterhours', 'Open': 'Ouvrir',
-    'Previous piece': 'Œuvre précédente', 'Next piece': 'Œuvre suivante', 'Close': 'Fermer',
+    'Before': 'Avant', 'After': 'Après', 'Previous piece': 'Œuvre précédente', 'Next piece': 'Œuvre suivante', 'Close': 'Fermer',
 }
 
 def t(s):
@@ -448,7 +448,7 @@ def media_rows(text, owner, label, first_eager=False):
                 eager[0] = False
             if opts.get('tag'):   # tag="Before": a word in white, top left, on the picture or the video
                 body = re.sub(r'<figure class="', '<figure class="has-tag ', body, count=1)
-                body = body.replace('</figure>', f'<span class="m-tag">{esc(opts["tag"])}</span></figure>', 1)
+                body = body.replace('</figure>', f'<span class="m-tag">{esc(t(opts["tag"]))}</span></figure>', 1)
             sizes.append(size); ratios.append(h / w if w else 1)
             reveal = '' if first_cell[0] else ' data-reveal'  # the first media of a page shows at once
             first_cell[0] = False

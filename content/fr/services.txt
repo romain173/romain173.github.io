@@ -25,7 +25,7 @@ Une production complète, | de la première idée à l’image finale. | Vidéos
 - Boîte à outils d’animation
 - Identité cinétique
 - Systèmes de design
-- Gabarits et lignes directrices
+- Templates et lignes directrices
 - Déploiement et adaptation
 - Flux de production
 

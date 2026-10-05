@@ -1,38 +1,42 @@
 role: Production complète et VFX assistés par IA
 page_role: Direction créative et mix-média
 page_title: Ranko — La Ronde 2.0 — production complète et VFX assistés par IA
-description: Production d’envergure pour le film de marque 2.0 de La Ronde — tournage sur place, direction créative, système de gabarits modulaires et VFX assistés par IA. Ranko, Montréal.
+description: Production d’envergure pour le film de marque 2.0 de La Ronde — tournage sur place, direction créative, système de templates modulaires et VFX assistés par IA. Ranko, Montréal.
 cover_alt: Film de marque La Ronde 2.0 - tournage sur place et VFX assistés par IA
 
 == intro
 
-La Ronde est le plus grand parc d’attractions du Québec et le deuxième en importance au Canada.
+La Ronde est le plus grand parc d’attractions du Québec et le deuxième plus grand au Canada.
 
 == credits
 
 **CLIENT** — La Ronde
 **AGENCY** — Vibrant
-**SERVICE** — Direction créative, Direction artistique, Design graphique, Ingénierie de requêtes IA, Motion design, Montage, Postproduction
+**SERVICE** — Direction créative, Direction artistique, Design graphique, Ingénierie de prompt, Motion design, Montage, Postproduction
 
 == media
 
 ## Le défi
-Après plusieurs années de collaboration, La Ronde nous a demandé de bâtir un univers de campagne entièrement nouveau. Nous sommes allés au-delà de notre rôle habituel et avons pris en charge toute la production — en tournant de nouvelles images sur place pour créer un film de marque 2.0 et tout un écosystème de contenus autour de lui.
+Après plusieurs années de collaboration, La Ronde nous a demandé de bâtir un univers de campagne entièrement nouveau.
+Nous sommes allés au-delà de notre rôle habituel et avons pris en charge toute la production — en tournant de nouvelles images sur place pour créer un film de marque 2.0 et tout un écosystème de contenus autour de lui.
 
 ## Ce projet marque une évolution créative, pensée pour rehausser la présence du parc et stimuler l’engagement pour la nouvelle saison.
 
 ## Notre approche stratégique et créative
 
-### 01 — Une stratégie de gabarits modulaires
-Un système de gabarits maîtres régit tout l’écosystème de contenus. Les contenus phares se déclinent en autant de versions que nécessaire, et le message reste cohérent à chaque point de contact.
+### 01 — Une stratégie de templates modulaires
+Un système de templates régit tout l’écosystème de contenus.
+Les contenus phares se déclinent en autant de versions que nécessaire, et le message reste cohérent sur chaque format et chaque canal.
 
-### 02 — Une direction artistique sur mesure
-Une esthétique originale, construite autour d’une idée : reproduire ce qu’on ressent vraiment au parc. Tourner sur place imposait de vraies contraintes : les GoPro et Insta360 ont donc été jumelées à des caméras traditionnelles — la précision de la captation d’action avec l’immersion grand angle de la vue subjective. Les images sont hyperdynamiques.
+### 02 — Une direction artistique | sur mesure
+Une esthétique originale, construite autour d’une idée : reproduire ce qu’on ressent vraiment au parc.
+Tourner sur place imposait de vraies contraintes : les GoPro et Insta360 ont donc été jumelées à des caméras traditionnelles, alliant la précision de la captation de l’action à l’immersion grand angle de la vue subjective. Les images sont hyperdynamiques.
 
-### 03 — Des effets visuels assistés par IA
-L’IA traverse le pipeline VFX pour avancer plus vite sur les séquences complexes, et garder une finition haut de gamme avec plus de précision et plus de contrôle créatif.
+### 03 — Des VFX assistés par l’IA
+L’IA est intégrée à notre pipeline VFX pour avancer plus vite sur les séquences complexes, et garder une finition haut de gamme avec plus de précision et plus de contrôle créatif.
 
 ## Deux publicités phares et une gamme de contenus, conçues pour moderniser le message de La Ronde et établir une nouvelle norme pour la marque.
 
 ## Les livrables finaux
-Deux publicités phares et une gamme complète de contenus de campagne, bâties sur le système de gabarits maîtres — tout ce dont La Ronde a besoin pour faire vivre la saison sur chaque format et chaque canal.
+Deux publicités phares et une gamme complète de contenus de campagne, bâties sur le système de templates.
+Tout ce dont La Ronde a besoin pour faire vivre la saison sur chaque format et chaque canal.
