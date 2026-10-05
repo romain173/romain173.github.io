@@ -37,11 +37,11 @@ video 1221862529 half | video 1221905922 half
 
 ## AI, fully integrated
 AI runs through our production pipeline. It means the idea doesn't get scaled down to fit, and your brand lands somewhere it's never been.
-- AI Prompt Engineering
 - AI-Generated Images & Video
-- Generative Motion
+- AI-Generated Motion
 - AI-Assisted VFX
 - Visual Development & Previs
+- AI Prompt Engineering
 - Pipeline Integration
 
 == process
