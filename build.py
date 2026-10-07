@@ -587,7 +587,7 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
 <a class="skip" href="#main">{t("Skip to content")}</a>
 <header class="kn">
   <div class="kn-l">
-    <a class="hd-logo" href="/" aria-label="{t("Ranko — home")}">{LOGO}</a>
+    <a class="hd-logo hd-word" href="/" aria-label="{t("Ranko — home")}">Ranko</a>
     <p class="kn-time">{t("Montreal, QC")} <span data-clock></span></p>
   </div>
   <nav class="kn-nav" aria-label="{t("Main")}"><ul>{nav}</ul></nav>

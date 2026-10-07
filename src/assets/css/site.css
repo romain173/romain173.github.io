@@ -561,6 +561,7 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
 }
 .kn-l { display: flex; flex: 1 1 auto; align-items: center; gap: 20px; min-width: 0; }   /* takes the room between the logo and the links */
 .kn .hd-logo svg { width: 70px; }
+.hd-word { font-size: 20px; line-height: 1; font-weight: 700; font-style: italic; letter-spacing: -.02em; color: var(--ink); }   /* the name in Helvetica bold italic instead of the RANKO logo */
 .kn-time { margin-inline: auto; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }   /* in the middle between the logo and the first link (or the button on phones) */
 .clock-sep { animation: clock-blink 1s steps(1, end) infinite; }   /* the colon blinks with the seconds */
 @keyframes clock-blink { 50% { opacity: 0; } }
