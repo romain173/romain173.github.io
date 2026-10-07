@@ -583,11 +583,11 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>
-{f'<div class="intro" aria-hidden="true"><span class="intro-logo">{LOGO}</span></div>' if path == '/' else ''}
+{'<div class="intro" aria-hidden="true"><span class="intro-logo intro-word">' + ''.join(f'<span style="--i:{i}">{c}</span>' for i, c in enumerate('Ranko')) + '</span></div>' if path == '/' else ''}
 <a class="skip" href="#main">{t("Skip to content")}</a>
 <header class="kn">
   <div class="kn-l">
-    <a class="hd-logo hd-word" href="/" aria-label="{t("Ranko — home")}">Ranko</a>
+    <a class="hd-logo hd-word" href="/" aria-label="{t("Ranko — home")}"><span aria-hidden="true">{"".join(f"<span>{c}</span>" for c in "Ranko")}</span></a>
     <p class="kn-time">{t("Montreal, QC")} <span data-clock></span></p>
   </div>
   <nav class="kn-nav" aria-label="{t("Main")}"><ul>{nav}</ul></nav>

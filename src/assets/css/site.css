@@ -562,6 +562,21 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
 .kn-l { display: flex; flex: 1 1 auto; align-items: center; gap: 20px; min-width: 0; }   /* takes the room between the logo and the links */
 .kn .hd-logo svg { width: 70px; }
 .hd-word { font-size: 20px; line-height: 1; font-weight: 700; font-style: italic; letter-spacing: -.02em; color: var(--ink); }   /* the name in Helvetica bold italic instead of the RANKO logo */
+/* every 20 s each letter lifts a little, slides down out of view and comes back in from the top (like the old logo) */
+.hd-word > span { display: inline-flex; clip-path: inset(-25% -6% 0 -6%); }
+.hd-word > span > span { display: block; animation: word-cycle 20s 3s infinite; }
+.hd-word > span > span:nth-child(2) { animation-delay: 3.06s; }
+.hd-word > span > span:nth-child(3) { animation-delay: 3.12s; }
+.hd-word > span > span:nth-child(4) { animation-delay: 3.18s; }
+.hd-word > span > span:nth-child(5) { animation-delay: 3.24s; }
+@keyframes word-cycle {
+  0%    { transform: none; animation-timing-function: cubic-bezier(.3, 0, .2, 1); }
+  .9%   { transform: translate(0, -12%); animation-timing-function: cubic-bezier(.6, 0, .9, .4); }
+  2.2%  { transform: translate(0, 120%); }
+  2.21% { transform: translate(0, -120%); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
+  7.5%, 100% { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hd-word > span > span { animation: none; } }
 .kn-time { margin-inline: auto; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }   /* in the middle between the logo and the first link (or the button on phones) */
 .clock-sep { animation: clock-blink 1s steps(1, end) infinite; }   /* the colon blinks with the seconds */
 @keyframes clock-blink { 50% { opacity: 0; } }
@@ -605,13 +620,8 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
   background: #0b0b0b; color: var(--bg);
   animation: intro-up .94s cubic-bezier(.76, 0, .24, 1) 1.06s forwards;   /* the whole intro lasts 2 s */
 }
-.intro-logo svg { width: clamp(90px, 9vw, 130px); height: auto; }
-.intro-logo path { transform: translate(0, 400px); animation: intro-letter .82s var(--ease) forwards; }
-.intro-logo path:nth-child(1) { animation-delay: .12s; }
-.intro-logo path:nth-child(2) { animation-delay: .19s; }
-.intro-logo path:nth-child(3) { animation-delay: .26s; }
-.intro-logo path:nth-child(4) { animation-delay: .33s; }
-.intro-logo path:nth-child(5) { animation-delay: .4s; }
+.intro-word { display: inline-flex; overflow: hidden; padding: 0 .08em .06em; font-size: clamp(40px, 4.4vw, 64px); line-height: 1; font-weight: 700; font-style: italic; letter-spacing: -.02em; }   /* "Ranko" in bold italic, its letters rise one after the other */
+.intro-word > span { display: block; transform: translate(0, 110%); animation: intro-letter .82s var(--ease) forwards; animation-delay: calc(.12s + var(--i) * 70ms); }
 @keyframes intro-letter { to { transform: none; } }
 @keyframes intro-up { to { transform: translate3d(0, -100%, 0); } }
 /* the home title and sentence start rising as the curtain lifts */
