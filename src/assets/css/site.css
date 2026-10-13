@@ -825,7 +825,7 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .bio { padding-top: clamp(48px, 6vw, 96px); }
 .brands .sec-t, .visit .sec-t { font-weight: 500; }
 .bio-txt h3 { font-size: var(--t2); line-height: 1.35; letter-spacing: -.01em; font-weight: 400; max-width: 40ch; }
-@media (min-width: 900px) { .bio { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gap); align-items: start; } .bio-img { order: 2; width: 80%; justify-self: end; } }   /* big screens: the text on the left, the portrait on the right, a little smaller (80 %) */
+@media (min-width: 900px) { .bio { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gap); align-items: start; } .bio-img { order: 2; } }   /* big screens: the text on the left, the portrait on the right */
 /* About: a logo with a project page is a link: the whole cell, light grey and a slight zoom on hover */
 .brand { position: relative; }
 .brand-link { position: absolute; inset: 0; display: grid; place-items: center; padding: 12px; transition: background-color .35s var(--ease); }
