@@ -606,9 +606,11 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
 /* language switch (FR / EN): after the links on big screens, in the full-screen menu on phones */
 .kn-lang { color: var(--muted); letter-spacing: .02em; transition: color .3s var(--ease); }
 .kn-lang:hover { color: var(--ink); }
-@media (max-width: 899px) { .kn > .kn-lang { display: none; } }
+@media (max-width: 899px) { .kn { gap: 14px; } }   /* phones: FR / EN stays in the bar, between the clock and the button */
 .menu .kn-lang { font-size: inherit; }
-@media (max-width: 479px) { .kn-time { display: none; } }   /* small phones: no room beside the button */
+@media (max-width: 539px) { .kn-time { display: none; } }   /* small phones: no room beside the button */
+@media (max-width: 379px) { .kn { gap: 10px; } .kn-cta { padding: 0 12px; } }   /* very narrow phones: a little tighter so FR / EN keeps its place */
+@media (max-width: 339px) { [lang^=fr] .kn > .kn-lang { display: none; } }   /* the tiniest phones, French (longer button): FR / EN only in the menu */
 @media (max-width: 539px) { [lang^=fr] .kn-time { display: none; } }   /* French: longer button */
 .menu { z-index: 49; }
 
