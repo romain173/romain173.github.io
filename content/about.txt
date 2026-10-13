@@ -2,7 +2,7 @@ page_title: Ranko — Montreal creative company
 description: Ranko is a creative company based in Montreal — video production, motion design and graphic design, produced end to end for brands worldwide.
 label: About
 heading: We are | *Ranko*
-portrait_alt: Romain Amphyon. A young man with short brown hair and blue eyes wearing a black shirt and a pink watch poses with arms crossed in front of a background of swirling blue lights and motion blur effects.
+portrait_alt: Romain Amphyon, arms crossed, in a navy double-breasted suit and a light blue shirt, against a light grey background.
 
 == intro
 

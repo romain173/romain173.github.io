@@ -997,7 +997,7 @@ def page_simple(name, path):
   <ul class="brand-grid">{"".join(brand_cell(b) for b in brands)}</ul>
 </section>
 <section class="sec bio">
-  <div class="bio-img" data-reveal>{picture("about", "portrait", 1200, 992, meta.get("portrait_alt", ""), "half", label="Portrait")}</div>
+  <div class="bio-img" data-reveal>{picture("about", "portrait", 1600, 1600, meta.get("portrait_alt", ""), "half", label="Portrait")}</div>
   <div class="bio-txt">{md(sec.get("bio", ""))}</div>
 </section>
 {visit(sec.get("visit", ""))}''')
