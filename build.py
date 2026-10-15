@@ -555,10 +555,16 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
                   for h, u in (('en-CA', path), ('fr-CA', '/fr' + path), ('x-default', path))) if path != '/404' else ''
     switch = (f'<a class="kn-lang" href="{other}" hreflang="{"en" if LANG == "fr" else "fr"}" lang="{"en" if LANG == "fr" else "fr"}" '
               f'aria-label="{"English version" if LANG == "fr" else "Version française"}">{"EN" if LANG == "fr" else "FR"}</a>') if path != '/404' else ''
-    ld = json.dumps({'@context': 'https://schema.org', '@type': 'Organization', 'name': 'Ranko', 'url': SITE_URL,
+    # what Google reads about Ranko (name, logo, address, founder, socials): helps local search and the knowledge panel
+    ld = json.dumps({'@context': 'https://schema.org', '@type': 'Organization', '@id': SITE_URL + '/#ranko',
+                     'name': 'Ranko', 'url': SITE_URL, 'logo': SITE_URL + '/apple-touch-icon.png', 'image': SITE_URL + '/assets/img/og-ranko.png',
+                     'description': 'Creative studio in Montreal: video production, motion design, design and creative systems, with AI fully integrated.',
                      'email': 'hello@ranko.ca', 'foundingDate': '2020',
-                     'address': {'@type': 'PostalAddress', 'addressLocality': 'Montreal', 'addressRegion': 'QC', 'addressCountry': 'CA'},
-                     'sameAs': ['https://www.instagram.com/ranko.ca/', 'https://www.linkedin.com/company/rankoca', 'https://vimeo.com/rankoca']})
+                     'founder': {'@type': 'Person', 'name': 'Romain Amphyon', 'jobTitle': 'Founder & Creative Director', 'sameAs': ['https://www.linkedin.com/in/romain-amphyon/']},
+                     'address': {'@type': 'PostalAddress', 'streetAddress': '1 Boul. De Maisonneuve Ouest', 'addressLocality': 'Montreal',
+                                 'addressRegion': 'QC', 'postalCode': 'H2X 0E3', 'addressCountry': 'CA'},
+                     'areaServed': 'Worldwide', 'knowsLanguage': ['en', 'fr'],
+                     'sameAs': ['https://www.instagram.com/ranko.ca/', 'https://www.linkedin.com/company/rankoca', 'https://vimeo.com/rankoca']}, ensure_ascii=False)
     lenis = f'<script src="/assets/js/lenis.min.js?v={ver("assets/js/lenis.min.js")}" defer></script>' if HAS_LENIS else ''
     pre = '<link rel="preconnect" href="https://player.vimeo.com">' if video else ''
     return f'''<!doctype html>
