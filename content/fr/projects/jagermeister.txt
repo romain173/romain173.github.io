@@ -1,6 +1,6 @@
 role: Système motion et boîte à outils, déploiement mondial
-page_title: Ranko — Jägermeister Around the Block — système motion et boîte à outils
-description: Direction créative et système motion pour la campagne mondiale Around the Block de Jägermeister — une boîte à outils flexible déployée auprès de réalisateurs du monde entier. Ranko, Montréal.
+page_title: Ranko — Jägermeister — système motion et boîte à outils
+description: Système motion pour la campagne mondiale Around the Block de Jägermeister : une boîte à outils flexible déployée auprès de réalisateurs du monde entier.
 cover_alt: Campagne Around the Block de Jägermeister - système motion coloré
 
 == intro

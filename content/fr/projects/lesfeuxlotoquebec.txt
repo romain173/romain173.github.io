@@ -1,6 +1,6 @@
 role: Direction créative et mix-média
 page_title: Ranko — Grands Feux Loto-Québec — campagne publicitaire
-description: Direction créative, mix-média et typographie cinétique 3D pour la campagne publicitaire de l’événement international des Grands Feux Loto-Québec. Par Ranko, Montréal.
+description: Direction créative, mix-média et typographie cinétique 3D pour la campagne des Grands Feux Loto-Québec, compétition internationale de feux d’artifice.
 cover_alt: Grands Feux Loto-Québec - visuels de la campagne des feux d’artifice
 
 == intro

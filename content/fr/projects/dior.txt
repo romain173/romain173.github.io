@@ -1,6 +1,6 @@
 role: Design typographique et direction motion
 page_title: Ranko — Dior x Esquire Japan — animation typographique et de logo
-description: Typographie glitch et animation de logo pour la campagne Dior x Esquire Japan — un motion design qui a donné vie à l’identité de la marque à l’écran. Ranko, Montréal.
+description: Typographie glitch et animation de logo pour la campagne Dior x Esquire Japan : un motion design qui donne vie à l’identité de la marque. Ranko, Montréal.
 cover_alt: Campagne Dior x Esquire Japan - flacon du parfum Sauvage tenu en main
 
 == intro

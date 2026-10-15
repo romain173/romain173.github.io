@@ -1,5 +1,5 @@
 role: Direction créative et direction artistique Y2K
-page_title: Ranko — The Vending Machine — expérimentation en motion design Y2K
+page_title: Ranko — The Vending Machine — motion design Y2K
 description: Un film personnel qui célèbre l’esthétique Y2K — chrome, néons et rétrofuturisme en motion design 3D et VFX. Par Ranko, Montréal.
 cover_alt: Expérimentation en motion design Y2K - rétrofuturisme en chrome et néons
 

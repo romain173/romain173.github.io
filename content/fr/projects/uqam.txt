@@ -1,5 +1,5 @@
 role: Production complète et motion design
-page_title: Ranko — Vidéo explicative du BDIS de l’UQAM — production vidéo complète
+page_title: Ranko — UQAM — vidéo explicative du BDIS
 description: Production complète d’une vidéo explicative pour le BDIS de l’UQAM — réalisation, direction créative, motion design 3D, montage et son. Ranko, Montréal.
 cover_alt: Vidéo explicative du BDIS de l’UQAM - animation 3D et motion design
 

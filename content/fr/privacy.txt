@@ -1,5 +1,5 @@
 page_title: Ranko — Confidentialité et témoins
-description: Comment Ranko traite les renseignements personnels et les témoins sur ranko.ca : ce qui est recueilli, pourquoi, Google Analytics avec votre consentement, et vos droits.
+description: Comment Ranko traite vos renseignements personnels et les témoins sur ranko.ca : ce qui est recueilli, Google Analytics avec votre accord, et vos droits.
 
 label: Confidentialité
 heading: Confidentialité | et témoins

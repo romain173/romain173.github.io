@@ -1,6 +1,6 @@
 role: Direction motion pour une campagne mondiale
 page_title: Ranko — Uniqlo UT — motion design pour une campagne mondiale
-description: Motion design et typographie cinétique pour la campagne mondiale UT d’Uniqlo — 16 t-shirts graphiques animés pour des boutiques du monde entier. Par Ranko, Montréal.
+description: Motion design et typographie cinétique pour la campagne mondiale UT d’Uniqlo : 16 t-shirts graphiques animés pour les boutiques du monde entier.
 cover_alt: Campagne mondiale UT d’Uniqlo - danseuse entourée de grandes lettres UT
 
 == intro

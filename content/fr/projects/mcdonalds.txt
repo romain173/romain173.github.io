@@ -1,6 +1,6 @@
 role: Concept créatif et direction du montage
 page_title: Ranko — McDonald’s McNugget Buddies — concept et montage
-description: Concept, traitement du réalisateur et montage de la publicité McNugget Buddies de Kerwin Frost pour McDonald’s — un traitement audacieux inspiré des années 90. Par Ranko, Montréal.
+description: Concept, traitement et montage de la publicité McNugget Buddies de Kerwin Frost pour McDonald’s : un traitement audacieux inspiré des années 90.
 cover_alt: Publicité McNugget Buddies de McDonald’s - croquettes de poulet empilées
 
 == intro

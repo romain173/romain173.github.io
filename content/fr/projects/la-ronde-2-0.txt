@@ -1,7 +1,7 @@
 role: Production complète et VFX assistés par IA
 page_role: Direction créative et mix-média
 page_title: Ranko — La Ronde 2.0 — production complète et VFX assistés par IA
-description: Production d’envergure pour le film de marque 2.0 de La Ronde — tournage sur place, direction créative, système de templates modulaires et VFX assistés par IA. Ranko, Montréal.
+description: Film de marque 2.0 de La Ronde : tournage sur place, direction créative, système de templates modulaires et VFX assistés par IA. Par Ranko, Montréal.
 cover_alt: Film de marque La Ronde 2.0 - tournage sur place et VFX assistés par IA
 
 == intro

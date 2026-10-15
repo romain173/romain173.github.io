@@ -1,5 +1,5 @@
 page_title: Ranko — production vidéo et motion design à Montréal
-description: Production vidéo, motion design, design graphique et systèmes créatifs. Ranko assure une production complète pour les marques, de la première idée à l’image finale.
+description: Production vidéo, motion design, design graphique et systèmes créatifs : Ranko assure une production complète, de la première idée à l’image finale.
 label: Services
 heading: Ce que | nous | faisons
 

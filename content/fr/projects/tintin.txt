@@ -1,6 +1,6 @@
 role: Direction créative et mix-média
 page_title: Ranko — Tintin, l’aventure immersive — deux messages de campagne
-description: Direction créative et motion en mix-média pour deux messages de Tintin, l’aventure immersive, qui mêlent des images de l’expérience et de l’animation 2D. Ranko, Montréal.
+description: Direction créative et motion mix-média pour deux messages de Tintin, l’aventure immersive, mêlant images de l’expérience et animation 2D. Ranko, Montréal.
 cover_alt: Tintin, l’aventure immersive - visuels des messages de campagne
 
 == intro

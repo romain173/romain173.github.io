@@ -1,6 +1,6 @@
 role: Postproduction et mix-média
 page_title: Ranko — Ssense x Moncler — postproduction et mix-média
-description: Postproduction, montage en mix-média, détourage et compositing pour trois messages de la campagne Ssense x Moncler, diffusés en boutique et sur les réseaux sociaux. Ranko, Montréal.
+description: Postproduction, montage mix-média, détourage et compositing pour trois messages Ssense x Moncler diffusés en boutique et sur les réseaux sociaux.
 cover_alt: Campagne Ssense x Moncler - mannequin en manteau Moncler blanc
 
 == intro

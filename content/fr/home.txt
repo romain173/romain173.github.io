@@ -1,5 +1,5 @@
 page_title: Ranko | Studio créatif
-description: Ranko est un studio créatif spécialisé en design, en film et en numérique. Une production complète pour les marques qui ouvrent la voie. De Montréal à l’international.
+description: Ranko est un studio créatif spécialisé en design, vidéo et numérique. Une production complète pour les marques qui ouvrent la voie, de Montréal au monde.
 ai_tile1: Nous décidons, | l’IA exécute.
 ai_tile: Tout est possible. | Votre marque va plus loin.
 hero_sub: Spécialisé en design, vidéo et numérique.

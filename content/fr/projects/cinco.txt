@@ -1,6 +1,6 @@
 role: Production complète, propulsée par l’IA
-page_title: Ranko — Cinco — étude de cas de production vidéo propulsée par l’IA
-description: Production vidéo complète pour l’AI Experience Room de Cinco — stratégie créative, direction artistique, motion design et 70 contenus générés par IA, par Ranko Montréal.
+page_title: Ranko — Cinco — production vidéo propulsée par l’IA
+description: Production vidéo complète pour l’AI Experience Room de Cinco : stratégie créative, direction artistique, motion design et 70 contenus générés par IA.
 cover_alt: AI Experience Room de Cinco - visuels de produits, un aspirateur et un maillot, sur des écrans de téléphone
 
 == intro
