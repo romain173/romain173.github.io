@@ -184,8 +184,16 @@ def placeholder_family(w, h):
     return min(PH, key=lambda k: abs(PH[k][0] - r))
 
 
+# descriptions of the video stills (for Google Images and screen readers), in English and French:
+# content/video-descriptions.json, "<owner>/video-<id>": {"en": …, "fr": …} — edit there
+_vd_path = os.path.join(CONTENT, 'video-descriptions.json')
+VIDEO_DESC = json.load(open(_vd_path, encoding='utf-8')) if os.path.exists(_vd_path) else {}
+
+
 def picture(owner, slot, w, h, alt='', size='full', eager=False, cls='', label=None, register=True):
     """An image slot. Uses images/<owner>/<slot>.webp if present, otherwise the placeholder."""
+    if not alt and f'{owner}/{slot}' in VIDEO_DESC:
+        alt = VIDEO_DESC[f'{owner}/{slot}'].get('fr' if LANG == 'fr' else 'en', '')
     rel = f'{owner}/{slot}.webp'
     real = os.path.exists(os.path.join(IMAGES, rel))
     if register:
