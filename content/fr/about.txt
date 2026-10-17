@@ -3,6 +3,7 @@ description: Ranko est un studio créatif basé à Montréal : une production co
 label: À propos
 heading: Nous | sommes | *Ranko*
 portrait_alt: Romain Amphyon, bras croisés, en costume croisé bleu marine et chemise bleu clair, sur fond gris clair.
+influences_alt: Collage en noir et blanc des influences de Romain Amphyon : mangas Akira et Otomo, affiches d’Aliens et de Terminator, jeux Nintendo 64, figurines des Tortues Ninja, Kerwin Frost, livres de design de logos japonais, Sony Ericsson, Timecop de Van Damme, muay-thaï, et Romain avec un collaborateur.
 
 == intro
 

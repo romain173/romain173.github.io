@@ -107,7 +107,7 @@ FR = {
     'Services': 'Services', 'Client': 'Client', 'Agency': 'Agence',
     "Brands we've worked for": 'Marques pour lesquelles nous avons travaillé', 'Open in Google Maps ↗': 'Ouvrir la carte ↗',
     'see the project': 'voir le projet', 'Our Work': 'Nos projets', 'Play': 'Lire',
-    'Afterhours pieces': 'Œuvres Afterhours', 'Afterhours piece': 'Œuvre Afterhours', 'Open': 'Ouvrir',
+    'Influences': 'Influences', 'Afterhours pieces': 'Œuvres Afterhours', 'Afterhours piece': 'Œuvre Afterhours', 'Open': 'Ouvrir',
     'Before': 'Avant', 'After': 'Après', 'Previous piece': 'Œuvre précédente', 'Next piece': 'Œuvre suivante', 'Close': 'Fermer',
 }
 
@@ -1009,6 +1009,9 @@ def page_simple(name, path):
 <section class="sec brands" aria-labelledby="br-t">
   <h2 id="br-t" class="sec-t" data-reveal>{t("Brands we've worked for")}</h2>
   <ul class="brand-grid">{"".join(brand_cell(b) for b in brands)}</ul>
+</section>
+<section class="sec about-wall" aria-label="{t('Influences')}">
+  <div data-reveal>{picture("about", "influences", 1920, 1080, meta.get("influences_alt", ""), "full", label="Influences")}</div>
 </section>
 <section class="sec bio">
   <div class="bio-img" data-reveal>{picture("about", "portrait", 1600, 1600, meta.get("portrait_alt", ""), "half", label="Portrait")}</div>

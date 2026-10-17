@@ -3,6 +3,7 @@ description: Ranko is a creative company based in Montreal — video production,
 label: About
 heading: We are | *Ranko*
 portrait_alt: Romain Amphyon, arms crossed, in a navy double-breasted suit and a light blue shirt, against a light grey background.
+influences_alt: Black-and-white collage of Romain Amphyon’s influences: Akira and Otomo manga, Aliens and Terminator posters, Nintendo 64 games, TMNT toys, Kerwin Frost, Japanese logo design books, Sony Ericsson, Van Damme’s Timecop, Muay Thai, and Romain with a collaborator.
 
 == intro
 

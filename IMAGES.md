@@ -565,6 +565,7 @@ Astuce : le site gratuit https://squoosh.app convertit une image en WebP (régla
 
 | | Fichier | Dimensions | Format | Dossier |
 |---|---|---|---|---|
+| ✅ | `influences.webp` | 1920 × 1080 | WebP | `images/about/` |
 | ✅ | `portrait.webp` | 1600 × 1600 | WebP | `images/about/` |
 
 ## afterhours
