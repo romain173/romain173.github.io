@@ -822,7 +822,7 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 /* About, harmonized with Services / Privacy / projects: section titles in weight 500, a thin grey line above each
    section, the bio in a row (portrait left, text right at the size of the service sentences, regular weight) */
 .brands, .bio, .visit { border-top: 1px solid var(--line); margin: 0 var(--g); padding-left: 0; padding-right: 0; }
-.about-wall { margin: 0 var(--g); padding-left: 0; padding-right: 0; }   /* About: the influences collage, full width, between the logos and the bio */
+.about-wall { margin: 0 var(--g); padding-left: 0; padding-right: 0; border-top: 1px solid var(--line); padding-top: clamp(48px, 6vw, 96px); }   /* thin grey line above, like the other About sections */   /* About: the influences collage, full width, between the logos and the bio */
 .about-wall .media { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 2.39 / 1 !important; }   /* letterbox, frame to frame */
 .about-wall .media img { position: absolute; left: 0; top: 0; width: 100%; height: auto; will-change: transform; }   /* the whole picture, taller than the frame: it slides inside as the page scrolls (site.js) */
 @media (max-width: 767px) { .about-wall .media { aspect-ratio: 16 / 10 !important; } .about-wall .media img { width: 130%; left: -15%; } }
