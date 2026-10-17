@@ -823,7 +823,9 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
    section, the bio in a row (portrait left, text right at the size of the service sentences, regular weight) */
 .brands, .bio, .visit { border-top: 1px solid var(--line); margin: 0 var(--g); padding-left: 0; padding-right: 0; }
 .about-wall { margin: 0 var(--g); padding-left: 0; padding-right: 0; }   /* About: the influences collage, full width, between the logos and the bio */
-.about-wall .media { border-radius: var(--radius); overflow: hidden; }
+.about-wall .media { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 2.39 / 1 !important; }   /* letterbox, frame to frame */
+.about-wall .media img { position: absolute; left: 0; top: 0; width: 100%; height: auto; will-change: transform; }   /* the whole picture, taller than the frame: it slides inside as the page scrolls (site.js) */
+@media (max-width: 767px) { .about-wall .media { aspect-ratio: 16 / 10 !important; } .about-wall .media img { width: 130%; left: -15%; } }
 .bio { padding-top: clamp(48px, 6vw, 96px); }
 .brands .sec-t, .visit .sec-t { font-weight: 500; }
 .bio-txt h3 { font-size: var(--t2); line-height: 1.35; letter-spacing: -.01em; font-weight: 400; max-width: 40ch; }

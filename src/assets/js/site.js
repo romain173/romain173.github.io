@@ -99,6 +99,22 @@
   };
   if (svcRows.length) { svcAir(); addEventListener('resize', svcAir, { passive: true }); document.fonts?.ready.then(svcAir); }
 
+  /* ---------- About: the influences collage slides inside its letterbox frame as the page scrolls */
+  const wall = $('.about-wall .media');
+  if (wall && !RM) {
+    const img = $('img', wall);
+    const move = () => {
+      const r = wall.getBoundingClientRect();
+      const travel = img.offsetHeight - r.height;   // how much of the picture is hidden
+      if (travel <= 0) return;
+      const p = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight + r.height)));   // 0 as it enters at the bottom, 1 as it leaves at the top
+      img.style.transform = `translate3d(0, ${(-travel * p).toFixed(1)}px, 0)`;
+    };
+    // scroll events already come at most once per frame: move right away (no waiting frame)
+    addEventListener('scroll', move, { passive: true }); addEventListener('resize', move, { passive: true });
+    img.complete ? move() : img.addEventListener('load', move, { once: true });
+  }
+
   /* ---------- Montreal clock */
   const clock = $('[data-clock]');
   if (clock) {
