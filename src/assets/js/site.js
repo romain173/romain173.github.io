@@ -68,8 +68,9 @@
     const walk = (n, em) => n.childNodes.forEach((c) => (c.nodeType === 3 ? [...c.textContent].forEach(() => it.push(em)) : walk(c, em || c.nodeName === 'EM')));
     walk(b, false);
     const lead = b.textContent.length - b.textContent.trimStart().length;
-    b.setAttribute('aria-label', text);
     b.textContent = '';
+    // the words stay in the link for screen readers and search engines (hidden from view); the letters below are only the animation
+    b.append(Object.assign(document.createElement('span'), { className: 'sr', textContent: text }));
     const row = document.createElement('span'); row.className = 'roll'; row.setAttribute('aria-hidden', 'true');
     [...text].forEach((ch, i) => {
       const l = document.createElement('span'); l.className = 'roll-l' + (it[i + lead] ? ' is-em' : ''); l.style.setProperty('--i', i);
