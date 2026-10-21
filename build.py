@@ -389,7 +389,7 @@ def mosaic(text, owner):
                 media = picture(owner, f'video-{vid}', w * 10, h * 10, '', 'third', not items, label=group, register=False)
                 data = f'data-kind="{"film" if kind == "film" else "loop"}" data-vimeo="{vid}" data-h="{hsh}"'
                 what = 'film' if kind == 'film' else 'video'
-                if not (kind == 'film' and first_film):   # every video plays in its tile, muted, in a loop — except the first film (The Vending Machine), which keeps its Play button
+                if not (kind == 'film' and 'play' in rest):   # every video plays in its tile, muted, in a loop — except films flagged "play" (to be launched), which show a Play button
                     media = tile_video(media, ref, owner)
                 else:
                     media = media.replace('</div>', f'<span class="play ah-play" aria-hidden="true"><span>{t("Play")}</span></span></div>', 1)

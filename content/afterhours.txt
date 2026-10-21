@@ -12,11 +12,11 @@ Here is our playground. | Where we test | what we're curious about, | without a 
 
 ### Ranko Logo Reveal
 
-video 1236860544/d71969e790 third | video 1236860542/fb949b8623 third | video 1236860541/c328e7de82 third
+film 1236860544/d71969e790 third play | film 1236860542/fb949b8623 third play | film 1236860541/c328e7de82 third play
 
 ### The Vending Machine
 
-film 1026161301 half | image image-01 1080x1080 third alt="A digital rendering of a can of Pepsi Lime soda against a backdrop of ice, with a distorted, neon-like color effect."
+film 1026161301 half play | image image-01 1080x1080 third alt="A digital rendering of a can of Pepsi Lime soda against a backdrop of ice, with a distorted, neon-like color effect."
 
 image image-02 1080x1080 third alt="Neon-style 3D text that reads 'FREE BEACH PACK EASY' with a colorful gradient effect, over a grid background." | video 1026161183 third
 
