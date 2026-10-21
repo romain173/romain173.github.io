@@ -394,15 +394,14 @@ def mosaic(text, owner):
                 else:
                     media = media.replace('</div>', f'<span class="play ah-play" aria-hidden="true"><span>{t("Play")}</span></span></div>', 1)
                     first_film = False
-            items.append((h / w, f'''<li class="k-card" style="--order:{len(items)}"><button type="button" class="ah-open" {data} data-title="{esc(group)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="{t('Open')} {esc(group)} — {esc(what)}">
+            items.append((w / h, f'''<li class="ah-cell" style="--ar:{w / h:.4f}"><button type="button" class="ah-open" {data} data-title="{esc(group)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="{t('Open')} {esc(group)} — {esc(what)}">
   {media}
 </button></li>'''))
-    # 3 columns, in the page order, each piece going to the column that is the shortest so far
-    cols, tall = [[], [], []], [0, 0, 0]
-    for r, html_ in items:
-        c = tall.index(min(tall)); cols[c].append(html_); tall[c] += r
-    wall = ''.join(f'<li class="k-col"><ol>{"".join(c)}</ol></li>' for c in cols)
-    return f'''<section class="sec ah-sec" aria-label="{t('Afterhours pieces')}"><ol class="k-cards">{wall}</ol></section>
+    # rows of 3 in the page order: in each row the pieces share one height (widths follow their shapes), so every
+    # row lines up edge to edge, whatever mix of square and 4:5 pieces it holds
+    rows = [items[i:i + 3] for i in range(0, len(items), 3)]
+    wall = ''.join(f'<li><ol class="ah-row">{"".join(h for _, h in r)}</ol></li>' for r in rows)
+    return f'''<section class="sec ah-sec" aria-label="{t('Afterhours pieces')}"><ol class="ah-rows">{wall}</ol></section>
 <dialog class="lb" aria-label="{t('Afterhours piece')}">
   <div class="lb-stage"><div class="lb-media"></div></div>
   <p class="lb-cap"><span class="lb-title"></span><span class="lb-count"></span></p>

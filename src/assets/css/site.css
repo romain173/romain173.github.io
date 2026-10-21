@@ -654,6 +654,17 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .kn-cta { background: var(--ink); color: #fff; }   /* stays black at all times (only the letters roll on hover) */
 
 /* Afterhours: mosaic like the home wall, each piece in its own format; a click opens it full screen (site.js) */
+/* Afterhours: rows of three pieces sharing one height (each width follows the piece's shape) — every row lines up */
+.ah-rows { display: grid; gap: var(--gap); }
+.ah-row { display: flex; gap: var(--gap); }
+.ah-cell { flex: var(--ar) 1 0; min-width: 0; }
+@media (max-width: 767px) {   /* phones: two by two, every piece in the same 4:5 frame */
+  .ah-rows { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ah-rows > li, .ah-row { display: contents; }
+  .ah-cell .media { aspect-ratio: 4 / 5 !important; }
+  .ah-cell .media img { width: 100%; height: 100%; object-fit: cover; }
+  .ah-rows > li:last-child .ah-cell:last-child:nth-child(odd) { grid-column: 1 / -1; }   /* an odd count: the last piece on the whole width, no empty half */
+}
 .ah-open { display: block; width: 100%; text-align: left; border-radius: 14px; overflow: hidden; background: #f5f5f7; cursor: zoom-in; }
 .ah-open .media { border-radius: 0; }
 .ah-open:hover .media img, .ah-open:focus-visible .media img { transform: scale(1.03); }
