@@ -10,6 +10,10 @@ Here is our playground. | Where we test | what we're curious about, | without a 
 
 == media
 
+### Ranko Logo Reveal
+
+video 1236860544/d71969e790 third | video 1236860542/fb949b8623 third | video 1236860541/c328e7de82 third
+
 ### The Vending Machine
 
 film 1026161301 half | image image-01 1080x1080 third alt="A digital rendering of a can of Pepsi Lime soda against a backdrop of ice, with a distorted, neon-like color effect."

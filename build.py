@@ -365,6 +365,7 @@ def mosaic(text, owner):
     columns end on the same line), each piece in its own format. A click opens it full screen (image, or the Vimeo
     video). Same content file as before: ### headings name the pieces that follow them."""
     items, group = [], ''
+    first_film = True
     for para in paragraphs(text):
         first = para.split(None, 1)[0]
         if first not in ('video', 'film', 'image', 'clip'):
@@ -388,10 +389,11 @@ def mosaic(text, owner):
                 media = picture(owner, f'video-{vid}', w * 10, h * 10, '', 'third', not items, label=group, register=False)
                 data = f'data-kind="{"film" if kind == "film" else "loop"}" data-vimeo="{vid}" data-h="{hsh}"'
                 what = 'film' if kind == 'film' else 'video'
-                if items:   # every video plays in its tile, muted, in a loop — except the very first piece (the vending machine film)
+                if not (kind == 'film' and first_film):   # every video plays in its tile, muted, in a loop — except the first film (The Vending Machine), which keeps its Play button
                     media = tile_video(media, ref, owner)
                 else:
                     media = media.replace('</div>', f'<span class="play ah-play" aria-hidden="true"><span>{t("Play")}</span></span></div>', 1)
+                    first_film = False
             items.append((h / w, f'''<li class="k-card" style="--order:{len(items)}"><button type="button" class="ah-open" {data} data-title="{esc(group)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="{t('Open')} {esc(group)} — {esc(what)}">
   {media}
 </button></li>'''))
