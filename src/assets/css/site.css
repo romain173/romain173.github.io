@@ -663,7 +663,6 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
   .ah-rows > li, .ah-row { display: contents; }
   .ah-cell .media { aspect-ratio: 4 / 5 !important; }
   .ah-cell .media img { width: 100%; height: 100%; object-fit: cover; }
-  .ah-rows > li:last-child .ah-cell:last-child:nth-child(odd) { grid-column: 1 / -1; }   /* an odd count: the last piece on the whole width, no empty half */
 }
 .ah-open { display: block; width: 100%; text-align: left; border-radius: 14px; overflow: hidden; background: #f5f5f7; cursor: zoom-in; }
 .ah-open .media { border-radius: 0; }
