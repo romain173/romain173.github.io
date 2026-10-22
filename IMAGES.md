@@ -22,7 +22,7 @@ Astuce : le site gratuit https://squoosh.app convertit une image en WebP (régla
 
 | | Fichier | Dimensions | Dossier |
 |---|---|---|---|
-| ✅ | `video-1221254113.webp` | 1920 × 1082 | `images/home/` |
+| ✅ | `video-1238391176.webp` | 1920 × 1082 | `images/home/` |
 
 </details>
 
