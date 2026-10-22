@@ -394,12 +394,23 @@ def mosaic(text, owner):
                 else:
                     media = media.replace('</div>', f'<span class="play ah-play" aria-hidden="true"><span>{t("Play")}</span></span></div>', 1)
                     first_film = False
-            items.append((w / h, f'''<li class="ah-cell" style="--ar:{w / h:.4f}"><button type="button" class="ah-open" {data} data-title="{esc(group)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="{t('Open')} {esc(group)} — {esc(what)}">
+            items.append(('row' in flags, f'''<li class="ah-cell" style="--ar:{w / h:.4f}"><button type="button" class="ah-open" {data} data-title="{esc(group)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="{t('Open')} {esc(group)} — {esc(what)}">
   {media}
 </button></li>'''))
     # rows of 3 in the page order: in each row the pieces share one height (widths follow their shapes), so every
-    # row lines up edge to edge, whatever mix of square and 4:5 pieces it holds
-    rows = [items[i:i + 3] for i in range(0, len(items), 3)]
+    # row lines up edge to edge, whatever mix of square and 4:5 pieces it holds. Pieces flagged "row" that follow
+    # each other make a row of their own, however many they are (the 4 Ranko Logo Reveal films)
+    rows, rest = [], []
+    for i, (own, html) in enumerate(items):
+        if own and i and items[i - 1][0]:
+            rows[-1].append((own, html))
+        elif own:
+            rows.append([(own, html)])
+        else:
+            rest.append((own, html))
+            if i + 1 == len(items) or items[i + 1][0] or len(rest) == 3:
+                rows.extend(rest[j:j + 3] for j in range(0, len(rest), 3))
+                rest = []
     wall = ''.join(f'<li><ol class="ah-row">{"".join(h for _, h in r)}</ol></li>' for r in rows)
     return f'''<section class="sec ah-sec" aria-label="{t('Afterhours pieces')}"><ol class="ah-rows">{wall}</ol></section>
 <dialog class="lb" aria-label="{t('Afterhours piece')}">
