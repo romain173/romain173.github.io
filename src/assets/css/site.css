@@ -56,22 +56,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   view-transition-name: header;
   font-size: var(--t1);
 }
-.hd-logo svg { width: 92px; height: auto; }
-/* header logo: every 10s each letter lifts a little, slides down out of view and comes back in from the top.
-   CSS only (5 letters, transforms): no script, no cost. Letters are masked to the logo, a bit higher for the lift. */
-.hd-logo svg { overflow: visible; clip-path: inset(-12% -4% 0 -4%); }
-.hd-logo path { animation: logo-cycle 10s 3s infinite; }
-.hd-logo path:nth-child(2) { animation-delay: 3.06s; }
-.hd-logo path:nth-child(3) { animation-delay: 3.12s; }
-.hd-logo path:nth-child(4) { animation-delay: 3.18s; }
-.hd-logo path:nth-child(5) { animation-delay: 3.24s; }
-@keyframes logo-cycle {
-  0%    { transform: none; animation-timing-function: cubic-bezier(.3, 0, .2, 1); }
-  1.8%  { transform: translate(0, -34px); animation-timing-function: cubic-bezier(.6, 0, .9, .4); }
-  4.4%  { transform: translate(0, 420px); }
-  4.41% { transform: translate(0, -420px); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }   /* long, soft landing */
-  15%, 100% { transform: none; }
-}
 .hd-city { justify-self: center; white-space: nowrap; }
 .hd-clock { opacity: .6; margin-left: 6px; font-variant-numeric: tabular-nums; }
 .hd-menu { grid-column: 3; justify-self: end; position: relative; }
@@ -560,23 +544,19 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
   font-size: 14px; font-weight: 500; view-transition-name: header;
 }
 .kn-l { display: flex; flex: 1 1 auto; align-items: center; gap: 20px; min-width: 0; }   /* takes the room between the logo and the links */
-.kn .hd-logo svg { width: 70px; }
-.hd-word { font-size: 20px; line-height: 1; font-weight: 700; font-style: italic; letter-spacing: -.02em; color: var(--ink); }   /* the name in Helvetica bold italic instead of the RANKO logo */
-/* every 20 s each letter lifts a little, slides down out of view and comes back in from the top (like the old logo) */
-.hd-word > span { display: inline-flex; clip-path: inset(-25% -6% 0 -6%); }
-.hd-word > span > span { display: block; animation: word-cycle 20s 3s infinite; }
-.hd-word > span > span:nth-child(2) { animation-delay: 3.06s; }
-.hd-word > span > span:nth-child(3) { animation-delay: 3.12s; }
-.hd-word > span > span:nth-child(4) { animation-delay: 3.18s; }
-.hd-word > span > span:nth-child(5) { animation-delay: 3.24s; }
+.hd-lockup { display: block; color: var(--ink); }
+.kn .hd-lockup svg { display: block; width: auto; height: 20px; overflow: visible; clip-path: inset(-25% -2% 0 -2%); }   /* the oval + "Ranko" logo, as tall as the old name */
+/* every 20 s the oval then the word lift a little, slide down out of view and come back in from the top (like the old logo) */
+.hd-lockup .lk { transform-box: fill-box; animation: word-cycle 20s 3s infinite; }
+.hd-lockup .lk + .lk { animation-delay: 3.08s; }
 @keyframes word-cycle {
   0%    { transform: none; animation-timing-function: cubic-bezier(.3, 0, .2, 1); }
   .9%   { transform: translate(0, -12%); animation-timing-function: cubic-bezier(.6, 0, .9, .4); }
-  2.2%  { transform: translate(0, 120%); }
-  2.21% { transform: translate(0, -120%); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
+  2.2%  { transform: translate(0, 140%); }
+  2.21% { transform: translate(0, -140%); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
   7.5%, 100% { transform: none; }
 }
-@media (prefers-reduced-motion: reduce) { .hd-word > span > span { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .hd-lockup .lk { animation: none; } }
 .kn-time { margin-inline: auto; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }   /* in the middle between the logo and the first link (or the button on phones) */
 .clock-sep { animation: clock-blink 1s steps(1, end) infinite; }   /* the colon blinks with the seconds */
 @keyframes clock-blink { 50% { opacity: 0; } }
@@ -622,8 +602,8 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
   background: #0b0b0b; color: var(--bg);
   animation: intro-up .94s cubic-bezier(.76, 0, .24, 1) 1.06s forwards;   /* the whole intro lasts 2 s */
 }
-.intro-word { display: inline-flex; overflow: hidden; padding: 0 .08em .06em; font-size: clamp(40px, 4.4vw, 64px); line-height: 1; font-weight: 700; font-style: italic; letter-spacing: -.02em; }   /* "Ranko" in bold italic, its letters rise one after the other */
-.intro-word > span { display: block; transform: translate(0, 110%); animation: intro-letter .82s var(--ease) forwards; animation-delay: calc(.12s + var(--i) * 70ms); }
+.intro-oval { display: block; overflow: hidden; padding: .06em 0; }   /* the oval alone, rising into view */
+.intro-oval svg { display: block; width: clamp(140px, 16vw, 240px); height: auto; transform: translate(0, 110%); animation: intro-letter .82s var(--ease) .12s forwards; }
 @keyframes intro-letter { to { transform: none; } }
 @keyframes intro-up { to { transform: translate3d(0, -100%, 0); } }
 /* the home title and sentence start rising as the curtain lifts */

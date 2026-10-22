@@ -509,9 +509,13 @@ def media_rows(text, owner, label, first_eager=False):
 
 # ---------------------------------------------------------------- layout
 
-# RANKO logo (black paths only, coloured with the text colour)
-LOGO = open(os.path.join(SRC, 'assets/brand/logo-inline.svg'), encoding='utf-8').read()
-LOGO = LOGO.replace('<svg', '<svg aria-hidden="true" focusable="false"', 1)
+# the Ranko logo by Paul Nicholson (22.10.26), coloured with the text colour: the oval + "Ranko" in the header,
+# the oval alone in the home intro
+def brand_svg(name):
+    svg = open(os.path.join(SRC, 'assets/brand', name), encoding='utf-8').read()
+    return svg.replace('<svg', '<svg aria-hidden="true" focusable="false"', 1)
+LOGO = brand_svg('logo-lockup.svg')
+OVAL = brand_svg('logo-oval.svg')
 
 NAV = [('/work', 'Work'), ('/services', 'Services'), ('/about', 'About'), ('/afterhours', 'Afterhours')]
 MAIL = 'mailto:hello@ranko.ca?subject=Hello%20Ranko!'
@@ -598,11 +602,11 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>
-{'<div class="intro" aria-hidden="true"><span class="intro-logo intro-word">' + ''.join(f'<span style="--i:{i}">{c}</span>' for i, c in enumerate('Ranko')) + '</span></div>' if path == '/' else ''}
+{'<div class="intro" aria-hidden="true"><span class="intro-logo intro-oval">' + OVAL + '</span></div>' if path == '/' else ''}
 <a class="skip" href="#main">{t("Skip to content")}</a>
 <header class="kn">
   <div class="kn-l">
-    <a class="hd-logo hd-word" href="/" aria-label="{t("Ranko — home")}"><span aria-hidden="true">{"".join(f"<span>{c}</span>" for c in "Ranko")}</span></a>
+    <a class="hd-logo hd-lockup" href="/" aria-label="{t("Ranko — home")}">{LOGO}</a>
     <p class="kn-time">{t("Montreal, QC")} <span data-clock></span></p>
   </div>
   <nav class="kn-nav" aria-label="{t("Main")}"><ul>{nav}</ul></nav>
