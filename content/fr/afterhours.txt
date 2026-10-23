@@ -6,7 +6,7 @@ heading: After | hours
 
 == intro
 
-Voici notre terrain de jeu. | Là où on teste ce qui | nous rend curieux, | sans client, sans brief.
+Voici notre terrain de jeu. | Là où on teste ce qui | nous rend curieux.
 
 == alt
 
