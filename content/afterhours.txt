@@ -6,7 +6,7 @@ heading: After | hours
 
 == intro
 
-Here is our playground. | Where we test | what we're curious about.
+Here is our playground. | Where we test what | we're curious about.
 
 == media
 
