@@ -435,12 +435,7 @@ a:hover .clip-v { transform: scale(1.05); }
 .totop-s { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: butt; }
 .totop-h { fill: currentColor; }
 
-/* ------------------------------------------------ page transitions (supported browsers only) */
-@view-transition { navigation: auto; }
-::view-transition-old(root) { animation: vt-out .35s var(--ease) both; }
-::view-transition-new(root) { animation: vt-in .6s var(--ease) both; }
-@keyframes vt-out { to { opacity: 0; transform: translate3d(0, -24px, 0); } }
-@keyframes vt-in { from { opacity: 0; transform: translate3d(0, 40px, 0); } }
+/* page transitions: the black curtain with the oval, see "home intro" below */
 
 /* Lenis smooth scroll */
 html.lenis, html.lenis body { height: auto; }
@@ -451,7 +446,6 @@ html.lenis, html.lenis body { height: auto; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .js [data-reveal], .js [data-split] .w > span { opacity: 1; transform: none; }
-  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
 
 /* ================================================ Kanso-style home (Test-Ranko branch) */
@@ -598,16 +592,26 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
 @media (max-width: 539px) { [lang^=fr] .kn-time { display: none; } }   /* French: longer button */
 .menu { z-index: 49; }
 
-/* home intro (Test-Ranko), like salient.framer.website: dark screen, the logo's letters rise, then the screen lifts
-   like a curtain (~1.2 s). Once per visit (sessionStorage), never with reduced motion. */
+/* home intro (Test-Ranko), like salient.framer.website: dark screen, the oval rises, then the screen lifts
+   like a curtain. Once per visit (sessionStorage), never with reduced motion.
+   The same curtain between pages, like madebyanalogue.co.uk: on a click on a link of the site it comes up from the
+   bottom and the oval rises in it ("pt-out", 0.8 s, then the new page loads); the new page opens under it and it lifts
+   ("pt-in"). */
 .intro { display: none; }
-.intro-on .intro {
+.intro-on .intro, .pt-in .intro, .pt-out .intro {
   display: flex; align-items: center; justify-content: center; position: fixed; inset: 0; z-index: 100;
   background: #0b0b0b; color: var(--bg);
-  animation: intro-up .94s cubic-bezier(.76, 0, .24, 1) 1.06s forwards;   /* the whole intro lasts 2 s */
 }
+.intro-on .intro { animation: intro-up .94s cubic-bezier(.76, 0, .24, 1) 1.06s forwards; }   /* the whole intro lasts 2 s */
+.pt-out .intro { animation: pt-cover .55s cubic-bezier(.76, 0, .24, 1) both; }
+.pt-in .intro { animation: intro-up .94s cubic-bezier(.76, 0, .24, 1) .1s forwards; }
 .intro-oval { display: block; overflow: hidden; padding: .06em 0; }   /* the oval alone, rising into view */
 .intro-oval svg { display: block; width: clamp(140px, 16vw, 240px); height: auto; transform: translate(0, 110%); animation: intro-letter .82s var(--ease) .12s forwards; }
+.pt-out .intro-oval svg { animation: intro-letter .6s var(--ease) .2s forwards; }
+.pt-in .intro-oval svg { transform: none; animation: none; }   /* already in place: it leaves with the curtain */
+@keyframes pt-cover { from { transform: translate3d(0, 100%, 0); } }
+/* the page titles start rising as the curtain lifts */
+.pt-in [data-split] .w > span { transition-delay: calc(.5s + var(--i) * 28ms); }
 @keyframes intro-letter { to { transform: none; } }
 @keyframes intro-up { to { transform: translate3d(0, -100%, 0); } }
 /* the home title and sentence start rising as the curtain lifts */

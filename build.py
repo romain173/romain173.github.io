@@ -556,9 +556,15 @@ def ver(rel):
         return hashlib.md5(f.read()).hexdigest()[:8]
 
 
-# home intro (like salient.framer.website): a dark curtain with the logo, once per visit, skipped when motion is reduced
-INTRO_JS = ("<script>try{if(!sessionStorage.getItem('ranko-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)"
-            "{document.documentElement.classList.add('intro-on');sessionStorage.setItem('ranko-intro','1')}}catch(e){}</script>")
+# the black curtain with the oval (like salient.framer.website and madebyanalogue.co.uk), skipped when motion is reduced:
+# - home intro, once per visit ("intro-on")
+# - after a click on a link of the site, the new page opens under the curtain, which then lifts ("pt-in"; site.js
+#   sets "ranko-pt" when it closes the curtain on the page being left)
+def intro_js(home):
+    first = ("else if(!s.getItem('ranko-intro')){d.classList.add('intro-on');s.setItem('ranko-intro','1')}" if home else '')
+    return ("<script>try{var d=document.documentElement,s=sessionStorage;"
+            "if(!matchMedia('(prefers-reduced-motion: reduce)').matches){"
+            "if(s.getItem('ranko-pt')){d.classList.add('pt-in');s.removeItem('ranko-pt')}" + first + "}}catch(e){}</script>")
 
 
 def layout(path, title, description, body, current='', video=False, og_image='/assets/img/og-ranko.png'):
@@ -607,13 +613,13 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
 {pre}
 <style>{CSS}</style>
 <script>document.documentElement.classList.add('js')</script>
-{INTRO_JS if path == '/' else ''}
+{intro_js(path == '/')}
 {lenis}
 <script src="/assets/js/site.js?v={ver("assets/js/site.js")}" defer></script>
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>
-{'<div class="intro" aria-hidden="true"><span class="intro-logo intro-oval">' + OVAL + '</span></div>' if path == '/' else ''}
+<div class="intro" aria-hidden="true"><span class="intro-logo intro-oval">{OVAL}</span></div>
 <a class="skip" href="#main">{t("Skip to content")}</a>
 <header class="kn">
   <div class="kn-l">
