@@ -18,3 +18,7 @@ image-05 = Gros plan d’une plaque métallique portant le mot « PAY » en lett
 image-06 = Gros plan d’une carte blanche bordée de rouge dans un étui en plastique transparent, avec le texte « *Rad Level* Over #9000 » et le numéro « 13081985 ».
 image-07 = Photo d’une cabine téléphonique ou d’un kiosque avec une enseigne « BayWatch » en lettres jaunes stylisées, un code QR et la photo d’une femme blonde en haut rouge.
 image-08 = Un certificat encadré reçu par Pamela Anderson, présenté dans une pochette en plastique sous une étiquette.
+image-09 = Le nouveau logo ovale de Ranko par Paul Nicholson (#III), blanc et lumineux avec un halo lilas, sur des volutes de fumée sur fond noir.
+image-10 = Planche de construction du logo « R » de Ranko par NUMBER3 (#III) : l’ovale et le R lilas tracés à partir de cercles, sur fond blanc avec repères de centre.
+image-11 = Le logo ovale de Ranko en blanc sur fond noir.
+image-12 = Planche de construction du logo « R » de Ranko par NUMBER3 (#III) : l’ovale et le R vert olive tracés à partir de cercles, sur fond noir avec repères de centre.
