@@ -394,11 +394,13 @@ def mosaic(text, owner):
                 else:
                     media = media.replace('</div>', f'<span class="play ah-play" aria-hidden="true"><span>{t("Play")}</span></span></div>', 1)
                     first_film = False
-            title = opts.get('title', group)   # the line under the piece: its section, unless it has its own title="…"
-            items.append((pi if 'row' in flags else None, f'''<li class="ah-cell" style="--ar:{w / h:.4f}"><button type="button" class="ah-open" {data} data-title="{esc(title)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="{t('Open')} {esc(title)} — {esc(what)}">
+            # the line under the piece: its section, unless it has its own title="…" (title_fr="…" on the French
+            # page); [text](url) makes a link, so the line sits beside the button, not in it
+            title = (LANG == 'fr' and opts.get('title_fr')) or opts.get('title', group)
+            plain = re.sub(r'\[([^\]]+)\]\([^)\s]+\)', r'\1', title)
+            items.append((pi if 'row' in flags else None, f'''<li class="ah-cell" style="--ar:{w / h:.4f}"><button type="button" class="ah-open" {data} data-title="{esc(plain)}" data-alt="{esc(alt)}" data-ar="{w}/{h}" aria-label="{t('Open')} {esc(plain)} — {esc(what)}">
   {media}
-  <span class="ah-meta">{esc(title)}</span>
-</button></li>'''))
+</button><p class="ah-meta">{inline(title)}</p></li>'''))
     # rows of 3 in the page order: in each row the pieces share one height (widths follow their shapes), so every
     # row lines up edge to edge, whatever mix of square and 4:5 pieces it holds. The pieces of one content line
     # flagged "row" make a row of their own, however many they are (the 4 Ranko Logo Reveal films, then its 4 images)

@@ -12,9 +12,9 @@ Here is our playground. | Where we test | what we're curious about, | without a 
 
 ### Ranko Logo Reveal
 
-film 1236860543/973164eaaf third play row | film 1236860541/c328e7de82 third play row | film 1236860542/fb949b8623 third play row | film 1236860544/d71969e790 third play row
+film 1236860543/973164eaaf third play row title="Ranko Logo Reveal part 1" title_fr="Ranko Logo Reveal partie 1" | film 1236860541/c328e7de82 third play row title="Ranko Logo Reveal part 2" title_fr="Ranko Logo Reveal partie 2" | film 1236860542/fb949b8623 third play row title="Ranko Logo Reveal part 3" title_fr="Ranko Logo Reveal partie 3" | film 1236860544/d71969e790 third play row title="Ranko Logo Reveal part 4" title_fr="Ranko Logo Reveal partie 4"
 
-image image-09 1080x1350 third row alt="The new Ranko oval logo by Paul Nicholson (#III), glowing white with a lilac halo over swirls of smoke on a black background." | image image-10 1080x1350 third row alt="Logo construction sheet by NUMBER3 (#III) for the Ranko 'R' logo: the lilac oval and R built from circles, on white with centre guides." | image image-11 1080x1350 third row alt="The Ranko oval logo in white on black." | image image-12 1080x1350 third row alt="Logo construction sheet by NUMBER3 (#III) for the Ranko 'R' logo: the olive-green oval and R built from circles, on black with centre guides."
+image image-09 1080x1350 third row title="Ranko logo made by Paul Nicholson a.k.a [Number 3](https://www.instagram.com/number3__/)" title_fr="Logo Ranko créé par Paul Nicholson alias [Number 3](https://www.instagram.com/number3__/)" alt="The new Ranko oval logo by Paul Nicholson (#III), glowing white with a lilac halo over swirls of smoke on a black background." | image image-10 1080x1350 third row title="Ranko logo made by Paul Nicholson a.k.a [Number 3](https://www.instagram.com/number3__/)" title_fr="Logo Ranko créé par Paul Nicholson alias [Number 3](https://www.instagram.com/number3__/)" alt="Logo construction sheet by NUMBER3 (#III) for the Ranko 'R' logo: the lilac oval and R built from circles, on white with centre guides." | image image-11 1080x1350 third row title="Ranko logo made by Paul Nicholson a.k.a [Number 3](https://www.instagram.com/number3__/)" title_fr="Logo Ranko créé par Paul Nicholson alias [Number 3](https://www.instagram.com/number3__/)" alt="The Ranko oval logo in white on black." | image image-12 1080x1350 third row title="Ranko logo made by Paul Nicholson a.k.a [Number 3](https://www.instagram.com/number3__/)" title_fr="Logo Ranko créé par Paul Nicholson alias [Number 3](https://www.instagram.com/number3__/)" alt="Logo construction sheet by NUMBER3 (#III) for the Ranko 'R' logo: the olive-green oval and R built from circles, on black with centre guides."
 
 ### The Vending Machine
 
@@ -28,10 +28,10 @@ image image-03 1080x1080 third alt="A vending machine stocked with Pepsi Blue so
 
 film 1134037913 half
 
-### Dsqflo x Ranko
+### Ranko x Dsqflo
 
 image image-04 2160x2160 half alt="Close-up of a neon sign with cursive writing on a light blue wall." | image image-05 2160x2160 half alt="Close-up of a metallic sign with the word 'PAY' in purple letters, attached to a light blue background."
 
 ### Rad level over 9000!
 
-video 1062184512 half | image image-06 1080x1350 quarter alt="Close-up of a white card with a red border inside a transparent plastic case, displaying the text '*Rad Level* Over #9000' and a number '13081985.'" | image image-07 1080x1350 quarter alt="A photo of a payphone or kiosk with a sign that reads 'BayWatch' in yellow stylized font, a QR code, and a picture of a blonde woman in a red top." | image image-08 1080x1350 quarter alt="A framed certificate received by Pamela Anderson, displayed in a plastic sleeve with a label above."
+video 1062184512 half | image image-06 1080x1350 quarter title="Pamela's autograph" title_fr="L'autographe de Pamela" alt="Close-up of a white card with a red border inside a transparent plastic case, displaying the text '*Rad Level* Over #9000' and a number '13081985.'" | image image-07 1080x1350 quarter title="Pamela's autograph" title_fr="L'autographe de Pamela" alt="A photo of a payphone or kiosk with a sign that reads 'BayWatch' in yellow stylized font, a QR code, and a picture of a blonde woman in a red top." | image image-08 1080x1350 quarter title="Pamela's autograph" title_fr="L'autographe de Pamela" alt="A framed certificate received by Pamela Anderson, displayed in a plastic sleeve with a label above."
