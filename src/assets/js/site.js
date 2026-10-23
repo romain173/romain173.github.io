@@ -13,32 +13,11 @@
     requestAnimationFrame(raf);
   }
 
-  /* ---------- the black curtain with the oval: home intro, and between pages (CSS "home intro").
-     Once it has lifted it is hidden again (not removed: it closes over the page when a link is followed). */
-  const root = document.documentElement;
-  if (root.classList.contains('intro-on')) setTimeout(() => root.classList.remove('intro-on'), 2200);
-  if (root.classList.contains('pt-in')) setTimeout(() => root.classList.remove('pt-in'), 1200);
-  if (!RM && $('.intro')) {
-    document.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href]');
-      if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      if ((a.target && a.target !== '_self') || a.hasAttribute('download')) return;
-      const u = new URL(a.href, location.href);
-      if (u.origin !== location.origin) return;   // other sites, mail, phone
-      if (u.pathname === location.pathname && u.search === location.search) return;   // same page, or a # on it
-      if (/\.(webp|jpe?g|png|gif|svg|pdf|mp4|webm|zip|xml|txt)$/i.test(u.pathname)) return;   // files
-      e.preventDefault();
-      try { sessionStorage.setItem('ranko-pt', '1'); } catch (_) {}
-      root.classList.remove('intro-on', 'pt-in');
-      root.classList.add('pt-out');
-      setTimeout(() => { location.href = u.href; }, 800);
-    });
-    // back / forward from the browser's memory: the page comes back as it was left, curtain closed → open it
-    addEventListener('pageshow', (e) => {
-      if (!e.persisted) return;
-      root.classList.remove('pt-out');
-      try { sessionStorage.removeItem('ranko-pt'); } catch (_) {}
-    });
+  /* ---------- home intro: remove the curtain once it has lifted */
+  const intro = $('.intro');
+  if (intro) {
+    if (document.documentElement.classList.contains('intro-on')) setTimeout(() => intro.remove(), 2200);
+    else intro.remove();
   }
 
   /* ---------- home project wall: load and decode the pictures while the page is at rest after opening,
