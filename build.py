@@ -565,7 +565,7 @@ INTRO_JS = ("<script>try{if(!sessionStorage.getItem('ranko-intro')&&!matchMedia(
             "{document.documentElement.classList.add('intro-on');sessionStorage.setItem('ranko-intro','1')}}catch(e){}</script>")
 
 
-def layout(path, title, description, body, current='', video=False, og_image='/assets/img/og-ranko.png'):
+def layout(path, title, description, body, current='', video=False, og_image='/assets/img/og-ranko-logo.png'):
     here = ' aria-current="page"'
     nav = ''.join(f'<li><a href="{h}"{here if current == h else ""}>{t(x)}</a></li>' for h, x in NAV)
     canonical = SITE_URL + ('/fr' if LANG == 'fr' else '') + path
@@ -577,7 +577,7 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
               f'aria-label="{"English version" if LANG == "fr" else "Version française"}">{"EN" if LANG == "fr" else "FR"}</a>') if path != '/404' else ''
     # what Google reads about Ranko (name, logo, address, founder, socials): helps local search and the knowledge panel
     ld = json.dumps({'@context': 'https://schema.org', '@type': 'Organization', '@id': SITE_URL + '/#ranko',
-                     'name': 'Ranko', 'url': SITE_URL, 'logo': SITE_URL + '/apple-touch-icon.png', 'image': SITE_URL + '/assets/img/og-ranko.png',
+                     'name': 'Ranko', 'url': SITE_URL, 'logo': SITE_URL + '/apple-touch-icon.png', 'image': SITE_URL + '/assets/img/og-ranko-logo.png',
                      'description': 'Creative studio in Montreal: video production, motion design, design and creative systems, with AI fully integrated.',
                      'email': 'hello@ranko.ca', 'foundingDate': '2020',
                      'founder': {'@type': 'Person', 'name': 'Romain Amphyon', 'jobTitle': 'Founder & Creative Director', 'sameAs': ['https://www.linkedin.com/in/romain-amphyon/']},
