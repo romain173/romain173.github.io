@@ -1001,7 +1001,10 @@ def page_project(slug, order, P):
     <span class="next-r">{esc(nxt["meta"]["role"])}</span>
   </a>
 </nav>'''
-    return layout('/' + slug, m.get('page_title', 'Ranko — ' + m['title']), m.get('description', ''), body, '/work', video=True)
+    # share image (Facebook, LinkedIn…): images/<project>/share.jpg, 1200×675, the one Romain had on Squarespace
+    share = f'/images/{slug}/share.jpg' if os.path.exists(os.path.join(ROOT, 'images', slug, 'share.jpg')) else None
+    return layout('/' + slug, m.get('page_title', 'Ranko — ' + m['title']), m.get('description', ''), body, '/work', video=True,
+                  **({'og_image': share} if share else {}))
 
 
 def page_simple(name, path):
