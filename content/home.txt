@@ -32,8 +32,8 @@ End-to-end | production with AI | fully integrated — not to cut corners, but t
 
 == testimonials
 
-# Google rating shown above the quotes (update by hand: Google Business, 29 Sept. 2026)
-google: 5.0 | 38
+# Google rating shown above the quotes (update by hand: Google Business, 29 Oct. 2026)
+google: 5.0 | 39
 
 # quote | name | role | project   (taken as-is from ranko.ca, Cinco and La Ronde 2.0 pages)
 Ranko worked in true synergy with our team to deliver a high-quality product. Easy to collaborate with, forward-thinking, and innovative, they brought both strong ideas and a solutions-oriented approach throughout the process. | Nicolas Marullo | President & CEO | Cinco

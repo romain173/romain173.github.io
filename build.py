@@ -776,8 +776,11 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1=''):
     g = re.search(r'^google:\s*([\d.,]+)\s*\|\s*(\d+)', quotes, re.M)
     # animated when the tile appears: the stars light up one after the other, the numbers roll up from 0 (like the process)
     stars = ''.join(f'<span class="st" style="--i:{i}"><span>★</span><span class="st-on">★</span></span>' for i in range(5))
-    rating = (f'<a class="ai-rating" href="https://www.google.com/maps/search/?api=1&amp;query=Ranko+Montreal" target="_blank" rel="noopener" '
-              + (f'aria-label="Note de {g.group(1)} sur 5 sur Google, {g.group(2)} avis">' if LANG == 'fr' else f'aria-label="Rated {g.group(1)} out of 5 on Google, {g.group(2)} reviews">')
+    # the rolling digits hold every step of the count (0 1 2 3 4 5…), so the real sentence is written once as hidden
+    # text: read by Google and screen readers, not shown
+    said = (f'Note de {g.group(1)} sur 5 sur Google, {g.group(2)} avis' if LANG == 'fr' else f'Rated {g.group(1)} out of 5 on Google, {g.group(2)} reviews') if g else ''
+    rating = (f'<a class="ai-rating" href="https://www.google.com/maps/search/?api=1&amp;query=Ranko+Montreal" target="_blank" rel="noopener">'
+              + f'<span class="sr">{said}</span>'
               + f'<span class="ai-stars" aria-hidden="true">{stars}</span>'
               + f'<span aria-hidden="true"><b>{odometer(g.group(1), .35)}</b> · {odometer(g.group(2), odo_end(g.group(1), .35) - .2)} {t("Google reviews")}</span></a>') if g else ''
     qs = ''.join(f'''<figure class="ai-q{" is-on" if i == 0 else ""}"{" hidden" if i else ""}><blockquote>“{inline(q)}”</blockquote>
