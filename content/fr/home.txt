@@ -14,7 +14,7 @@ Une production complète, | de la première idée | à l’image finale.
 
 == statement3
 
-Nous avons pleinement intégré l’IA, — pas pour en faire moins, mais pour aller plus loin.
+Nous avons pleinement | intégré l’IA, — pas pour en faire moins, mais pour aller plus loin.
 
 == facts
 
