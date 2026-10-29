@@ -622,6 +622,9 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
 .roll-l > span:last-child { order: -1; }
 .roll-l.is-em { font-style: italic; }   /* "Ranko" in italics inside a rolling button */
 a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
+/* Play / Lire: the same roll when the pointer is on the video or its tile */
+.play:hover .roll-l > span, .play:focus-visible .roll-l > span, .vm:hover .play .roll-l > span,
+.ah-open:hover .ah-play .roll-l > span, .ah-open:focus-visible .ah-play .roll-l > span { transform: none; }
 
 /* pill buttons: light grey with black text, black with white text on hover (while the letters roll) */
 .k-pill { background-color: #ececec; color: var(--ink); transition: background-color .3s var(--ease), color .15s linear; }

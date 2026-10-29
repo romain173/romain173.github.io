@@ -68,8 +68,9 @@
     addEventListener('load', fit, { once: true });
   });
 
-  /* ---------- pill buttons and menu links: on hover each letter rolls down, a copy comes in from the top (cascade) */
-  $$('.kn-cta, .k-pill, .kn-nav a').forEach((b) => {
+  /* ---------- pill buttons, menu links and the Play / Lire buttons: on hover each letter rolls down, a copy comes in
+     from the top (cascade) */
+  $$('.kn-cta, .k-pill, .kn-nav a, .play').forEach((b) => {
     const text = b.textContent.trim();
     // letters inside <em> (e.g. "Ranko") stay in italics once split
     const it = [];
