@@ -10,6 +10,6 @@ images: hydro-quebec-presentation
 
 film 1240929145 third play title="Bienvenue à Hydro-Québec" | film 1240931946 third play title="Options de gestion de la demande de puissance 2026" | film 1240931456 third play title="Pointes hivernales"
 
-film 1240936218 third play title="Flex D" | film 1240941845 third play title="Flex D (2)" | film 1240931454 third play title="Hilo — Événement de pointe"
+film 1240936218 third play title="Flex D" | film 1240931454 third play title="Hilo — Événement de pointe"
 
 film 1240929139 third play title="Hilo — Jumelage thermostat Honeywell Resideo" | film 1240929141 third play title="Hilo — Jumelage thermostat Mysa" | film 1240929146 third play title="Hilo — Jumelage thermostat Sinopé" | film 1240930022 third play title="Hilo — Jumelage thermostat Honeywell TCC"
