@@ -1,5 +1,5 @@
 page_title: Ranko | Creative Company
-description: Ranko is a creative company specialized in design, film and digital. End-to-end production for brands leading the way. From Montreal to global.
+description: Ranko is a creative company specialized in design, film and motion. End-to-end production for brands leading the way. From Montreal to global.
 # AI bento, tile 1 (AI video): the title top left
 ai_tile1: AI pipeline, human direction
 # AI bento, tile 4 (tall video): the sentence at the bottom
