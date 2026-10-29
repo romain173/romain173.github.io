@@ -1,4 +1,4 @@
-page_title: Ranko | Studio créatif
+page_title: Ranko | Studio créatif montréalais
 description: Ranko, studio créatif en design, vidéo et motion : une production complète pour les marques qui ouvrent la voie, de Montréal à l’international.
 ai_tile1: Nous décidons, | l’IA exécute.
 ai_tile: Tout est possible. | Votre marque va plus loin.
