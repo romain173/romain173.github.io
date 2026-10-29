@@ -783,9 +783,12 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1='', mid=''):
               + f'<span class="sr">{said}</span>'
               + f'<span class="ai-stars" aria-hidden="true">{stars}</span>'
               + f'<span aria-hidden="true"><b>{odometer(g.group(1), .35)}</b> · {odometer(g.group(2), odo_end(g.group(1), .35) - .2)} {t("Google reviews")}</span></a>') if g else ''
-    qs = ''.join(f'''<figure class="ai-q{" is-on" if i == 0 else ""}"{" hidden" if i else ""}><blockquote>“{inline(q)}”</blockquote>
-        <figcaption><b>{esc(n)}</b><span>{esc(r)} — {esc(pj)}</span></figcaption></figure>''' for i, (q, n, r, pj) in enumerate(qrows))
-    dots = ''.join(f'<button type="button" class="ai-dot" aria-label="{"Témoignage" if LANG == "fr" else "Testimonial"} {i + 1} {"sur" if LANG == "fr" else "of"} {len(qrows)}" aria-pressed="{"true" if i == 0 else "false"}"></button>' for i in range(len(qrows)))
+    # two testimonials at a time (side by side in the wide tile, one above the other on smaller screens); the pairs take turns
+    one = lambda q, n, r, pj: f'''<figure class="ai-q1"><blockquote>“{inline(q)}”</blockquote>
+        <figcaption><b>{esc(n)}</b><span>{esc(r)} — {esc(pj)}</span></figcaption></figure>'''
+    pages = [qrows[i:i + 2] for i in range(0, len(qrows), 2)]
+    qs = ''.join(f'<div class="ai-q{" is-on" if i == 0 else ""}"{" hidden" if i else ""}>{"".join(one(*x) for x in pg)}</div>' for i, pg in enumerate(pages))
+    dots = ''.join(f'<button type="button" class="ai-dot" aria-label="{"Témoignages" if LANG == "fr" else "Testimonials"} {i + 1} {"sur" if LANG == "fr" else "of"} {len(pages)}" aria-pressed="{"true" if i == 0 else "false"}"></button>' for i in range(len(pages)))
     # tile 4: the Bronco intro (WebM hosted with the site, images/home/ai-intro.webm + its still ai-intro.webp)
     tall_media = tile_video(picture('home', 'ai-intro', 1510, 2160, '', 'third', label='AI', register=False), 'ai-intro.webm', 'home') \
         .replace('class="media ', 'class="media ai-bg ', 1)
