@@ -606,8 +606,9 @@ main:has(.k) + .bottom { margin-top: var(--sp); }
   background: #0b0b0b; color: var(--bg);
   animation: intro-up .94s cubic-bezier(.76, 0, .24, 1) 1.06s forwards;   /* the whole intro lasts 2 s */
 }
-.intro-oval { display: block; overflow: hidden; padding: .06em 0; }   /* the oval alone, rising into view */
-.intro-oval svg { display: block; width: clamp(140px, 16vw, 240px); height: auto; transform: translate(0, 110%); animation: intro-letter .82s var(--ease) .12s forwards; }
+.intro-oval { display: block; }   /* the oval alone, rising into view — no mask around it, so it never looks cut */
+.intro-oval svg { display: block; width: clamp(140px, 16vw, 240px); height: auto; opacity: 0; transform: translate(0, 60%); animation: intro-oval .82s var(--ease) .12s forwards; }
+@keyframes intro-oval { to { opacity: 1; transform: none; } }
 @keyframes intro-letter { to { transform: none; } }
 @keyframes intro-up { to { transform: translate3d(0, -100%, 0); } }
 /* the home title and sentence start rising as the curtain lifts */
