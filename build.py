@@ -584,7 +584,7 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
     ld = json.dumps({'@context': 'https://schema.org', '@type': 'Organization', '@id': SITE_URL + '/#ranko',
                      'name': 'Ranko', 'url': SITE_URL, 'logo': SITE_URL + '/apple-touch-icon.png', 'image': SITE_URL + '/assets/img/og-ranko-16x9.png',
                      'description': 'Creative studio in Montreal: video production, motion design, design and creative systems, with AI fully integrated.',
-                     'email': 'hello@ranko.ca', 'foundingDate': '2020',
+                     'email': 'hello@ranko.ca', 'foundingDate': '2020-08',
                      'founder': {'@type': 'Person', 'name': 'Romain Amphyon', 'jobTitle': 'Founder & Creative Director', 'sameAs': ['https://www.linkedin.com/in/romain-amphyon/']},
                      'address': {'@type': 'PostalAddress', 'streetAddress': '1 Boul. De Maisonneuve Ouest', 'addressLocality': 'Montreal',
                                  'addressRegion': 'QC', 'postalCode': 'H2X 0E3', 'addressCountry': 'CA'},
