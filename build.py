@@ -798,17 +798,17 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1='', mid=''):
     <h2 id="ai-t" class="ai-t" data-split>{title}</h2>
     {f'<p class="page-intro ai-sub" data-split>{sub}</p>' if sub else ''}
   </div>
-  <!-- layout chosen by Romain (29 oct. 2026): tall video (9:16) + services, the AI sentence, AI video (16:9) + testimonials -->
+  <!-- layout chosen by Romain (29 oct. 2026): testimonials (16:9) + Bronco video, the AI sentence, AI pipeline video (16:9) + services -->
   <div class="ai-bento ai-row1">
+    <div class="ai-col ai-quote" data-reveal>
+      <div class="ai-top"><div class="ai-avs">{avatars}</div>{rating}</div>
+      <div class="ai-quotes" aria-label="{t("What clients say")}">{qs}</div>
+      <div class="ai-dots" role="group" aria-label="{t("Choose a testimonial")}">{dots}</div>
+      <a class="k-pill ai-more" href="/about">{t("About <em>Ranko</em>")}</a>
+    </div>
     <div class="ai-col ai-tall" data-reveal>{tall_media}
       <p class="ai-tall-b">{inline(tall_txt).replace(" | ", "<br>")}</p>
       <a class="k-pill ai-more" href="{MAIL}">{t("Work with us")}</a>
-    </div>
-    <div class="ai-col ai-frame ai-feats">
-      {feat(films_t, films_l)}
-      {feat(sys_t, sys_l)}
-      {feat(ai_t, ai_d.split(". ")[0].rstrip(".") + ".")}
-      <a class="k-pill ai-more" href="/services">{t("View all services")}</a>
     </div>
   </div>
   {ai_mid}
@@ -819,11 +819,11 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1='', mid=''):
       </div>
       <a class="k-pill ai-more" href="/work">{t("View all work")}</a>
     </div>
-    <div class="ai-col ai-quote" data-reveal>
-      <div class="ai-top"><div class="ai-avs">{avatars}</div>{rating}</div>
-      <div class="ai-quotes" aria-label="{t("What clients say")}">{qs}</div>
-      <div class="ai-dots" role="group" aria-label="{t("Choose a testimonial")}">{dots}</div>
-      <a class="k-pill ai-more" href="/about">{t("About <em>Ranko</em>")}</a>
+    <div class="ai-col ai-frame ai-feats">
+      {feat(films_t, films_l)}
+      {feat(sys_t, sys_l)}
+      {feat(ai_t, ai_d.split(". ")[0].rstrip(".") + ".")}
+      <a class="k-pill ai-more" href="/services">{t("View all services")}</a>
     </div>
   </div>
 </section>'''
