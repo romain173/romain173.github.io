@@ -653,6 +653,7 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .ah-cell { display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; background: #f5f5f7; }
 .ah-open { display: block; width: 100%; text-align: left; cursor: zoom-in; }
 /* hidden presentation pages: 16:9 films, kept in their shape on phones too (one per line) */
+.ah-wide .ah-cell { flex: 0 0 calc((100% - 2 * var(--gap)) / 3); }   /* every tile a third of the width, even alone on the last row */
 @media (max-width: 767px) {
   .ah-wide .ah-rows { grid-template-columns: 1fr; }
   .ah-wide .ah-cell .media { aspect-ratio: 16 / 9 !important; }
