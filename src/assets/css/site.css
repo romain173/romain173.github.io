@@ -176,8 +176,8 @@ a:hover .media img { transform: scale(1.03); }
 .vm.is-ready .ph-label { display: none; }
 .play {
   position: absolute; left: 50%; top: 50%; z-index: 4; transform: translate(-50%, -50%);
-  min-width: 92px; height: 92px; padding: 0 22px; border-radius: 999px;
-  background: var(--bg); color: var(--ink); font-size: var(--t1);
+  min-width: 46px; height: 46px; padding: 0 10px; border-radius: 999px;   /* half the old 92 px (Romain, 29 oct. 2026) */
+  background: var(--bg); color: var(--ink); font-size: 12px;   /* half of 16 px would not be readable */
   transition: transform .5s var(--ease);
 }
 .play:hover { transform: translate(-50%, -50%) scale(1.08); }
