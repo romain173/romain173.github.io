@@ -360,7 +360,7 @@ def svc_row(txt):
 
 # ---------------------------------------------------------------- Afterhours: mosaic
 
-def mosaic(text, owner):
+def mosaic(text, owner, wide=False):
     """Afterhours: every image and video in a wall of 3 columns like the home page (widths computed in site.js so the
     columns end on the same line), each piece in its own format. A click opens it full screen (image, or the Vimeo
     video). Same content file as before: ### headings name the pieces that follow them."""
@@ -416,7 +416,7 @@ def mosaic(text, owner):
                 rows.extend(rest[j:j + 3] for j in range(0, len(rest), 3))
                 rest = []
     wall = ''.join(f'<li><ol class="ah-row">{"".join(h for _, h in r)}</ol></li>' for r in rows)
-    return f'''<section class="sec ah-sec" aria-label="{t('Afterhours pieces')}"><ol class="ah-rows">{wall}</ol></section>
+    return f'''<section class="sec ah-sec{' ah-wide' if wide else ''}" aria-label="{t('Afterhours pieces')}"><ol class="ah-rows">{wall}</ol></section>
 <dialog class="lb" aria-label="{t('Afterhours piece')}">
   <div class="lb-stage"><div class="lb-media"></div></div>
   <p class="lb-cap"><span class="lb-title"></span><span class="lb-count"></span></p>
@@ -565,16 +565,16 @@ INTRO_JS = ("<script>try{if(!sessionStorage.getItem('ranko-intro')&&!matchMedia(
             "{document.documentElement.classList.add('intro-on');sessionStorage.setItem('ranko-intro','1')}}catch(e){}</script>")
 
 
-def layout(path, title, description, body, current='', video=False, og_image='/assets/img/og-ranko-16x9.png'):
+def layout(path, title, description, body, current='', video=False, og_image='/assets/img/og-ranko-16x9.png', hidden=False):
     here = ' aria-current="page"'
     nav = ''.join(f'<li><a href="{h}"{here if current == h else ""}>{t(x)}</a></li>' for h, x in NAV)
     canonical = SITE_URL + ('/fr' if LANG == 'fr' else '') + path
     # the same page in the other language; written with a mark (\x00) so the /fr link rewriting leaves it alone
     other = ('\x00' + path) if LANG == 'fr' else ('/fr' + path)
     alt = ''.join(f'<link rel="alternate" hreflang="{h}" href="{SITE_URL}{u}">'
-                  for h, u in (('en-CA', path), ('fr-CA', '/fr' + path), ('x-default', path))) if path != '/404' else ''
+                  for h, u in (('en-CA', path), ('fr-CA', '/fr' + path), ('x-default', path))) if path != '/404' and not hidden else ''
     switch = (f'<a class="kn-lang" href="{other}" hreflang="{"en" if LANG == "fr" else "fr"}" lang="{"en" if LANG == "fr" else "fr"}" '
-              f'aria-label="{"English version" if LANG == "fr" else "Version française"}">{"EN" if LANG == "fr" else "FR"}</a>') if path != '/404' else ''
+              f'aria-label="{"English version" if LANG == "fr" else "Version française"}">{"EN" if LANG == "fr" else "FR"}</a>') if path != '/404' and not hidden else ''
     # what Google reads about Ranko (name, logo, address, founder, socials): helps local search and the knowledge panel
     ld = json.dumps({'@context': 'https://schema.org', '@type': 'Organization', '@id': SITE_URL + '/#ranko',
                      'name': 'Ranko', 'url': SITE_URL, 'logo': SITE_URL + '/apple-touch-icon.png', 'image': SITE_URL + '/assets/img/og-ranko-16x9.png',
@@ -595,6 +595,7 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{canonical}">
+{'<meta name="robots" content="noindex, nofollow">' if hidden else ''}
 {alt}
 <meta property="og:type" content="website">
 <meta property="og:locale" content="{"fr_CA" if LANG == "fr" else "en_CA"}">
@@ -1104,6 +1105,20 @@ def visit(text):
 </section>'''
 
 
+def page_private(name):
+    """A page only people with the link can open (e.g. for a presentation): content/private/<name>.txt, laid out like
+    Afterhours. Its address (path:) is hard to guess; it is not in the menu, the sitemap or the French version, and
+    search engines are asked not to list it ("noindex"). The site's files are public on GitHub, so it is hidden, not secret."""
+    meta, sec = read_content(os.path.join(CONTENT, 'private', name + '.txt'))
+    body = f'''<section class="page-hd k-hero">
+  <h1 class="page-t" data-split>{"<br>".join(inline(x.strip()) for x in meta.get("heading", "").split("|"))}</h1>
+  {f'<div class="page-intro" data-split>{md(sec["intro"], reveal=False).replace(" | ", " <br>")}</div>' if sec.get("intro") else ""}
+</section>
+<hr class="hd-line">
+{mosaic(sec.get('media', ''), meta.get('images', name), wide=True)}'''
+    return meta['path'], layout(meta['path'], meta['page_title'], meta.get('description', ''), body, video=True, hidden=True)
+
+
 def page_404():
     body = '''<section class="page-hd"><h1 class="page-t">Page not found</h1>
 <p class="page-intro"><a class="link-big" href="/">Back to home</a></p></section>'''
@@ -1225,6 +1240,12 @@ def build():
         print(f'  ! French text not written yet for {len(FR_MISSING)} file(s) (English shown): ' + ', '.join(sorted(set(FR_MISSING))))
     for path, content in pages.items(): write(path, content)
     urls = ['/'] + [p[:-5] for p in pages if p not in ('/index.html', '/404.html', '/fr/index.html')] + ['/fr/']
+    # pages only for people with the link: written after the list of addresses, so they stay out of the sitemap
+    priv = os.path.join(CONTENT, 'private')
+    for f in sorted(os.listdir(priv)) if os.path.isdir(priv) else []:
+        if f.endswith('.txt'):
+            path, content = page_private(f[:-4])
+            write(path + '.html', content)
     write('/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + ''.join(f'  <url><loc>{SITE_URL}{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     write_images_md()

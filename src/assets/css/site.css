@@ -652,6 +652,11 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
    The cards of a row stretch to the same height, so the strips line up even when one title takes two lines. */
 .ah-cell { display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; background: #f5f5f7; }
 .ah-open { display: block; width: 100%; text-align: left; cursor: zoom-in; }
+/* hidden presentation pages: 16:9 films, kept in their shape on phones too (one per line) */
+@media (max-width: 767px) {
+  .ah-wide .ah-rows { grid-template-columns: 1fr; }
+  .ah-wide .ah-cell .media { aspect-ratio: 16 / 9 !important; }
+}
 .ah-open .media { border-radius: 0; }
 /* the strip: the size of the second line of the Work cards, but in black */
 .ah-meta { padding: 12px 16px 14px; font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--ink); }
