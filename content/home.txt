@@ -19,7 +19,11 @@ We help brands | capture attention | by crafting work | with a point of view.
 
 == statement2
 
-End-to-end | production with AI | fully integrated — not to cut corners, but to go further.
+End-to-end production, | from first idea to final frame.
+
+== statement3
+
+We’ve fully integrated AI, | not to cut corners, but to go further.
 
 == facts
 

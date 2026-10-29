@@ -10,7 +10,11 @@ Nous aidons les marques | à capter l’attention | en signant des projets | ave
 
 == statement2
 
-Une production | complète avec l’IA | pleinement intégrée — pas pour en faire moins, | mais pour aller plus loin.
+Une production complète, | de la première idée à l’image finale.
+
+== statement3
+
+Nous avons pleinement intégré l’IA, | pas pour en faire moins, mais pour aller plus loin.
 
 == facts
 

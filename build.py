@@ -912,6 +912,7 @@ def page_home(order, P):
 </section>
 
 {ai_bento(sec.get("statement2", ""), n_brands, sec.get("testimonials", ""), meta.get("ai_tile", ""), meta.get("ai_tile1", ""))}
+{f'<section class="sec statement statement-3"><p class="mid-t" data-split>{inline(sec["statement3"]).replace(" | ", " <br>")}</p></section>' if sec.get("statement3") else ""}
 
 </div>
 '''
