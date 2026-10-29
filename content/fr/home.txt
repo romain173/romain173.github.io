@@ -6,7 +6,7 @@ hero_sub: Spécialisé en design, vidéo et motion.
 
 == statement
 
-Chez *Ranko*, nous aidons | les marques à capter l’attention | en signant des projets | avec un vrai point de vue.
+Nous aidons les marques | à capter l’attention | en signant des projets | avec un vrai point de vue.
 
 == statement2
 
