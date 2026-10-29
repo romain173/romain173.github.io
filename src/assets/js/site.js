@@ -20,6 +20,14 @@
     else intro.remove();
   }
 
+  /* ---------- hidden pages: each film's cover comes straight from Vimeo (the one chosen there), at 1280 × 720 */
+  $$('img[data-vthumb]').forEach((img) => {
+    fetch(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent('https://vimeo.com/' + img.dataset.vthumb)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => { if (j && j.thumbnail_url) img.src = j.thumbnail_url.replace(/-d_\d+(x\d+)?/, '-d_1280x720'); })
+      .catch(() => {});
+  });
+
   /* ---------- home project wall: load and decode the pictures while the page is at rest after opening,
      so they don't all have to be decoded at once when the visitor scrolls past the showreel */
   const wallImgs = $$('.k-cards img');

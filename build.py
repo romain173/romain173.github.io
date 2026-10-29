@@ -387,6 +387,11 @@ def mosaic(text, owner, wide=False):
                 vid, _, hsh = ref.partition('/')
                 w, h = vimeo_size(vid, hsh or None)
                 media = picture(owner, f'video-{vid}', w * 10, h * 10, '', 'third', not items, label=group, register=False)
+                if wide and not os.path.exists(os.path.join(IMAGES, owner, f'video-{vid}.webp')):
+                    # hidden pages: the cover is read from Vimeo when the page opens (site.js), so changing it on
+                    # Vimeo is enough; the grey placeholder shows until it arrives
+                    media = re.sub(r'<img [^>]*>', f'<img src="/assets/img/placeholder/16x9-1280.webp" data-vthumb="{vid}" width="{w}" height="{h}" alt="">', media, 1)
+                    media = re.sub(r'<span class="ph-label">[^<]*</span>', '', media)
                 data = f'data-kind="{"film" if kind == "film" else "loop"}" data-vimeo="{vid}" data-h="{hsh}"'
                 what = 'film' if kind == 'film' else 'video'
                 if not (kind == 'film' and 'play' in rest):   # every video plays in its tile, muted, in a loop — except films flagged "play" (to be launched), which show a Play button
