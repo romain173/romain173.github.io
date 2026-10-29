@@ -735,7 +735,7 @@ def tile_video(media, ref, owner=''):
     return media[:media.rindex('</div>')] + fig + '</div>'
 
 
-def ai_bento(statement, n_brands, quotes='', tile4='', tile1=''):
+def ai_bento(statement, n_brands, quotes='', tile4='', tile1='', mid=''):
     """Home, after Selected Work: the AI part as a bento (like kanso.framer.media), made only of existing material:
     the second statement as a two-tone title, the two AI videos of the Services page, Services texts, client logos."""
     head, _, tail = statement.partition(' — ')
@@ -789,13 +789,17 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1=''):
     # tile 4: the Bronco intro (WebM hosted with the site, images/home/ai-intro.webm + its still ai-intro.webp)
     tall_media = tile_video(picture('home', 'ai-intro', 1510, 2160, '', 'third', label='AI', register=False), 'ai-intro.webm', 'home') \
         .replace('class="media ', 'class="media ai-bg ', 1)
+    # between the two rows: the AI sentence, its first part big, the rest smaller under it, both on the left
+    big, _, small = mid.partition(' — ')
+    ai_mid = (f'<div class="ai-mid"><p class="ai-t ai-mid-t" data-split>{inline(big).replace(" | ", "<br>")}</p>'
+              + (f'<p class="page-intro ai-mid-s" data-split>{inline(small).replace(" | ", "<br>")}</p>' if small else '') + '</div>') if mid else ''
     return f'''<section class="sec ai" aria-labelledby="ai-t">
   <div class="ai-hd">
     <h2 id="ai-t" class="ai-t" data-split>{title}</h2>
     {f'<p class="page-intro ai-sub" data-split>{sub}</p>' if sub else ''}
   </div>
-  <div class="ai-bento">
-    <!-- order chosen by Romain (29 oct. 2026): testimonials, services, AI video, tall video -->
+  <!-- layout chosen by Romain (29 oct. 2026): testimonials + services, the AI sentence, AI video (16:9) + tall video (9:16) -->
+  <div class="ai-bento ai-row1">
     <div class="ai-col ai-quote" data-reveal>
       <div class="ai-top"><div class="ai-avs">{avatars}</div>{rating}</div>
       <div class="ai-quotes" aria-label="{t("What clients say")}">{qs}</div>
@@ -808,6 +812,9 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1=''):
       {feat(ai_t, ai_d.split(". ")[0].rstrip(".") + ".")}
       <a class="k-pill ai-more" href="/services">{t("View all services")}</a>
     </div>
+  </div>
+  {ai_mid}
+  <div class="ai-bento ai-row2">
     <div class="ai-col ai-frame">
       <div class="ai-card ai-hero" data-reveal>{vid_card(vids[0], "ai-bg") if vids else ""}
         <p class="ai-hero-t">{inline(tile1 or ai_t).replace(" | ", "<br>")}</p>
@@ -912,8 +919,7 @@ def page_home(order, P):
   <ol class="k-cards">{"".join(cards)}</ol>
 </section>
 
-{ai_bento(sec.get("statement2", ""), n_brands, sec.get("testimonials", ""), meta.get("ai_tile", ""), meta.get("ai_tile1", ""))}
-{f'<section class="sec statement statement-3"><p class="mid-t" data-split>{inline(sec["statement3"]).replace(" | ", " <br>")}</p></section>' if sec.get("statement3") else ""}
+{ai_bento(sec.get("statement2", ""), n_brands, sec.get("testimonials", ""), meta.get("ai_tile", ""), meta.get("ai_tile1", ""), sec.get("statement3", ""))}
 
 </div>
 '''

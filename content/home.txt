@@ -23,7 +23,7 @@ End-to-end production, | from first idea to final frame.
 
 == statement3
 
-We’ve fully integrated AI, | not to cut corners, but to go further.
+We’ve fully integrated AI, — not to cut corners, but to go further.
 
 == facts
 
