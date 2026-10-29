@@ -3,6 +3,7 @@ path: /hydro-quebec-fd474c
 page_title: Ranko — Hydro-Québec
 description: Ranko × Hydro-Québec
 heading: Hydro-Québec
+lang: fr
 images: hydro-quebec-presentation
 
 == media

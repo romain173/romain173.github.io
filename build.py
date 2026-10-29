@@ -107,7 +107,7 @@ FR = {
     'Services': 'Services', 'Client': 'Client', 'Agency': 'Agence',
     "Brands we've worked for": 'Marques pour lesquelles nous avons travaillé', 'Open in Google Maps ↗': 'Ouvrir la carte ↗',
     'see the project': 'voir le projet', 'Our Work': 'Nos projets', 'Play': 'Lire',
-    'Influences': 'Influences', 'Afterhours pieces': 'Œuvres Afterhours', 'Afterhours piece': 'Œuvre Afterhours', 'Open': 'Ouvrir',
+    'Influences': 'Influences', 'Afterhours pieces': 'Œuvres Afterhours', 'Afterhours piece': 'Œuvre Afterhours', 'Open': 'Ouvrir', 'Videos': 'Vidéos', 'Video': 'Vidéo',
     'Before': 'Avant', 'After': 'Après', 'Previous piece': 'Œuvre précédente', 'Next piece': 'Œuvre suivante', 'Close': 'Fermer',
 }
 
@@ -421,8 +421,8 @@ def mosaic(text, owner, wide=False):
                 rows.extend(rest[j:j + 3] for j in range(0, len(rest), 3))
                 rest = []
     wall = ''.join(f'<li><ol class="ah-row">{"".join(h for _, h in r)}</ol></li>' for r in rows)
-    return f'''<section class="sec ah-sec{' ah-wide' if wide else ''}" aria-label="{t('Afterhours pieces')}"><ol class="ah-rows">{wall}</ol></section>
-<dialog class="lb" aria-label="{t('Afterhours piece')}">
+    return f'''<section class="sec ah-sec{' ah-wide' if wide else ''}" aria-label="{t('Videos' if wide else 'Afterhours pieces')}"><ol class="ah-rows">{wall}</ol></section>
+<dialog class="lb" aria-label="{t('Video' if wide else 'Afterhours piece')}">
   <div class="lb-stage"><div class="lb-media"></div></div>
   <p class="lb-cap"><span class="lb-title"></span><span class="lb-count"></span></p>
   <button type="button" class="lb-btn lb-prev" aria-label="{t('Previous piece')}">←</button>
@@ -573,7 +573,7 @@ INTRO_JS = ("<script>try{if(!sessionStorage.getItem('ranko-intro')&&!matchMedia(
 def layout(path, title, description, body, current='', video=False, og_image='/assets/img/og-ranko-16x9.png', hidden=False):
     here = ' aria-current="page"'
     nav = ''.join(f'<li><a href="{h}"{here if current == h else ""}>{t(x)}</a></li>' for h, x in NAV)
-    canonical = SITE_URL + ('/fr' if LANG == 'fr' else '') + path
+    canonical = SITE_URL + ('/fr' if LANG == 'fr' and not hidden else '') + path
     # the same page in the other language; written with a mark (\x00) so the /fr link rewriting leaves it alone
     other = ('\x00' + path) if LANG == 'fr' else ('/fr' + path)
     alt = ''.join(f'<link rel="alternate" hreflang="{h}" href="{SITE_URL}{u}">'
@@ -1249,8 +1249,11 @@ def build():
     priv = os.path.join(CONTENT, 'private')
     for f in sorted(os.listdir(priv)) if os.path.isdir(priv) else []:
         if f.endswith('.txt'):
+            m, _ = read_content(os.path.join(priv, f))
+            LANG = m.get('lang', 'en')   # lang: fr → French words (Lire, menu…) and links to the French pages
             path, content = page_private(f[:-4])
-            write(path + '.html', content)
+            LANG = 'en'
+            write(path + '.html', fr_links(content) if m.get('lang') == 'fr' else content)
     write('/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + ''.join(f'  <url><loc>{SITE_URL}{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     write_images_md()
