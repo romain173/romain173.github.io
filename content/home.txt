@@ -4,7 +4,7 @@ description: Ranko is a creative company specialized in design, film and digital
 ai_tile1: AI pipeline, human direction
 # AI bento, tile 4 (tall video): the sentence at the bottom
 ai_tile: Your idea stays full size. Your brand goes further.
-hero_sub: Specialized in the fields of design, film and digital.
+hero_sub: Specialized in the fields of design, film and motion.
 reel: 1238391176
 featured: cinco, uniqlo, jagermeister, mcdonalds, dior, ssensexmoncler, nikon, nba-beat, louis-vuitton, la-ronde-2-0
 # Kanso-style home (Test-Ranko): which column each featured project sits in (left | middle | right)
