@@ -795,12 +795,7 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1=''):
     {f'<p class="page-intro ai-sub" data-split>{sub}</p>' if sub else ''}
   </div>
   <div class="ai-bento">
-    <div class="ai-col ai-frame">
-      <div class="ai-card ai-hero" data-reveal>{vid_card(vids[0], "ai-bg") if vids else ""}
-        <p class="ai-hero-t">{inline(tile1 or ai_t).replace(" | ", "<br>")}</p>
-      </div>
-      <a class="k-pill ai-more" href="/work">{t("View all work")}</a>
-    </div>
+    <!-- order chosen by Romain (29 oct. 2026): testimonials, services, AI video, tall video -->
     <div class="ai-col ai-quote" data-reveal>
       <div class="ai-top"><div class="ai-avs">{avatars}</div>{rating}</div>
       <div class="ai-quotes" aria-label="{t("What clients say")}">{qs}</div>
@@ -812,6 +807,12 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1=''):
       {feat(sys_t, sys_l)}
       {feat(ai_t, ai_d.split(". ")[0].rstrip(".") + ".")}
       <a class="k-pill ai-more" href="/services">{t("View all services")}</a>
+    </div>
+    <div class="ai-col ai-frame">
+      <div class="ai-card ai-hero" data-reveal>{vid_card(vids[0], "ai-bg") if vids else ""}
+        <p class="ai-hero-t">{inline(tile1 or ai_t).replace(" | ", "<br>")}</p>
+      </div>
+      <a class="k-pill ai-more" href="/work">{t("View all work")}</a>
     </div>
     <div class="ai-col ai-tall" data-reveal>{tall_media}
       <p class="ai-tall-b">{inline(tall_txt).replace(" | ", "<br>")}</p>
