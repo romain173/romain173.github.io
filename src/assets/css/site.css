@@ -760,9 +760,9 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .odo-r > span { display: block; height: 1.2em; line-height: 1.2; }
 .js [data-reveal]:not(.is-in) .odo-r { transform: none; }
 .ai-quotes { margin-top: auto; display: grid; }
-.ai-q { grid-area: 1 / 1; display: grid; gap: 24px; align-content: end; }   /* a pair of testimonials */
+.ai-q { grid-area: 1 / 1; display: grid; gap: 24px; align-content: end; }   /* a group of testimonials */
 .ai-q1 { display: grid; gap: 18px; align-content: end; }
-@media (min-width: 1100px) { .ai-q { grid-template-columns: 1fr 1fr; column-gap: 48px; } .ai-q .ai-q1 blockquote { font-size: clamp(22px, 2.1vw, 32px); line-height: 1.22; } }   /* side by side in the wide tile, bigger to fill it */
+@media (min-width: 1100px) { .ai-q { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 36px; } .ai-q .ai-q1 blockquote { font-size: clamp(19px, 1.65vw, 26px); line-height: 1.25; } }   /* three side by side in the wide tile: tall columns, like the video next to it */
 .ai-q[hidden] { display: grid; visibility: hidden; opacity: 0; }   /* all quotes share one spot: the card keeps the height of the longest */
 .ai-q.is-on { animation: ai-q-in .7s var(--ease); }
 @keyframes ai-q-in { from { opacity: 0; transform: translate3d(0, 10px, 0); } }
