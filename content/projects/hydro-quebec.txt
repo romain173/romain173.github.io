@@ -20,7 +20,7 @@ For a corporate project like this, we aimed for a subtle approach in motion grap
 
 == media
 
-film 1125550020
+film 1125550020 youtube=mRv751hf9Eg youtube_fr=9IpJ8oLQt9s
 
 ### Hydro-Québec is one of the largest hydropower producers in the world.
 

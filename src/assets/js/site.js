@@ -282,6 +282,8 @@
 
   /* ---------- Vimeo: loaded only when needed */
   const src = (fig, film) => {
+    // a film can play the client's YouTube video instead (youtube=<id> in the content file), without YouTube cookies
+    if (fig.dataset.youtube) return `https://www.youtube-nocookie.com/embed/${fig.dataset.youtube}?${new URLSearchParams({ autoplay: 1, rel: 0, playsinline: 1 })}`;
     const q = new URLSearchParams({ dnt: 1 });
     if (fig.dataset.h) q.set('h', fig.dataset.h);
     if (film) { q.set('autoplay', 1); q.set('title', 0); q.set('byline', 0); q.set('portrait', 0); q.set('color', 'fcfcf7'); }
@@ -293,7 +295,7 @@
     const f = document.createElement('iframe');
     f.src = src(fig, film);
     f.allow = 'autoplay; fullscreen; picture-in-picture';
-    f.title = 'Vimeo video'; f.setAttribute('allowfullscreen', '');
+    f.title = fig.dataset.youtube ? 'YouTube video' : 'Vimeo video'; f.setAttribute('allowfullscreen', '');
     f.addEventListener('load', () => {
       fig.classList.add('is-ready');
       if (!film && fig.dataset.seen !== '1') setTimeout(() => cmd(fig, 'pause'), 300);   // loaded ahead while off screen: wait

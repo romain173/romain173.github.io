@@ -256,9 +256,11 @@ def vimeo_size(vid, h=None):
     return VIMEO[vid]['w'], VIMEO[vid]['h']
 
 
-def vimeo(ref, mode, owner, label, size='full', caption='', eager=False, slot=None):
+def vimeo(ref, mode, owner, label, size='full', caption='', eager=False, slot=None, youtube=''):
     """mode 'loop' = muted background loop (plays on screen); 'film' = poster + play button.
-    slot: name of the cover image (default video-<id>); lets the same video appear twice with two covers."""
+    slot: name of the cover image (default video-<id>); lets the same video appear twice with two covers.
+    youtube: the client's YouTube video to play instead (youtube=<id> on the line); the Vimeo id still gives the
+    shape and the cover image."""
     vid, _, h = ref.partition('/')
     w, hh = vimeo_size(vid, h or None)
     slot = slot or f'video-{vid}'
@@ -272,7 +274,8 @@ def vimeo(ref, mode, owner, label, size='full', caption='', eager=False, slot=No
     SLOTS.append((owner, slot, pw, ph, os.path.exists(os.path.join(IMAGES, owner, f'{slot}.webp'))))
     btn = '' if mode == 'loop' else f'<button class="play" type="button"><span>{t("Play")}</span></button>'
     cap = f'<figcaption>{inline(caption)}</figcaption>' if caption else ''
-    return (f'<figure class="vm vm-{mode}" data-vimeo="{vid}" data-h="{h}" data-mode="{mode}" style="--ar:{w}/{hh}">'
+    yt = f' data-youtube="{esc(youtube)}"' if youtube else ''
+    return (f'<figure class="vm vm-{mode}" data-vimeo="{vid}" data-h="{h}"{yt} data-mode="{mode}" style="--ar:{w}/{hh}">'
             f'{poster}{btn}</figure>{cap}')
 
 
@@ -472,7 +475,7 @@ def media_rows(text, owner, label, first_eager=False):
                 body = clip(owner, ref, w, h, opts.get('alt', ''), size, label)
                 body += f'<figcaption>{inline(cap)}</figcaption>' if cap else ''
             else:
-                body = vimeo(ref, 'loop' if kind == 'video' else 'film', owner, label, size, cap, eager[0], opts.get('poster'))
+                body = vimeo(ref, 'loop' if kind == 'video' else 'film', owner, label, size, cap, eager[0], opts.get('poster'), (LANG == 'fr' and opts.get('youtube_fr')) or opts.get('youtube', ''))
                 vw_, vh_ = vimeo_size(ref.partition('/')[0], ref.partition('/')[2] or None); w, h = vw_, vh_
                 eager[0] = False
             if opts.get('tag'):   # tag="Before": a word in white, top left, on the picture or the video
