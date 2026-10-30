@@ -762,7 +762,8 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .ai-quotes { margin-top: auto; display: grid; }
 .ai-q { grid-area: 1 / 1; display: grid; gap: 24px; align-content: end; }   /* a group of testimonials */
 .ai-q1 { display: grid; gap: 18px; align-content: end; }
-@media (min-width: 1100px) { .ai-q { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 36px; } .ai-q .ai-q1 blockquote { font-size: clamp(19px, 1.65vw, 26px); line-height: 1.25; } }   /* three side by side in the wide tile: tall columns, like the video next to it */
+.ai-qc { display: grid; gap: 28px; align-content: end; }   /* a column: a long testimonial above a short one */
+@media (min-width: 1100px) { .ai-qall { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 36px; align-items: end; } .ai-qall .ai-q1 blockquote { font-size: clamp(16px, 1.3vw, 21px); line-height: 1.25; } }   /* all six in the wide tile, three columns */
 .ai-q[hidden] { display: grid; visibility: hidden; opacity: 0; }   /* all quotes share one spot: the card keeps the height of the longest */
 .ai-q.is-on { animation: ai-q-in .7s var(--ease); }
 @keyframes ai-q-in { from { opacity: 0; transform: translate3d(0, 10px, 0); } }
