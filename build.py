@@ -389,8 +389,8 @@ def mosaic(text, owner, wide=False):
                 media = picture(owner, f'video-{vid}', w * 10, h * 10, '', 'third', not items, label=group, register=False)
                 if wide and not os.path.exists(os.path.join(IMAGES, owner, f'video-{vid}.webp')):
                     # hidden pages: the cover is read from Vimeo when the page opens (site.js), so changing it on
-                    # Vimeo is enough; the grey placeholder shows until it arrives
-                    media = re.sub(r'<img [^>]*>', f'<img src="/assets/img/loading-16x9.webp" data-vthumb="{vid}" width="{w}" height="{h}" alt="">', media, 1)
+                    # Vimeo is enough; a plain #f5f5f7 (the colour of the title strips) shows until it arrives
+                    media = re.sub(r'<img [^>]*>', f'<img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 9%27%3E%3Crect width=%2716%27 height=%279%27 fill=%27%23f5f5f7%27/%3E%3C/svg%3E" data-vthumb="{vid}" width="{w}" height="{h}" alt="">', media, 1)
                     media = re.sub(r'<span class="ph-label">[^<]*</span>', '', media)
                 data = f'data-kind="{"film" if kind == "film" else "loop"}" data-vimeo="{vid}" data-h="{hsh}"'
                 what = 'film' if kind == 'film' else 'video'
