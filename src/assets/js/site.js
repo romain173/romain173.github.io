@@ -28,6 +28,21 @@
       .catch(() => {});
   });
 
+  /* ---------- hidden client presentations: the FR / EN switch of the menu keeps the slide that is open */
+  const deck = $('.deck-frame');
+  if (deck) {
+    const sync = () => {
+      let h = '';
+      try { h = deck.contentWindow.location.hash; } catch (_) {}
+      $$('.kn-lang').forEach((a) => { a.href = a.getAttribute('href').split('#')[0] + h; });
+    };
+    deck.addEventListener('load', () => {
+      sync();
+      try { deck.contentWindow.addEventListener('hashchange', sync); } catch (_) {}
+    });
+    if (location.hash) deck.src = deck.getAttribute('src').split('#')[0] + location.hash;   // a link to a slide opens it
+  }
+
   /* ---------- home project wall: load and decode the pictures while the page is at rest after opening,
      so they don't all have to be decoded at once when the visitor scrolls past the showreel */
   const wallImgs = $$('.k-cards img');

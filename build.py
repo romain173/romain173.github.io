@@ -573,7 +573,7 @@ INTRO_JS = ("<script>try{if(!sessionStorage.getItem('ranko-intro')&&!matchMedia(
             "{document.documentElement.classList.add('intro-on');sessionStorage.setItem('ranko-intro','1')}}catch(e){}</script>")
 
 
-def layout(path, title, description, body, current='', video=False, og_image='/assets/img/og-ranko-16x9.png', hidden=False):
+def layout(path, title, description, body, current='', video=False, og_image='/assets/img/og-ranko-16x9.png', hidden=False, switch_ok=False):
     here = ' aria-current="page"'
     nav = ''.join(f'<li><a href="{h}"{here if current == h else ""}>{t(x)}</a></li>' for h, x in NAV)
     canonical = SITE_URL + ('/fr' if LANG == 'fr' and not hidden else '') + path
@@ -582,7 +582,7 @@ def layout(path, title, description, body, current='', video=False, og_image='/a
     alt = ''.join(f'<link rel="alternate" hreflang="{h}" href="{SITE_URL}{u}">'
                   for h, u in (('en-CA', path), ('fr-CA', '/fr' + path), ('x-default', path))) if path != '/404' and not hidden else ''
     switch = (f'<a class="kn-lang" href="{other}" hreflang="{"en" if LANG == "fr" else "fr"}" lang="{"en" if LANG == "fr" else "fr"}" '
-              f'aria-label="{"English version" if LANG == "fr" else "Version française"}">{"EN" if LANG == "fr" else "FR"}</a>') if path != '/404' and not hidden else ''
+              f'aria-label="{"English version" if LANG == "fr" else "Version française"}">{"EN" if LANG == "fr" else "FR"}</a>') if path != '/404' and (switch_ok or not hidden) else ''
     # what Google reads about Ranko (name, logo, address, founder, socials): helps local search and the knowledge panel
     ld = json.dumps({'@context': 'https://schema.org', '@type': 'Organization', '@id': SITE_URL + '/#ranko',
                      'name': 'Ranko', 'url': SITE_URL, 'logo': SITE_URL + '/apple-touch-icon.png', 'image': SITE_URL + '/assets/img/og-ranko-16x9.png',
@@ -1274,13 +1274,23 @@ def build():
             path, content = page_private(f[:-4])
             LANG = 'en'
             write(path + '.html', fr_links(content) if m.get('lang') == 'fr' else content)
-    # client presentations made elsewhere (one self-contained HTML file each, in src/decks/): put online as they are,
-    # at the same hidden address in English and under /fr, never in the sitemap
+    # client presentations made elsewhere (one self-contained HTML file each, in src/decks/): the file as it is under
+    # /decks/, shown in a hidden page with the site menu on top, in English (/<name>) and French (/fr/<name>);
+    # never in the sitemap
     decks = os.path.join(SRC, 'decks')
     for f in sorted(os.listdir(decks)) if os.path.isdir(decks) else []:
         if f.endswith('.html'):
-            for d in (DIST, os.path.join(DIST, 'fr')):
-                shutil.copy(os.path.join(decks, f), os.path.join(d, f))
+            os.makedirs(os.path.join(DIST, 'decks'), exist_ok=True)
+            shutil.copy(os.path.join(decks, f), os.path.join(DIST, 'decks', f))
+            name = f[:-5]
+            m_ = re.search(r'<title>([^<]*)</title>', open(os.path.join(decks, f), encoding='utf-8').read())
+            for lang in ('en', 'fr'):
+                LANG = lang
+                body = (f'<div class="deck-wrap"><iframe class="deck-frame" src="/decks/{f}?lang={lang}" '
+                        f'title="{esc(m_.group(1) if m_ else name)}" allow="fullscreen"></iframe></div>')
+                page = layout('/' + name, m_.group(1) if m_ else 'Ranko', '', body, hidden=True, switch_ok=True)
+                LANG = 'en'
+                write(('/fr/' if lang == 'fr' else '/') + name + '.html', page)
     write('/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + ''.join(f'  <url><loc>{SITE_URL}{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     write_images_md()
