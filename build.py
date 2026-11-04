@@ -1274,6 +1274,13 @@ def build():
             path, content = page_private(f[:-4])
             LANG = 'en'
             write(path + '.html', fr_links(content) if m.get('lang') == 'fr' else content)
+    # client presentations made elsewhere (one self-contained HTML file each, in src/decks/): put online as they are,
+    # at the same hidden address in English and under /fr, never in the sitemap
+    decks = os.path.join(SRC, 'decks')
+    for f in sorted(os.listdir(decks)) if os.path.isdir(decks) else []:
+        if f.endswith('.html'):
+            for d in (DIST, os.path.join(DIST, 'fr')):
+                shutil.copy(os.path.join(decks, f), os.path.join(d, f))
     write('/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + ''.join(f'  <url><loc>{SITE_URL}{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     write_images_md()
