@@ -31,15 +31,19 @@
   /* ---------- hidden client presentations: the FR / EN switch of the menu keeps the slide that is open */
   const deck = $('.deck-frame');
   if (deck) {
+    // the deck changes its #n without a hashchange event, so it is read again every 300 ms; the address bar of the
+    // page follows it too (#1, #2...), so a copied link opens the same slide
+    let last = null;
     const sync = () => {
       let h = '';
       try { h = deck.contentWindow.location.hash; } catch (_) {}
+      if (!h || h === last) return;
+      last = h;
       $$('.kn-lang').forEach((a) => { a.href = a.getAttribute('href').split('#')[0] + h; });
+      if (location.hash !== h) history.replaceState(history.state, '', location.pathname + location.search + h);
     };
-    deck.addEventListener('load', () => {
-      sync();
-      try { deck.contentWindow.addEventListener('hashchange', sync); } catch (_) {}
-    });
+    deck.addEventListener('load', sync);
+    setInterval(sync, 300);
     if (location.hash) deck.src = deck.getAttribute('src').split('#')[0] + location.hash;   // a link to a slide opens it
   }
 
