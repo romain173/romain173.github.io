@@ -786,10 +786,17 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1='', mid=''):
               + f'<span class="sr">{said}</span>'
               + f'<span class="ai-stars" aria-hidden="true">{stars}</span>'
               + f'<span aria-hidden="true"><b>{odometer(g.group(1), .35)}</b> · {odometer(g.group(2), odo_end(g.group(1), .35) - .2)} {t("Google reviews")}</span></a>') if g else ''
-    # testimonials: one at a time in the second card, they take turns (site.js), with dots to choose one
-    qs = ''.join(f'''<figure class="ai-q ai-q1{" is-on" if i == 0 else ""}"{" hidden" if i else ""}><blockquote>“{inline(q)}”</blockquote>
-        <figcaption><b>{esc(n)}</b><span>{esc(r)} — {esc(pj)}</span></figcaption></figure>''' for i, (q, n, r, pj) in enumerate(qrows))
-    dots = ''.join(f'<button type="button" class="ai-dot" aria-label="{"Témoignage" if LANG == "fr" else "Testimonial"} {i + 1} {"sur" if LANG == "fr" else "of"} {len(qrows)}" aria-pressed="{"true" if i == 0 else "false"}"></button>' for i in range(len(qrows)))
+    # testimonials: two at a time, one above the other, to fill the wide tile (Romain, 9 nov. 2026); a long one with a
+    # short one, the pairs take turns (site.js), with dots to choose a pair
+    one = lambda q, n, r, pj: f'''<figure class="ai-q1"><blockquote>“{inline(q)}”</blockquote>
+        <figcaption><b>{esc(n)}</b><span>{esc(r)} — {esc(pj)}</span></figcaption></figure>'''
+    by_len = sorted(range(len(qrows)), key=lambda i: -len(qrows[i][0]))
+    half = (len(by_len) + 1) // 2
+    longs, shorts = by_len[:half], by_len[half:][::-1]   # the longest with the shortest, and so on
+    pairs = [[longs[i]] + ([shorts[i]] if i < len(shorts) else []) for i in range(len(longs))]
+    qs = ''.join(f'<div class="ai-q{" is-on" if i == 0 else ""}"{" hidden" if i else ""}>{"".join(one(*qrows[k]) for k in c)}</div>'
+                 for i, c in enumerate(pairs))
+    dots = ''.join(f'<button type="button" class="ai-dot" aria-label="{"Témoignages" if LANG == "fr" else "Testimonials"} {i + 1} {"sur" if LANG == "fr" else "of"} {len(pairs)}" aria-pressed="{"true" if i == 0 else "false"}"></button>' for i in range(len(pairs)))
     # tile 4: the Bronco intro (WebM hosted with the site, images/home/ai-intro.webm + its still ai-intro.webp)
     tall_media = tile_video(picture('home', 'ai-intro', 1510, 2160, '', 'third', label='AI', register=False), 'ai-intro.webm', 'home') \
         .replace('class="media ', 'class="media ai-bg ', 1)

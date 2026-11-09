@@ -745,7 +745,7 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .odo-r > span { display: block; height: 1.2em; line-height: 1.2; }
 .js [data-reveal]:not(.is-in) .odo-r { transform: none; }
 .ai-quotes { margin-top: auto; display: grid; }
-.ai-q { grid-area: 1 / 1; display: grid; gap: 24px; align-content: end; }   /* a group of testimonials */
+.ai-q { grid-area: 1 / 1; display: grid; gap: 32px; align-content: end; }   /* a pair of testimonials, one above the other */
 .ai-q1 { display: grid; gap: 18px; align-content: end; }
 .ai-q[hidden] { display: grid; visibility: hidden; opacity: 0; }   /* all quotes share one spot: the card keeps the height of the longest */
 .ai-q.is-on { animation: ai-q-in .7s var(--ease); }
