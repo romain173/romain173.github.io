@@ -706,23 +706,6 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .ai-bento { display: grid; gap: 8px; }
 @media (min-width: 700px) { .ai-bento { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1100px) { .ai-bento { grid-template-columns: repeat(4, minmax(0, 1fr)); min-height: clamp(520px, 42vw, 640px); } }
-/* home layout (Romain, 29 oct. 2026): row 1 testimonials 16:9 (wide) + Bronco video (narrow), the AI sentence,
-   row 2 AI pipeline video 16:9 (wide) + services (narrow); same columns in both rows, both tiles of a row the same height.
-   Tablets (700-1099 px): two halves per row; phones: one under the other */
-@media (min-width: 700px) { .ai-row1, .ai-row2 { min-height: 0; } }
-@media (min-width: 1100px) {
-  .ai-row1, .ai-row2 { display: flex; }
-  .ai-row1 > .ai-quote, .ai-row2 > .ai-frame { flex: none; width: calc((100% - 8px) * .7596); }   /* 16:9 vs 9:16 widths: 1.7778 / 2.3403 */
-  .ai-row1 > .ai-tall, .ai-row2 > .ai-feats { flex: none; width: calc((100% - 8px) * .2404); min-height: 0; }
-  .ai-row1 > .ai-quote { aspect-ratio: 16 / 9; }   /* sets the height of row 1 */
-  .ai-row2 .ai-hero { flex: 1 0 auto; aspect-ratio: 16 / 9; min-height: 0; }   /* sets the height of row 2 (grows a little if the services need more room, on smaller screens) */
-}
-.ai-mid { display: grid; gap: 20px; margin: var(--sp) 0; }   /* the AI sentence between the two rows, laid out like a page header: */
-.ai-mid-s { font-weight: 400; max-width: 26ch; }
-@media (min-width: 900px) {   /* big on the left, the rest small on the right, on the line of its last line (like "Specialized in…") */
-  .ai-mid { grid-template-columns: auto minmax(0, 1fr); align-items: last baseline; column-gap: var(--gap); }
-  .ai-mid-s { justify-self: end; max-width: 21ch; text-align: right; }
-}
 .ai-col { border-radius: 16px; min-width: 0; }
 .ai-frame { display: flex; flex-direction: column; gap: 6px; padding: 6px; background: #f5f5f7; }
 .ai-card { position: relative; border-radius: 13px; background: #fff; overflow: hidden; }
@@ -763,8 +746,6 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .ai-quotes { margin-top: auto; display: grid; }
 .ai-q { grid-area: 1 / 1; display: grid; gap: 24px; align-content: end; }   /* a group of testimonials */
 .ai-q1 { display: grid; gap: 18px; align-content: end; }
-.ai-qc { display: grid; gap: 28px; align-content: end; }   /* a column: a long testimonial above a short one */
-@media (min-width: 1100px) { .ai-qall { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 36px; align-items: end; } .ai-qall .ai-q1 blockquote { font-size: clamp(16px, 1.3vw, 21px); line-height: 1.25; } }   /* all six in the wide tile, three columns */
 .ai-q[hidden] { display: grid; visibility: hidden; opacity: 0; }   /* all quotes share one spot: the card keeps the height of the longest */
 .ai-q.is-on { animation: ai-q-in .7s var(--ease); }
 @keyframes ai-q-in { from { opacity: 0; transform: translate3d(0, 10px, 0); } }

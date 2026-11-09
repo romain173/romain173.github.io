@@ -21,10 +21,6 @@ We help brands | capture attention | through beautifully | crafted creative.
 
 We know how | to make people | stop and look. — Produced by one multidisciplinary team, | from first idea to final frame.
 
-== statement3
-
-We’ve fully | integrated AI, — not to cut corners, but to go further.
-
 == facts
 
 # number | suffix | text   ({projects} and {brands} are counted automatically; = before a number: no count-up)

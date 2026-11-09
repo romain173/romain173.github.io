@@ -786,53 +786,41 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1='', mid=''):
               + f'<span class="sr">{said}</span>'
               + f'<span class="ai-stars" aria-hidden="true">{stars}</span>'
               + f'<span aria-hidden="true"><b>{odometer(g.group(1), .35)}</b> · {odometer(g.group(2), odo_end(g.group(1), .35) - .2)} {t("Google reviews")}</span></a>') if g else ''
-    # all the testimonials at once, no turns (Romain, 30 oct. 2026): three columns, a long one above a short one in each
-    one = lambda q, n, r, pj: f'''<figure class="ai-q1"><blockquote>“{inline(q)}”</blockquote>
-        <figcaption><b>{esc(n)}</b><span>{esc(r)} — {esc(pj)}</span></figcaption></figure>'''
-    by_len = sorted(range(len(qrows)), key=lambda i: -len(qrows[i][0]))
-    half = (len(by_len) + 1) // 2
-    longs, shorts = by_len[:half], by_len[half:][::-1]   # the longest with the shortest, and so on
-    cols = [[longs[i]] + ([shorts[i]] if i < len(shorts) else []) for i in range(len(longs))]
-    qs = '<div class="ai-q is-on ai-qall">' + ''.join(f'<div class="ai-qc">{"".join(one(*qrows[k]) for k in c)}</div>' for c in cols) + '</div>'
-    dots = ''
+    # testimonials: one at a time in the second card, they take turns (site.js), with dots to choose one
+    qs = ''.join(f'''<figure class="ai-q ai-q1{" is-on" if i == 0 else ""}"{" hidden" if i else ""}><blockquote>“{inline(q)}”</blockquote>
+        <figcaption><b>{esc(n)}</b><span>{esc(r)} — {esc(pj)}</span></figcaption></figure>''' for i, (q, n, r, pj) in enumerate(qrows))
+    dots = ''.join(f'<button type="button" class="ai-dot" aria-label="{"Témoignage" if LANG == "fr" else "Testimonial"} {i + 1} {"sur" if LANG == "fr" else "of"} {len(qrows)}" aria-pressed="{"true" if i == 0 else "false"}"></button>' for i in range(len(qrows)))
     # tile 4: the Bronco intro (WebM hosted with the site, images/home/ai-intro.webm + its still ai-intro.webp)
     tall_media = tile_video(picture('home', 'ai-intro', 1510, 2160, '', 'third', label='AI', register=False), 'ai-intro.webm', 'home') \
         .replace('class="media ', 'class="media ai-bg ', 1)
-    # between the two rows: the AI sentence, its first part big, the rest smaller under it, both on the left
-    big, _, small = mid.partition(' — ')
-    ai_mid = (f'<div class="ai-mid"><p class="ai-t ai-mid-t" data-split>{inline(big).replace(" | ", "<br>")}</p>'
-              + (f'<p class="page-intro ai-mid-s" data-split>{inline(small).replace(" | ", "<br>")}</p>' if small else '') + '</div>') if mid else ''
     return f'''<section class="sec ai" aria-labelledby="ai-t">
   <div class="ai-hd">
     <h2 id="ai-t" class="ai-t" data-split>{title}</h2>
     {f'<p class="page-intro ai-sub" data-split>{sub}</p>' if sub else ''}
   </div>
-  <!-- layout chosen by Romain (29 oct. 2026): testimonials (16:9) + Bronco video, the AI sentence, AI pipeline video (16:9) + services -->
-  <div class="ai-bento ai-row1">
-    <div class="ai-col ai-quote" data-reveal>
-      <div class="ai-top"><div class="ai-avs">{avatars}</div>{rating}</div>
-      <div class="ai-quotes" aria-label="{t("What clients say")}">{qs}</div>
-      {f'<div class="ai-dots" role="group" aria-label="{t("Choose a testimonial")}">{dots}</div>' if dots else ''}
-      <a class="k-pill ai-more" href="/about">{t("About <em>Ranko</em>")}</a>
-    </div>
-    <div class="ai-col ai-tall" data-reveal>{tall_media}
-      <p class="ai-tall-b">{inline(tall_txt).replace(" | ", "<br>")}</p>
-      <a class="k-pill ai-more" href="{MAIL}">{t("Work with us")}</a>
-    </div>
-  </div>
-  {ai_mid}
-  <div class="ai-bento ai-row2">
+  <!-- the four tiles side by side, as at the start (Romain, 9 nov. 2026): AI video, testimonials, services, Bronco -->
+  <div class="ai-bento">
     <div class="ai-col ai-frame">
       <div class="ai-card ai-hero" data-reveal>{vid_card(vids[0], "ai-bg") if vids else ""}
         <p class="ai-hero-t">{inline(tile1 or ai_t).replace(" | ", "<br>")}</p>
       </div>
       <a class="k-pill ai-more" href="/work">{t("View all work")}</a>
     </div>
+    <div class="ai-col ai-quote" data-reveal>
+      <div class="ai-top"><div class="ai-avs">{avatars}</div>{rating}</div>
+      <div class="ai-quotes" aria-label="{t("What clients say")}">{qs}</div>
+      <div class="ai-dots" role="group" aria-label="{t("Choose a testimonial")}">{dots}</div>
+      <a class="k-pill ai-more" href="/about">{t("About <em>Ranko</em>")}</a>
+    </div>
     <div class="ai-col ai-frame ai-feats">
       {feat(films_t, films_l)}
       {feat(sys_t, sys_l)}
       {feat(ai_t, ai_d.split(". ")[0].rstrip(".") + ".")}
       <a class="k-pill ai-more" href="/services">{t("View all services")}</a>
+    </div>
+    <div class="ai-col ai-tall" data-reveal>{tall_media}
+      <p class="ai-tall-b">{inline(tall_txt).replace(" | ", "<br>")}</p>
+      <a class="k-pill ai-more" href="{MAIL}">{t("Work with us")}</a>
     </div>
   </div>
 </section>'''
