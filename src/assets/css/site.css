@@ -463,7 +463,7 @@ html.lenis, html.lenis body { height: auto; }
 /* home rhythm: the same space between every block — showreel · first statement · Selected Work · second statement · bottom panel */
 :root { --sp: clamp(72px, 8vw, 128px); }
 .k .statement { padding-top: var(--sp); padding-bottom: 0; }
-.k .statement .big-t { font-size: var(--t5); line-height: .94; letter-spacing: -.05em; }   /* t5: between the page titles (t6) and the section titles (t4) */
+.k .statement .big-t { font-size: clamp(44px, 6.7vw, 129px); line-height: .94; letter-spacing: -.05em; }   /* a touch under t5 (7.639vw), so the six hand-made lines of the statement each stay on one line */
 .k .k-shelf { margin-top: 0; padding-top: var(--sp); padding-bottom: 0; }
 main:has(.k) + .bottom { margin-top: var(--sp); }
    /* home statements and About's sentence run across the full width */
