@@ -706,6 +706,7 @@ a:hover .roll-l > span, a:focus-visible .roll-l > span { transform: none; }
 .ai-bento { display: grid; gap: 8px; }
 @media (min-width: 700px) { .ai-bento { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1100px) { .ai-bento { grid-template-columns: repeat(4, minmax(0, 1fr)); min-height: clamp(520px, 42vw, 640px); } }
+@media (min-width: 1100px) { .ai-bento > .ai-quote { grid-column: span 2; } }   /* the testimonials take the place of the services tile too */
 .ai-col { border-radius: 16px; min-width: 0; }
 .ai-frame { display: flex; flex-direction: column; gap: 6px; padding: 6px; background: #f5f5f7; }
 .ai-card { position: relative; border-radius: 13px; background: #fff; overflow: hidden; }

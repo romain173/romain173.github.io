@@ -798,7 +798,7 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1='', mid=''):
     <h2 id="ai-t" class="ai-t" data-split>{title}</h2>
     {f'<p class="page-intro ai-sub" data-split>{sub}</p>' if sub else ''}
   </div>
-  <!-- the four tiles side by side, as at the start (Romain, 9 nov. 2026): AI video, testimonials, services, Bronco -->
+  <!-- three tiles (Romain, 9 nov. 2026): AI video, testimonials (two columns wide), Bronco; the services tile is gone -->
   <div class="ai-bento">
     <div class="ai-col ai-frame">
       <div class="ai-card ai-hero" data-reveal>{vid_card(vids[0], "ai-bg") if vids else ""}
@@ -811,12 +811,6 @@ def ai_bento(statement, n_brands, quotes='', tile4='', tile1='', mid=''):
       <div class="ai-quotes" aria-label="{t("What clients say")}">{qs}</div>
       <div class="ai-dots" role="group" aria-label="{t("Choose a testimonial")}">{dots}</div>
       <a class="k-pill ai-more" href="/about">{t("About <em>Ranko</em>")}</a>
-    </div>
-    <div class="ai-col ai-frame ai-feats">
-      {feat(films_t, films_l)}
-      {feat(sys_t, sys_l)}
-      {feat(ai_t, ai_d.split(". ")[0].rstrip(".") + ".")}
-      <a class="k-pill ai-more" href="/services">{t("View all services")}</a>
     </div>
     <div class="ai-col ai-tall" data-reveal>{tall_media}
       <p class="ai-tall-b">{inline(tall_txt).replace(" | ", "<br>")}</p>
