@@ -5,7 +5,7 @@ heading: Ce que | nous | faisons
 
 == intro
 
-Nous aidons les marques | à capter l’attention | et à bâtir crédibilité, | engagement et confiance | en signant des projets | soignés dans les moindres détails.
+Nous aidons les marques | à capter l’attention et à bâtir crédibilité, | engagement et confiance | en signant des projets | soignés dans les moindres détails.
 
 == films
 
