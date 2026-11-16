@@ -1272,12 +1272,14 @@ def build():
             os.makedirs(os.path.join(DIST, 'decks'), exist_ok=True)
             shutil.copy(os.path.join(decks, f), os.path.join(DIST, 'decks', f))
             name = f[:-5]
-            m_ = re.search(r'<title>([^<]*)</title>', open(os.path.join(decks, f), encoding='utf-8').read())
-            for lang in ('en', 'fr'):
+            txt = open(os.path.join(decks, f), encoding='utf-8').read()
+            m_ = re.search(r'<title>([^<]*)</title>', txt)
+            both = 'data-l=\\"fr' in txt or 'data-l="fr' in txt   # the deck has a French version (Vision Group); else English only
+            for lang in (('en', 'fr') if both else ('en',)):
                 LANG = lang
                 body = (f'<div class="deck-wrap"><iframe class="deck-frame" src="/decks/{f}?lang={lang}" '
                         f'title="{esc(m_.group(1) if m_ else name)}" allow="fullscreen"></iframe></div>')
-                page = layout('/' + name, m_.group(1) if m_ else 'Ranko', '', body, hidden=True, switch_ok=True)
+                page = layout('/' + name, m_.group(1) if m_ else 'Ranko', '', body, hidden=True, switch_ok=both)
                 LANG = 'en'
                 write(('/fr/' if lang == 'fr' else '/') + name + '.html', page)
     write('/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
