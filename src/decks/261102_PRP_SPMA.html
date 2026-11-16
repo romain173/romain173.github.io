@@ -25,6 +25,73 @@
         on.querySelectorAll('video').forEach(function (v) { try { v.currentTime = 0; v.play(); } catch (e) {} });
       }
     }, 400);
+    // "Enlarge": on every picture, video and film of the slides, a small button bottom left on hover opens it full
+    // screen over the deck (click outside, × or Esc to close; the arrows don't change slide while it is open)
+    var css = document.createElement('style');
+    css.id = 'rk-zoom-css';
+    css.textContent =
+      '.rk-zb{position:absolute;left:16px;bottom:16px;z-index:20;display:flex;align-items:center;gap:8px;padding:9px 16px 9px 12px;border:0;border-radius:999px;background:rgba(255,255,255,.92);color:#000;font:500 20px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:-.01em;cursor:pointer;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;box-shadow:0 2px 10px rgba(0,0,0,.18)}' +
+      '.rk-zb svg{width:18px;height:18px}' +
+      '.rk-zh:hover>.rk-zb,.rk-zb:focus-visible{opacity:1;transform:none}' +
+      '.rk-lb{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.92);cursor:zoom-out;animation:rk-in .25s}' +
+      '@keyframes rk-in{from{opacity:0}}' +
+      '.rk-lb>img,.rk-lb>video{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:8px;cursor:default}' +
+      '.rk-lb>iframe{width:min(92vw,calc(90vh * var(--ar,1.7778)));aspect-ratio:var(--ar,16/9);max-height:90vh;border:0;border-radius:8px}' +
+      '.rk-lbx{position:fixed;top:16px;right:20px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font:300 30px/44px Arial,sans-serif;cursor:pointer}';
+    var icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>';
+    var lb = null;
+    var close = function () { if (lb) { lb.remove(); lb = null; } };
+    var open = function (el) {
+      close();
+      lb = document.createElement('div'); lb.className = 'rk-lb';
+      var m;
+      if (el.tagName === 'IMG') { m = document.createElement('img'); m.src = el.currentSrc || el.src; m.alt = el.alt || ''; }
+      else if (el.tagName === 'VIDEO') { m = document.createElement('video'); m.src = el.currentSrc || el.src; m.autoplay = m.loop = m.muted = m.controls = true; m.playsInline = true; }
+      else {
+        var id = (el.src.match(/video\/(\d+)/) || [])[1];
+        m = document.createElement('iframe');
+        m.src = 'https://player.vimeo.com/video/' + id + '?autoplay=1&muted=1&loop=1&dnt=1&title=0&byline=0&portrait=0';
+        m.allow = 'autoplay; fullscreen; picture-in-picture'; m.setAttribute('allowfullscreen', '');
+        var r = el.getBoundingClientRect(); if (r.width && r.height) m.style.setProperty('--ar', r.width / r.height);
+      }
+      m.addEventListener('click', function (e) { e.stopPropagation(); });
+      var x = document.createElement('button'); x.className = 'rk-lbx'; x.type = 'button'; x.setAttribute('aria-label', 'Close'); x.textContent = '×';
+      lb.appendChild(m); lb.appendChild(x);
+      lb.addEventListener('click', close);
+      document.body.appendChild(lb);
+    };
+    window.addEventListener('keydown', function (e) {
+      if (!lb) return;
+      e.stopImmediatePropagation(); e.preventDefault();
+      if (e.key === 'Escape') close();
+    }, true);
+    // one listener for every button (the deck copies its elements while it opens, and copies lose their listeners)
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('.rk-zb'); if (!b) return;
+      e.preventDefault(); e.stopPropagation();
+      var box = b.parentElement, el = box.querySelector(':scope > img, :scope > video, :scope > iframe');
+      // the before / after slider (two films in one box) goes full screen as it is, so it stays live and in sync
+      if (box.querySelectorAll('iframe').length > 1 && box.requestFullscreen) box.requestFullscreen().catch(function () {});
+      else if (el) open(el);
+    }, true);
+    var tag = function () {
+      // the deck rebuilds its page while it opens (styles and elements are copied anew): put the styles back, and
+      // never give a picture a second button
+      if (!document.getElementById('rk-zoom-css')) (document.head || document.documentElement).appendChild(css);
+      document.querySelectorAll('section img, section video, section iframe[src*="vimeo"]').forEach(function (el) {
+        if (el.closest('.rk-lb') || (el.parentElement && el.parentElement.querySelector(':scope > .rk-zb'))) return;
+        if (el.offsetWidth < 120 || el.offsetHeight < 80) return;   // icons: too small to be worth enlarging
+        if (/ranko/i.test(el.alt || '')) return;   // the Ranko logo of the cover
+        var box = el.parentElement; if (!box) return;
+        if (box.style.clipPath) return;   // the "before" half of the before / after slider: one button for the pair
+        if (getComputedStyle(box).position === 'static') box.style.position = 'relative';
+        box.classList.add('rk-zh');
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'rk-zb'; b.innerHTML = icon + 'Enlarge';
+        box.appendChild(b);
+      });
+    };
+    setInterval(tag, 800);
+
     if (window.top === window) return;
     // inside the site page: hide the deck's navigation bar (‹ 11 / 17 › Reset), drawn inside the deck component
     var hide = function () {
