@@ -5,6 +5,26 @@
   <!-- client presentation shown inside a hidden page of ranko.ca (with the site menu on top); English only -->
   <meta name="robots" content="noindex, nofollow">
   <script>(function () {
+    // videos start from the beginning when their slide opens (Vimeo films through the player's messages, the deck's
+    // own video files directly); the video files of the other slides are paused. The Vimeo films of the other slides
+    // are not paused: the before / after slide keeps its two films playing in sync and would restart them anyway
+    var cur = null;
+    var restart = function (f) {   // through Vimeo's player script, which the deck loads for its before / after slide
+      if (!window.Vimeo || !window.Vimeo.Player) return;
+      try { var p = f.__rk || (f.__rk = new window.Vimeo.Player(f)); p.setCurrentTime(0).then(function () { return p.play(); }).catch(function () {}); } catch (e) {}
+    };
+    setInterval(function () {
+      var on = document.querySelector('section[data-deck-active]');
+      document.querySelectorAll('section').forEach(function (sec) {
+        if (sec === on) return;
+        sec.querySelectorAll('video').forEach(function (v) { if (!v.paused) v.pause(); });
+      });
+      if (on && on !== cur) {
+        cur = on;
+        on.querySelectorAll('iframe[src*="vimeo"]').forEach(restart);
+        on.querySelectorAll('video').forEach(function (v) { try { v.currentTime = 0; v.play(); } catch (e) {} });
+      }
+    }, 400);
     if (window.top === window) return;
     // inside the site page: hide the deck's navigation bar (‹ 11 / 17 › Reset), drawn inside the deck component
     var hide = function () {
