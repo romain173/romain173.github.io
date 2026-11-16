@@ -1277,7 +1277,7 @@ def build():
             both = 'data-l=\\"fr' in txt or 'data-l="fr' in txt   # the deck has a French version (Vision Group); else English only
             for lang in (('en', 'fr') if both else ('en',)):
                 LANG = lang
-                body = (f'<div class="deck-wrap"><iframe class="deck-frame" src="/decks/{f}?lang={lang}" '
+                body = (f'<div class="deck-wrap"><iframe class="deck-frame" src="/decks/{f}?lang={lang}&amp;v={ver("decks/" + f)}" '
                         f'title="{esc(m_.group(1) if m_ else name)}" allow="fullscreen"></iframe></div>')
                 page = layout('/' + name, m_.group(1) if m_ else 'Ranko', '', body, hidden=True, switch_ok=both)
                 LANG = 'en'
