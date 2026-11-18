@@ -1272,6 +1272,8 @@ def build():
             os.makedirs(os.path.join(DIST, 'decks'), exist_ok=True)
             shutil.copy(os.path.join(decks, f), os.path.join(DIST, 'decks', f))
             name = f[:-5]
+            if os.path.isdir(os.path.join(decks, name)):   # the deck's own media (videos…), next to it under /decks/<name>/
+                shutil.copytree(os.path.join(decks, name), os.path.join(DIST, 'decks', name), dirs_exist_ok=True)
             txt = open(os.path.join(decks, f), encoding='utf-8').read()
             m_ = re.search(r'<title>([^<]*)</title>', txt)
             both = 'data-l=\\"fr' in txt or 'data-l="fr' in txt   # the deck has a French version (Vision Group); else English only
