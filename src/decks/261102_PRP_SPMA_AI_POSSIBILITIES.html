@@ -31,6 +31,16 @@
 .th .mini{position:relative;flex:1;aspect-ratio:16/9;overflow:hidden;border-radius:4px;outline:1px solid #2a2a2a}
 .th .mini .slide{display:flex;left:0;top:0;transform-origin:0 0}
 .th.cur{color:#fff}.th.cur .mini{outline:2px solid #e8643a}
+
+/* "Enlarge" button on pictures, videos and films (as in the Spin Master deck) */
+.rk-zh{position:relative}
+.rk-zb{position:absolute;left:16px;bottom:16px;z-index:20;display:flex;align-items:center;gap:8px;padding:9px 16px 9px 12px;border:0;border-radius:999px;background:rgba(255,255,255,.92);color:#000;font:500 20px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:-.01em;cursor:pointer;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.rk-zb svg{width:18px;height:18px}
+.rk-zh:hover>.rk-zb,.rk-zb:focus-visible{opacity:1;transform:none}
+.rk-lb{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.92);cursor:zoom-out}
+.rk-lb>img,.rk-lb>video{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:8px;cursor:default}
+.rk-lb>iframe{width:min(92vw,calc(90vh * var(--ar,1.7778)));aspect-ratio:var(--ar,16/9);max-height:90vh;border:0;border-radius:8px}
+.rk-lbx{position:fixed;top:16px;right:20px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font:300 30px/44px Arial,sans-serif;cursor:pointer}
 </style></head><body>
 <div class="stage">
   <section class="slide s-cover" data-n="1"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
@@ -118,25 +128,165 @@
     <div class="box"><video src="261102_PRP_SPMA_AI_POSSIBILITIES/14-screen-replacement.mp4" muted loop playsinline preload="none"></video></div>
     <div class="num">14</div>
   </section>
+  <!-- pages 15-22: copied from the Spin Master deck (/261102_PRP_SPMA, its pages 15 to 22) -->
+<section class="slide" data-n="15" style="background:#0B0B0B;color:#FFFFFF;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;padding:72px 100px 80px;box-sizing:border-box;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center;height:40px">
+    <div style="font-size:18px;font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1;color:#FFF">Ranko</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;min-height:0">
+    <div style="display:flex;justify-content:space-between;align-items:last baseline;gap:80px">
+      <h2 style="margin:0;font-size:220px;line-height:0.88;letter-spacing:0;font-weight:700">Process</h2>
+      <p style="margin:0;max-width:560px;font-size:28px;line-height:1.4;font-weight:400;letter-spacing:0;text-align:right;text-wrap:pretty;color:#FFF">Click on any frame to<br>see it full screen.</p>
+    </div>
+    <div style="margin-top:48px;height:1px;background:rgba(255,255,255,.14);width:100%"></div>
+  </div>
+</section>
+<section class="slide" data-n="16" style="background:#FFFFFF;color:#000000;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;padding:72px 100px 80px;box-sizing:border-box;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center;height:40px">
+    <div style="font-size:18px;font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1;color:#000">Ranko</div>
+    <div style="display:flex;gap:12px;font-size:18px;font-weight:400;letter-spacing:0;color:rgba(0,0,0,.55)">Process</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;min-height:0">
+    <div style="position:relative">
+    <h2 style="margin:0;white-space:nowrap;font-size:110px;line-height:0.92;letter-spacing:-0.045em;font-weight:500">AI results can be<br>inconsistent and<br>unpredictable.<br><span data-om-id="edf99370:407" style="background: linear-gradient(110deg, rgb(72, 67, 194) 0%, rgb(0, 173, 146) 100%) text; color: transparent; -webkit-text-fill-color: transparent; padding: 0px 0.08em 0.08em 0px; margin-right: -0.08em;">That’s why<br>we control<br>every step.</span></h2>
+    </div>
+    <div style="margin-top:48px;height:1px;background:rgba(0,0,0,.14);width:100%"></div>
+  </div>
+</section>
+<section class="slide" data-n="17" style="background:#FFFFFF;color:#000000;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;padding:72px 100px 80px;box-sizing:border-box;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center;height:40px">
+    <div style="font-size:18px;font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1;color:#000">Ranko</div>
+    <div style="display:flex;gap:12px;font-size:18px;font-weight:400;letter-spacing:0;color:rgba(0,0,0,.55)">Process</div>
+  </div>
+  <div style="flex:1;min-height:0;margin-top:48px;display:flex;flex-direction:column;justify-content:flex-start;gap:20px">
+    <div style="flex:none;white-space:nowrap;background:linear-gradient(110deg,#4843C2 0%,#00AD92 100%);color:#FFF;border-radius:14px;padding:14px 30px;font-size:28px;line-height:1;letter-spacing:-0.01em;font-weight:500">AI-Assisted 3D Modeling</div>
+    <div style="display:flex;gap:20px"><div style="flex:1.8394 1 0;min-width:0;aspect-ratio:5040/2740;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/17-1-station-face.webp" alt="Station — face" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1.8394 1 0;min-width:0;aspect-ratio:5040/2740;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/17-2-station-dos.webp" alt="Station — dos" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1.3835 1 0;min-width:0;aspect-ratio:5040/3643;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/17-3-station-cote-gauche.webp" alt="Station — cote gauche" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1.3835 1 0;min-width:0;aspect-ratio:5040/3643;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/17-4-station-cote-droit.webp" alt="Station — cote droit" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>
+    <div style="display:flex;gap:20px"><div style="flex:1.2469 1 0;min-width:0;aspect-ratio:5040/4042;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/17-5-station-isometrique-2.webp" alt="Station — isometrique 2" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1.3295 1 0;min-width:0;aspect-ratio:5040/3791;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/17-6-station-top.webp" alt="Station — top" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1.0347 1 0;min-width:0;aspect-ratio:5040/4871;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/17-7-station-isometrique.webp" alt="Station — isometrique" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>
+  </div>
+</section>
+<section class="slide" data-n="18" style="background:#FFFFFF;color:#000000;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;padding:72px 100px 80px;box-sizing:border-box;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center;height:40px">
+    <div style="font-size:18px;font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1;color:#000">Ranko</div>
+    <div style="display:flex;gap:12px;font-size:18px;font-weight:400;letter-spacing:0;color:rgba(0,0,0,.55)">Process</div>
+  </div>
+  <div style="flex:1;min-height:0;margin-top:48px;display:flex;flex-direction:column;justify-content:flex-start;gap:20px">
+    <div style="flex:none;white-space:nowrap;background:linear-gradient(110deg,#4843C2 0%,#00AD92 100%);color:#FFF;border-radius:14px;padding:14px 30px;font-size:28px;line-height:1;letter-spacing:-0.01em;font-weight:500">AI-Generated Character Sheet</div>
+    <div style="display:flex;gap:20px"><div style="flex:1.8394 1 0;min-width:0;aspect-ratio:5040/2740;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/18-1-station-face.webp" alt="Station — face" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1.8394 1 0;min-width:0;aspect-ratio:5040/2740;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/18-2-station-dos.webp" alt="Station — dos" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1.3835 1 0;min-width:0;aspect-ratio:5040/3643;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/18-3-station-cote-gauche.webp" alt="Station — cote gauche" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1.3835 1 0;min-width:0;aspect-ratio:5040/3643;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/18-4-station-cote-droit.webp" alt="Station — cote droit" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>
+    <div style="display:flex;gap:20px"><div style="flex:1.2469 1 0;min-width:0;aspect-ratio:5040/4042;border-radius:15px;overflow:hidden;background:rgb(97,97,97)"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/18-5-station-isometrique-1.webp" alt="Station — isometrique 1" style="width:100%;height:100%;object-fit:contain;display:block"></div><div style="flex:1.3295 1 0;min-width:0;aspect-ratio:5040/3791;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/18-6-station-top.webp" alt="Station — top" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1.0347 1 0;min-width:0;aspect-ratio:5040/4871;border-radius:15px;overflow:hidden;background:rgb(95,95,95)"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/18-7-station-isometrique-2.webp" alt="Station — isometrique 2" style="width:100%;height:100%;object-fit:contain;display:block"></div></div>
+  </div>
+</section>
+<section class="slide" data-n="19" style="background:#FFFFFF;color:#000000;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;padding:72px 100px 80px;box-sizing:border-box;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center;height:40px">
+    <div style="font-size:18px;font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1;color:#000">Ranko</div>
+    <div style="display:flex;gap:12px;font-size:18px;font-weight:400;letter-spacing:0;color:rgba(0,0,0,.55)">Process</div>
+  </div>
+  <div style="flex:1;min-height:0;margin-top:48px;display:flex;flex-direction:column;justify-content:flex-start;gap:20px">
+    <div style="flex:none;white-space:nowrap;background:linear-gradient(110deg,#4843C2 0%,#00AD92 100%);color:#FFF;border-radius:14px;padding:14px 30px;font-size:28px;line-height:1;letter-spacing:-0.01em;font-weight:500">AI-Generated Character Sheet</div>
+    <div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-start"><div style="width:100%;height:742.7px;flex:none;border-radius:15px;overflow:hidden;background:rgb(118,118,118)"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/19-1-megalodon-character-sheet.webp" alt="Megalodon — character sheet" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>
+  </div>
+</section>
+<section class="slide" data-n="20" style="background:#FFFFFF;color:#000000;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;padding:72px 100px 80px;box-sizing:border-box;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center;height:40px">
+    <div style="font-size:18px;font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1;color:#000">Ranko</div>
+    <div style="display:flex;gap:12px;font-size:18px;font-weight:400;letter-spacing:0;color:rgba(0,0,0,.55)">Process</div>
+  </div>
+  <div style="flex:1;min-height:0;margin-top:48px;display:flex;flex-direction:column;justify-content:flex-start;gap:20px">
+    <div style="flex:none;white-space:nowrap;background:linear-gradient(110deg,#4843C2 0%,#00AD92 100%);color:#FFF;border-radius:14px;padding:14px 30px;font-size:28px;line-height:1;letter-spacing:-0.01em;font-weight:500">Camera Angles &amp; Lenses</div>
+    <div style="flex:1;min-height:0;display:flex;gap:20px;justify-content:center"><div style="flex:1;min-width:0;height:100%;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/20-1-station-p19-blk-face.webp" alt="station-p19-blk-face" style="width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.2);transform-origin:46% 30%"></div><div style="flex:1;min-width:0;height:100%;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/20-2-station-p19-blk-top.webp" alt="station-p19-blk-top" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>
+    <div style="flex:none;white-space:nowrap;background:linear-gradient(110deg,#4843C2 0%,#00AD92 100%);color:#FFF;border-radius:14px;padding:14px 30px;font-size:28px;line-height:1;letter-spacing:-0.01em;font-weight:500">AI-Generated Pictures</div>
+    <div style="flex:1;min-height:0;display:flex;gap:20px;justify-content:center"><div style="flex:1;min-width:0;height:100%;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/20-3-station-p19-fin-face.webp" alt="station-p19-fin-face" style="width:100%;height:100%;object-fit:cover;display:block"></div><div style="flex:1;min-width:0;height:100%;border-radius:15px;overflow:hidden"><img src="261102_PRP_SPMA_AI_POSSIBILITIES/20-4-station-p19-fin-top.webp" alt="station-p19-fin-top" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>
+  </div>
+</section>
+<section class="slide" data-n="21" style="background:#FFFFFF;color:#000000;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;padding:72px 100px 80px;box-sizing:border-box;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center;height:40px">
+    <div style="font-size:18px;font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1;color:#000">Ranko</div>
+    <div style="display:flex;gap:12px;font-size:18px;font-weight:400;letter-spacing:0;color:rgba(0,0,0,.55)">Process</div>
+  </div>
+  <div style="flex:1;min-height:0;margin-top:48px;display:flex;flex-direction:column;gap:20px">
+  <div style="flex:none;white-space:nowrap;background:linear-gradient(110deg,#4843C2 0%,#00AD92 100%);color:#FFF;border-radius:14px;padding:14px 30px;font-size:28px;line-height:1;letter-spacing:-0.01em;font-weight:500">AI-Generated Video</div>
+  <div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-start">
+  <div style="width:100%;max-height:100%;aspect-ratio:2688/1152;position:relative;border-radius:15px;overflow:hidden;background:#000">
+    <iframe data-src="https://player.vimeo.com/video/1247312380?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;autopause=0&amp;dnt=1" title="Shot 02" allow="autoplay; fullscreen; picture-in-picture" frameborder="0" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block;pointer-events:none"></iframe>
+  </div>
+  </div>
+  </div>
+</section>
+<section class="slide" data-n="22" style="background:#FFFFFF;color:#000000;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;padding:72px 100px 80px;box-sizing:border-box;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center;height:40px">
+    <div style="font-size:18px;font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1;color:#000">Ranko</div>
+    <div style="display:flex;gap:12px;font-size:18px;font-weight:400;letter-spacing:0;color:rgba(0,0,0,.55)">Process</div>
+  </div>
+  <div style="flex:1;min-height:0;margin-top:48px;display:flex;flex-direction:column;gap:20px">
+  <div style="flex:none;white-space:nowrap;background:linear-gradient(110deg,#4843C2 0%,#00AD92 100%);color:#FFF;border-radius:14px;padding:14px 30px;font-size:28px;line-height:1;letter-spacing:-0.01em;font-weight:500">AI-Assisted VFX</div>
+  <div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-start">
+  <div data-ba="" style="--p:50%;width:100%;max-height:100%;aspect-ratio:2688/1152;position:relative;border-radius:15px;overflow:hidden;background:#000">
+    <iframe data-src="https://player.vimeo.com/video/1247400665?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;autopause=0&amp;dnt=1" title="After" allow="autoplay; fullscreen; picture-in-picture" frameborder="0" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block;pointer-events:none;transform:scale(1.32);transform-origin:50% 50%"></iframe>
+    <div style="position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--p)) 0 0)"><iframe data-src="https://player.vimeo.com/video/1247396433?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;autopause=0&amp;dnt=1" title="Before" allow="autoplay; fullscreen; picture-in-picture" frameborder="0" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block;pointer-events:none;transform:scale(1.32);transform-origin:50% 50%"></iframe></div>
+    <div style="position:absolute;left:24px;bottom:24px;padding:10px 18px;border-radius:10px;background:rgba(34,34,34,.56);backdrop-filter:blur(16px) saturate(1.5);color:#FFF;font-size:24px;font-weight:500;letter-spacing:0;line-height:1;pointer-events:none">Before</div>
+    <div style="position:absolute;right:24px;bottom:24px;padding:10px 18px;border-radius:10px;background:rgba(34,34,34,.56);backdrop-filter:blur(16px) saturate(1.5);color:#FFF;font-size:24px;font-weight:500;letter-spacing:0;line-height:1;pointer-events:none">After</div>
+    <div data-ba-handle="" style="position:absolute;top:0;bottom:0;left:var(--p);width:48px;margin-left:-24px;cursor:ew-resize;display:flex;justify-content:center;touch-action:none">
+      <div style="width:2px;height:100%;background:#FFF"></div>
+      <div style="position:absolute;top:50%;left:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:999px;background:#FFF;display:flex;align-items:center;justify-content:center;gap:6px"><div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:9px solid #000"></div><div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:9px solid #000"></div></div>
+    </div>
+  </div>
+  </div>
+  </div>
+</section>
 </div>
 <nav class="rail"></nav>
 <script>
 const S=[...document.querySelectorAll('.stage .slide')];
 const rail=document.querySelector('.rail');
 const T=S.map((s,i)=>{const t=document.createElement('div');t.className='th';t.innerHTML=`<b>${i+1}</b><div class="mini"></div>`;
-  const c=s.cloneNode(true);c.classList.remove('on');const v=c.querySelector('video');
+  const c=s.cloneNode(true);c.classList.remove('on');c.querySelectorAll('iframe').forEach(f=>f.remove());const v=c.querySelector('video');
   if(v){v.removeAttribute('loop');v.preload='metadata';v.src=v.getAttribute('src')+'#t=0.5';}
   t.querySelector('.mini').appendChild(c);t.addEventListener('click',e=>{e.stopPropagation();go(i+1)});rail.appendChild(t);return t});
 function fit(){const rw=rail.offsetWidth;const k=Math.min((innerWidth-rw)/1920,innerHeight/1080);S.forEach(s=>s.style.transform=`translate(-50%,-50%) scale(${k})`);
   T.forEach(t=>{const m=t.querySelector('.mini');m.firstChild.style.transform=`scale(${m.clientWidth/1920})`})}
 function go(n){n=Math.max(1,Math.min(S.length,n|0||1));
-  S.forEach((s,i)=>{const on=i===n-1;s.classList.toggle('on',on);const v=s.querySelector('video');if(!v)return;
+  S.forEach((s,i)=>{const on=i===n-1;s.classList.toggle('on',on);if(on||i===n)s.querySelectorAll('iframe[data-src]').forEach(f=>{f.src=f.dataset.src;f.removeAttribute('data-src')});const v=s.querySelector('video');if(!v)return;
     if(on){v.preload='auto';v.currentTime=0;v.play().catch(()=>{})}else{v.pause();if(i===n)v.preload='auto'}});
   T.forEach((t,i)=>t.classList.toggle('cur',i===n-1));T[n-1].scrollIntoView({block:'nearest'});
   if(location.hash!=='#'+n)history.replaceState(null,'','#'+n)}
 const cur=()=>parseInt(location.hash.slice(1))||1;
 addEventListener('resize',fit);addEventListener('hashchange',()=>go(cur()));
 addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(cur()+1)}if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(cur()-1)}});
-document.querySelector('.stage').addEventListener('click',e=>go(cur()+(e.clientX<rail.offsetWidth+(innerWidth-rail.offsetWidth)/3?-1:1)));
+document.querySelector('.stage').addEventListener('click',e=>{if(e.target.closest('[data-ba],.rk-zb'))return;go(cur()+(e.clientX<rail.offsetWidth+(innerWidth-rail.offsetWidth)/3?-1:1))});
 fit();go(cur());
-</script></body></html>
+</script><script id="before-after">(function(){var cur=null;function set(el,e){var r=el.getBoundingClientRect();var p=Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100));el.style.setProperty('--p',p+'%')}document.addEventListener('pointerdown',function(e){var h=e.target.closest&&e.target.closest('[data-ba-handle]');if(!h)return;cur=h.closest('[data-ba]');e.preventDefault();e.stopPropagation();set(cur,e)},true);document.addEventListener('pointermove',function(e){if(cur){e.preventDefault();set(cur,e)}},true);document.addEventListener('pointerup',function(){cur=null},true)})();</script>
+<script id="ba-sync">(function(){
+function T(p,ms){return Promise.race([p,new Promise(function(r){setTimeout(r,ms||1500)})]).catch(function(){});}
+function load(cb){if(window.Vimeo&&Vimeo.Player)return cb();var s=document.getElementById('vimeo-api');if(!s){s=document.createElement('script');s.id='vimeo-api';s.src='https://player.vimeo.com/api/player.js';document.head.appendChild(s);}s.addEventListener('load',cb);}
+function pair(box){
+  var fr=box.querySelectorAll('iframe[src*="player.vimeo.com"]');if(fr.length<2||box.__sync)return;box.__sync=1;
+  var A=new Vimeo.Player(fr[0]),B=new Vimeo.Player(fr[1]),busy=false,buf=0,started=false;
+  T(Promise.all([A.ready(),B.ready()]),8000).then(function(){busy=true;return T(Promise.all([A.setCurrentTime(0),B.setCurrentTime(0)]));}).then(function(){return T(Promise.all([A.play(),B.play()]));}).then(function(){busy=false;started=true;});
+  setInterval(function(){if(busy||!started)return;busy=true;T(Promise.all([A.getCurrentTime(),B.getCurrentTime(),A.getPaused(),B.getPaused(),A.getDuration()]),1000).then(function(r){
+    if(!r)return;
+    if((r[2]||r[3])&&!buf){return T(Promise.all([A.play(),B.play()]));}
+    var d=r[1]-r[0],dur=r[4];if(dur&&Math.abs(d)>dur/2)d-=(d>0?1:-1)*dur;
+    if(Math.abs(d)>0.1)return T(B.setCurrentTime(r[0]+0.03));
+  }).then(function(){busy=false;});},300);
+  [[A,B],[B,A]].forEach(function(p){p[0].on('bufferstart',function(){buf++;T(p[1].pause());});p[0].on('bufferend',function(){buf=Math.max(0,buf-1);if(!buf){T(A.getCurrentTime().then(function(t){return B.setCurrentTime(t)})).then(function(){T(A.play());T(B.play());});}});});
+}
+function scan(){document.querySelectorAll('[data-ba]').forEach(pair);}
+load(function(){scan();setInterval(scan,1500);});
+})();</script>
+<script>(function(){
+var icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>';
+var lb=null;function close(){if(lb){lb.remove();lb=null}}
+function open(el){close();lb=document.createElement('div');lb.className='rk-lb';var m;
+ if(el.tagName==='IMG'){m=document.createElement('img');m.src=el.currentSrc||el.src;m.alt=el.alt||''}
+ else if(el.tagName==='VIDEO'){m=document.createElement('video');m.src=el.currentSrc||el.src;m.autoplay=m.loop=m.muted=m.controls=true;m.playsInline=true}
+ else{var id=((el.src||el.dataset.src||'').match(/video\/(\d+)/)||[])[1];m=document.createElement('iframe');m.src='https://player.vimeo.com/video/'+id+'?autoplay=1&muted=1&loop=1&dnt=1&title=0&byline=0&portrait=0';m.allow='autoplay; fullscreen; picture-in-picture';m.setAttribute('allowfullscreen','');var r=el.getBoundingClientRect();if(r.width&&r.height)m.style.setProperty('--ar',r.width/r.height)}
+ m.addEventListener('click',function(e){e.stopPropagation()});var x=document.createElement('button');x.className='rk-lbx';x.type='button';x.setAttribute('aria-label','Close');x.textContent='×';
+ lb.appendChild(m);lb.appendChild(x);lb.addEventListener('click',function(e){e.stopPropagation();close()});document.body.appendChild(lb)}
+addEventListener('keydown',function(e){if(!lb)return;e.stopImmediatePropagation();e.preventDefault();if(e.key==='Escape')close()},true);
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.rk-zb');if(!b)return;e.preventDefault();e.stopPropagation();
+ var box=b.parentElement,el=box.querySelector(':scope > img, :scope > video, :scope > iframe');
+ if(box.querySelectorAll('iframe').length>1&&box.requestFullscreen)box.requestFullscreen().catch(function(){});else if(el)open(el)},true);
+document.querySelectorAll('.stage .slide img, .stage .slide video, .stage .slide iframe').forEach(function(el){
+ var box=el.parentElement;if(!box||box.style.clipPath||box.querySelector(':scope > .rk-zb'))return;
+ box.classList.add('rk-zh');var b=document.createElement('button');b.type='button';b.className='rk-zb';b.innerHTML=icon+'Enlarge';box.appendChild(b)});
+})();</script>
+</body></html>
